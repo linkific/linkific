@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function HeroSection() {
@@ -18,20 +19,29 @@ export default function HeroSection() {
     return (
         <section className="relative grid grid-cols-1 items-center gap-12 text-center min-h-[70vh]">
             {techImage && (
-                <div
-                    className="absolute inset-0 -z-10 bg-no-repeat bg-center transition-transform duration-300 ease-out"
+                 <Image
+                    src={techImage.imageUrl}
+                    alt={techImage.description}
+                    fill
+                    className="absolute inset-0 -z-10 object-contain transition-transform duration-300 ease-out"
                     style={{
-                        backgroundImage: `url('${techImage.imageUrl}')`,
-                        backgroundSize: 'contain',
                         transform: `translateY(${scrollY * 0.2}px) scale(${1 + scrollY * 0.0003}) rotate(${scrollY * 0.05}deg)`,
                         opacity: 1 - Math.min(scrollY / 800, 0.7),
                     }}
                     data-ai-hint={techImage.imageHint}
-                ></div>
+                    priority
+                />
             )}
             <div className="flex flex-col gap-6 items-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter">
-                    Revolutionize Your Business with <br /><span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">AI Automation</span>
+                    Revolutionize Your Business with <br />
+                    <span className="
+                        bg-gradient-to-r from-primary via-secondary to-primary 
+                        bg-clip-text text-transparent 
+                        animate-shimmer bg-[length:200%_auto]
+                    ">
+                        AI Automation
+                    </span>
                 </h1>
                 <p className="text-white/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
                     Linkific's smart software and AI-powered automation streamlines your workflow, boosts efficiency, and drives unprecedented growth.
