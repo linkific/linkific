@@ -35,7 +35,7 @@ const jobOpenings = [
     },
     {
       title: 'Digital Marketing Intern',
-      location: 'New York, NY',
+      location: 'Remote',
       description: 'Execute digital marketing campaigns, including SEO, SEM, and social media, to drive brand awareness.',
     },
     {
