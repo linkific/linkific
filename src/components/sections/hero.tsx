@@ -18,7 +18,7 @@ export default function HeroSection() {
             <div className="flex flex-col gap-6 items-center">
                  <div className="relative">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter">
-                        Linkific — purposeful software & product craft
+                        <span className="text-yellow-400">Linkific</span> — purposeful software & product craft
                     </h1>
                     <div className="absolute -top-8 -right-32 hidden lg:block transform -rotate-12">
                         <div className="relative">
