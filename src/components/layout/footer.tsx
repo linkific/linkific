@@ -8,7 +8,7 @@ const footerNavs = {
   ],
   'Contact': [
     { href: 'mailto:contact@linkific.com', name: 'contact@linkific.com' },
-    { href: 'tel:+15551234567', name: '+1 (555) 123-4567' },
+    { href: 'tel:+9022143695', name: '+90 22143695' },
   ]
 };
 
