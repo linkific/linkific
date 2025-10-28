@@ -56,7 +56,7 @@ export default function HeroSection() {
                     variants={itemVariants}
                 >
                     <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">
-                        <span className="truncate">Explore Solutions</span>
+                        <span className="truncate">Get a POC in for free</span>
                     </button>
                 </motion.div>
             </motion.div>
