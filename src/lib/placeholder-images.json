@@ -1,10 +1,10 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-3d",
-      "description": "Abstract 3D object representing a neural network node",
-      "imageUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuA8G1sfa_PjcVLjVdILN9GmRu_ToudOu_bPFwdqFBO7p_t6GXdGJYGpaz1jTtr18o-B13M8IRCCvSGCGxYH0mR5C5JGqsgo3eQ_8IbchL4tsDbFpInx_SrG-oSNx0FVt4BD47BRIwRHNraeKcObl-c5sUsQydFE1RJJif_7amwp7YyK5BCoslXOu33ABqLdzM-fxLRPSRWhQ2iWAxIEk9Z3tULFqJM87b6W-L1YqWck-wHEgWQ6QKb_ZJD-Rene0jTlPCdYHV9ByYLp",
-      "imageHint": "neural network"
+      "id": "hero-3d-tech",
+      "description": "Abstract 3D object representing technology",
+      "imageUrl": "https://images.unsplash.com/photo-1580943942792-63264a446b45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0ZWNoJTIwb2JqZWN0fGVufDB8fHx8MTc2MTY3Mjg5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tech object"
     },
     {
       "id": "project-1",

@@ -1,6 +1,9 @@
 import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function HeroSection() {
+    const heroImage = PlaceHolderImages.find(p => p.id === 'hero-3d-tech');
+
     return (
         <section className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 text-center lg:text-left">
             <div className="flex flex-col gap-6">
@@ -17,13 +20,16 @@ export default function HeroSection() {
                 </div>
             </div>
             <div className="flex items-center justify-center">
-                <Image
-                    alt="Abstract 3D object representing a neural network node"
-                    className="w-full max-w-sm h-auto rounded-full animate-[spin_25s_linear_infinite]"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8G1sfa_PjcVLjVdILN9GmRu_ToudOu_bPFwdqFBO7p_t6GXdGJYGpaz1jTtr18o-B13M8IRCCvSGCGxYH0mR5C5JGqsgo3eQ_8IbchL4tsDbFpInx_SrG-oSNx0FVt4BD47BRIwRHNraeKcObl-c5sUsQydFE1RJJif_7amwp7YyK5BCoslXOu33ABqLdzM-fxLRPSRWhQ2iWAxIEk9Z3tULFqJM87b6W-L1YqWck-wHEgWQ6QKb_ZJD-Rene0jTlPCdYHV9ByYLp"
-                    width={400}
-                    height={400}
-                />
+                {heroImage && (
+                    <Image
+                        alt={heroImage.description}
+                        data-ai-hint={heroImage.imageHint}
+                        className="w-full max-w-sm h-auto rounded-full animate-[spin_25s_linear_infinite]"
+                        src={heroImage.imageUrl}
+                        width={400}
+                        height={400}
+                    />
+                )}
             </div>
         </section>
     );
