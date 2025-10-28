@@ -62,3 +62,18 @@
     scroll-behavior: smooth;
   }
 }
+
+@layer utilities {
+  .writing-mode-vertical-rl {
+    writing-mode: vertical-rl;
+  }
+
+  @keyframes fall {
+    from {
+      transform: translateY(-100vh);
+    }
+    to {
+      transform: translateY(100vh);
+    }
+  }
+}

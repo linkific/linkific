@@ -4,10 +4,12 @@ import ProjectsSection from '@/components/sections/projects';
 import ServicesSection from '@/components/sections/services';
 import ContactSection from '@/components/sections/contact';
 import Footer from '@/components/layout/footer';
+import { CodeRainBackground } from '@/components/layout/code-rain-background';
 
 export default function Home() {
   return (
-    <div className="relative w-full min-h-screen overflow-x-hidden bg-background-dark font-display text-white">
+    <div className="relative w-full min-h-screen overflow-x-hidden bg-background font-display text-white">
+      <CodeRainBackground />
       {/* Main Content Wrapper */}
       <div className="relative z-10">
         <Header />
