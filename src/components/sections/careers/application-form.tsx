@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Loader2 } from "lucide-react";
@@ -23,6 +23,18 @@ const formSchema = z.object({
 });
 
 const jobOpenings = [
+  'HR & Management Specialist',
+  'React Developer',
+  'Flutter/Android Developer',
+  'Python/Node Backend Developer',
+  'Lead Researcher',
+  'AI/ML Engineer',
+  'Digital Marketing Specialist',
+  'Content Strategist',
+  'UI/UX Designer',
+];
+
+const internships = [
   'HR & Management Intern',
   'React Developer Intern',
   'Flutter/Android Intern',
@@ -138,9 +150,18 @@ export default function ApplicationForm() {
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {jobOpenings.map(role => (
-                                            <SelectItem key={role} value={role}>{role}</SelectItem>
-                                        ))}
+                                        <SelectGroup>
+                                            <SelectLabel>Job Openings</SelectLabel>
+                                            {jobOpenings.map(role => (
+                                                <SelectItem key={role} value={role}>{role}</SelectItem>
+                                            ))}
+                                        </SelectGroup>
+                                        <SelectGroup>
+                                            <SelectLabel>Internships</SelectLabel>
+                                            {internships.map(role => (
+                                                <SelectItem key={role} value={role}>{role}</SelectItem>
+                                            ))}
+                                        </SelectGroup>
                                     </SelectContent>
                                 </Select>
                                 <FormMessage />
