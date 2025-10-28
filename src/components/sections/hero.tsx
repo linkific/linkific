@@ -36,10 +36,14 @@ export default function HeroSection() {
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter">
                     Revolutionize Your Business with <br />
                     <span className="
+                        relative
                         bg-gradient-to-r from-primary via-secondary to-primary 
                         bg-clip-text text-transparent 
                         animate-shimmer bg-[length:200%_auto]
+                        inline-block
+                        px-4 py-2
                     ">
+                        <span className="absolute inset-0 bg-black/30 backdrop-blur-sm rounded-lg -z-10"></span>
                         AI Automation
                     </span>
                 </h1>
