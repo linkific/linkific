@@ -13,8 +13,8 @@ const RainColumn = ({ height, id }: { height: number; id: number }) => {
   const [characters] = useState(() =>
     Array.from({ length: Math.floor(height / FONT_SIZE) }, () => ({
       char: CHARACTERS.charAt(Math.floor(Math.random() * CHARACTERS.length)),
-      // Randomly assign a special color to ~0.2% of characters
-      color: Math.random() < 0.002 ? COLORS[Math.floor(Math.random() * COLORS.length)] : null,
+      // Randomly assign a special color to ~2% of characters
+      color: Math.random() < 0.02 ? COLORS[Math.floor(Math.random() * COLORS.length)] : null,
     }))
   );
 
