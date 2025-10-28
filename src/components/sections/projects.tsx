@@ -74,17 +74,19 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
 export default function ProjectsSection() {
     return (
         <section className="pt-24 sm:pt-32" id="projects">
-            <h2 className="text-white text-3xl font-bold text-center">Our Projects</h2>
-            <p className="text-white/70 text-center mt-2 mb-12 max-w-2xl mx-auto">A curated gallery of successful case studies, showcasing the real-world application of our technology.</p>
-            <div className="flex overflow-x-auto p-2 -mx-2 gap-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                <style>{`
-                    .overflow-x-auto::-webkit-scrollbar {
-                        display: none;
-                    }
-                `}</style>
-                {projects.map((project, index) => (
-                    <ProjectCard key={index} project={project} />
-                ))}
+            <div className="p-8 sm:p-12 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
+                <h2 className="text-white text-3xl font-bold text-center">Our Projects</h2>
+                <p className="text-white/70 text-center mt-2 mb-12 max-w-2xl mx-auto">A curated gallery of successful case studies, showcasing the real-world application of our technology.</p>
+                <div className="flex overflow-x-auto p-2 -mx-2 gap-6 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <style>{`
+                        .overflow-x-auto::-webkit-scrollbar {
+                            display: none;
+                        }
+                    `}</style>
+                    {projects.map((project, index) => (
+                        <ProjectCard key={index} project={project} />
+                    ))}
+                </div>
             </div>
         </section>
     );
