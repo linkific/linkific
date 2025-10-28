@@ -5,6 +5,7 @@ import ServicesSection from '@/components/sections/services';
 import ContactSection from '@/components/sections/contact';
 import Footer from '@/components/layout/footer';
 import { CodeRainBackground } from '@/components/layout/code-rain-background';
+import ProcessSection from '@/components/sections/process';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Header />
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <HeroSection />
+          <ProcessSection />
           <ProjectsSection featured={true} />
           <ServicesSection />
           <ContactSection />
