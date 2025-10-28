@@ -4,8 +4,9 @@ const projects = [
     {
         title: "Hospital support chatbot",
         description: "A healthcare support chatbot for bookings and query resolutions for doctors.",
-        imageUrl: "https://picsum.photos/seed/hospital-chatbot/300/200",
-        alt: "Hospital support chatbot"
+        imageUrl: "https://picsum.photos/seed/hospital-interior/800/600",
+        alt: "Hospital support chatbot",
+        "data-ai-hint": "hospital interior"
     },
     {
         title: "AI assisted chrome extension",
@@ -51,11 +52,11 @@ const projects = [
     },
 ];
 
-const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
+const ProjectCard = ({ project }: { project: typeof projects[0] & { "data-ai-hint"?: string } }) => (
     <div className="flex-shrink-0 w-80 snap-center">
         <div className="flex flex-col gap-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 h-full group hover:-translate-y-2 transition-transform duration-300">
             <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-                 <Image src={project.imageUrl} alt={project.alt} layout="fill" objectFit="cover" />
+                 <Image src={project.imageUrl} alt={project.alt} layout="fill" objectFit="cover" data-ai-hint={project['data-ai-hint']} />
             </div>
             <div className="flex flex-col flex-1 justify-between gap-4">
                 <div>
