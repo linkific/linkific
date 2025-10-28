@@ -2,9 +2,11 @@ import Link from 'next/link';
 
 const footerNavs = {
   'Quick Links': [
-    { href: '#projects', name: 'Projects' },
-    { href: '#services', name: 'Services' },
-    { href: '#contact', name: 'Contact' },
+    { href: '/projects', name: 'Projects' },
+    { href: '/services', name: 'Services' },
+    { href: '/contact', name: 'Contact' },
+    { href: '/about', name: 'About Us' },
+    { href: '/careers', name: 'Careers' },
   ],
   'Contact': [
     { href: 'mailto:contact@linkific.com', name: 'contact@linkific.com' },
@@ -34,9 +36,9 @@ export default function Footer() {
             <ul className="space-y-2">
               {footerNavs['Quick Links'].map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className="text-white/60 hover:text-white text-sm transition-colors">
+                  <Link href={item.href} className="text-white/60 hover:text-white text-sm transition-colors">
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
