@@ -14,9 +14,34 @@ const jobOpenings = [
       description: 'Work alongside our frontend team to build and improve user interfaces for our AI-powered applications.',
     },
     {
-      title: 'Marketing Intern',
+      title: 'Flutter/Android Intern',
+      location: 'Remote',
+      description: 'Develop and maintain cross-platform mobile applications for our clients using Flutter and native Android.',
+    },
+    {
+      title: 'Python/Node Backend Intern',
+      location: 'Remote',
+      description: 'Work with our backend team to build and maintain scalable server-side applications and APIs.',
+    },
+    {
+      title: 'Research Intern',
+      location: 'Remote',
+      description: 'Conduct in-depth research on emerging technologies and market trends to inform our product strategy.',
+    },
+    {
+      title: 'AI/ML Intern',
+      location: 'Remote',
+      description: 'Assist our AI team in developing and training machine learning models for various applications.',
+    },
+    {
+      title: 'Digital Marketing Intern',
       location: 'New York, NY',
-      description: 'Help shape our brand voice, manage social media, and create compelling content for our target audience.',
+      description: 'Execute digital marketing campaigns, including SEO, SEM, and social media, to drive brand awareness.',
+    },
+    {
+      title: 'Content Creation Intern',
+      location: 'Remote',
+      description: 'Create engaging content for our blog, social media, and marketing materials to attract and educate our audience.',
     },
     {
       title: 'Designer Intern',

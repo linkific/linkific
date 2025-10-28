@@ -25,7 +25,12 @@ const formSchema = z.object({
 const jobOpenings = [
   'HR & Management Intern',
   'React Developer Intern',
-  'Marketing Intern',
+  'Flutter/Android Intern',
+  'Python/Node Backend Intern',
+  'Research Intern',
+  'AI/ML Intern',
+  'Digital Marketing Intern',
+  'Content Creation Intern',
   'Designer Intern',
 ];
 
