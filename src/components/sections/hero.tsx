@@ -19,13 +19,7 @@ export default function HeroSection() {
             <div className="flex flex-col gap-6 items-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter">
                     Revolutionize Your Business with <br />
-                    <span className="
-                        relative
-                        text-accent
-                        inline-block
-                        px-4 py-2
-                    ">
-                        <span className="absolute inset-0 bg-black/30 backdrop-blur-sm rounded-lg -z-10"></span>
+                    <span className="text-yellow-400">
                         AI Automation
                     </span>
                 </h1>
