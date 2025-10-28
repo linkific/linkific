@@ -31,7 +31,7 @@ export default function Footer() {
               <span className="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
               <h2 className="text-white text-xl font-bold">Linkific</h2>
             </div>
-            <p className="text-white/60 text-sm">AI-powered automation for the modern business.</p>
+            <p className="text-white/60 text-sm">If you are reading this. why wait? lets have a chat.</p>
           </div>
           <div>
             <h4 className="text-white font-bold mb-4">Quick Links</h4>
