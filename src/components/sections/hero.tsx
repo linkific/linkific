@@ -2,50 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-const RainbowText = ({ text }: { text: string }) => {
-  const colors = [
-    'text-red-400',
-    'text-orange-400',
-    'text-yellow-400',
-    'text-green-400',
-    'text-blue-400',
-    'text-indigo-400',
-    'text-purple-400',
-    'text-pink-400',
-  ];
-
-  const [charColors, setCharColors] = useState<string[]>([]);
-
-  useEffect(() => {
-    setCharColors(
-      text.split('').map(() => colors[Math.floor(Math.random() * colors.length)])
-    );
-
-    const interval = setInterval(() => {
-      setCharColors(
-        text.split('').map(() => colors[Math.floor(Math.random() * colors.length)])
-      );
-    }, 2000); // Change colors every 2 seconds
-
-    return () => clearInterval(interval);
-  }, [text]);
-
-
-  return (
-    <>
-      {text.split('').map((char, index) => (
-        <span
-          key={index}
-          className={`transition-colors duration-500 ${charColors[index] || ''}`}
-        >
-          {char}
-        </span>
-      ))}
-    </>
-  );
-};
-
-
 export default function HeroSection() {
     const [scrollY, setScrollY] = useState(0);
 
@@ -63,8 +19,8 @@ export default function HeroSection() {
                  <div className="relative">
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter">
                         Revolutionize Your Business with <br />
-                        <span className="inline-block">
-                          <RainbowText text="AI Automation" />
+                        <span className="text-yellow-400">
+                          AI Automation
                         </span>
                     </h1>
                     <div className="absolute -top-12 -right-32 hidden lg:block transform -rotate-12">
