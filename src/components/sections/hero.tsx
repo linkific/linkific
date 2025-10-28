@@ -23,7 +23,7 @@ export default function HeroSection() {
                           AI Automation
                         </span>
                     </h1>
-                    <div className="absolute -top-12 -right-32 hidden lg:block transform -rotate-12">
+                    <div className="absolute -top-8 -right-32 hidden lg:block transform -rotate-12">
                         <div className="relative">
                             <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
