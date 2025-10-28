@@ -4,16 +4,15 @@ import React, { useEffect, useState } from 'react';
 
 const CHARACTERS = 'Σ=({[<a/>]})=>φ;01';
 const FONT_SIZE = 16;
+const COLUMN_SPACING_FACTOR = 1.5; // Increased for less clutter
 const COLORS = ['text-accent', 'text-secondary']; // Using theme colors
 
 const RainColumn = ({ height, id }: { height: number; id: number }) => {
   const [startDelay] = useState(Math.random() * 20);
-  // Increased duration for a slower fall
   const [animationDuration] = useState(8 + Math.random() * 8); 
   const [characters] = useState(() =>
     Array.from({ length: Math.floor(height / FONT_SIZE) }, () => ({
       char: CHARACTERS.charAt(Math.floor(Math.random() * CHARACTERS.length)),
-      // Randomly assign a special color to ~2% of characters
       color: Math.random() < 0.02 ? COLORS[Math.floor(Math.random() * COLORS.length)] : null,
     }))
   );
@@ -22,7 +21,7 @@ const RainColumn = ({ height, id }: { height: number; id: number }) => {
     <div
       className="absolute text-primary/50 writing-mode-vertical-rl text-lg will-change-transform"
       style={{
-        left: `${id * FONT_SIZE}px`,
+        left: `${id * FONT_SIZE * COLUMN_SPACING_FACTOR}px`,
         animation: `fall ${animationDuration}s linear ${startDelay}s infinite`,
       }}
     >
@@ -52,7 +51,6 @@ export function CodeRainBackground() {
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
     
-    // Also check on a short timeout in case scrollHeight is not final yet
     const timeoutId = setTimeout(updateDimensions, 500);
 
     return () => {
@@ -61,7 +59,7 @@ export function CodeRainBackground() {
     }
   }, []);
 
-  const columnCount = dimensions.width > 0 ? Math.floor(dimensions.width / FONT_SIZE) : 0;
+  const columnCount = dimensions.width > 0 ? Math.floor(dimensions.width / (FONT_SIZE * COLUMN_SPACING_FACTOR)) : 0;
 
   return (
     <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 bg-background">
