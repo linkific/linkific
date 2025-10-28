@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 const navLinks = [
-    { name: 'Projects', href: '#projects' },
+    { name: 'Projects', href: '/projects' },
     { name: 'Services', href: '#services' },
     { name: 'About Us', href: '#about' },
     { name: 'Careers', href: '#careers' },
@@ -22,9 +22,9 @@ export default function Header() {
                 </div>
                 <nav className="hidden md:flex items-center gap-8">
                     {navLinks.map((link) => (
-                        <a key={link.name} href={link.href} className="text-white/80 hover:text-white transition-colors text-sm font-medium">
+                        <Link key={link.name} href={link.href} className="text-white/80 hover:text-white transition-colors text-sm font-medium">
                             {link.name}
-                        </a>
+                        </Link>
                     ))}
                 </nav>
                 <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-gradient-to-r from-primary to-secondary text-white text-sm font-bold shadow-md hover:shadow-primary/50 transition-shadow">
