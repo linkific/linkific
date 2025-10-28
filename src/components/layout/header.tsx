@@ -4,10 +4,10 @@ import Link from 'next/link';
 
 const navLinks = [
     { name: 'Projects', href: '/projects' },
-    { name: 'Services', href: '#services' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Careers', href: '#careers' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Services', href: '/services' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Contact', href: '/contact' },
 ];
 
 export default function Header() {
