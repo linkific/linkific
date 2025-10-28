@@ -31,22 +31,23 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.12,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
+    hidden: { opacity: 0, x: 12, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.36,
+        ease: [0.22, 1, 0.36, 1],
+      },
     },
-  },
-};
+  };
 
 export default function ProcessSection() {
   return (
@@ -65,7 +66,9 @@ export default function ProcessSection() {
                     <motion.div 
                         key={index}
                         variants={itemVariants}
-                        className="flex flex-col items-start text-left p-6 rounded-xl border border-transparent hover:border-primary/50 transition-colors"
+                        whileHover={{ scale: 1.04, y: -5 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                        className="flex flex-col items-start text-left p-6 rounded-xl border border-transparent hover:border-primary/50 transition-colors cursor-pointer"
                     >
                         <div className="flex items-center justify-center size-12 rounded-lg bg-gradient-to-br from-primary to-secondary mb-5 shadow-lg">
                             <step.icon className="size-6 text-white" />
