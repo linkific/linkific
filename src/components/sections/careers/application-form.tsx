@@ -16,6 +16,7 @@ import { Check, Loader2 } from "lucide-react";
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
   email: z.string().email("A valid email is required"),
+  contactNumber: z.string().min(1, "Contact number is required"),
   role: z.string().min(1, "Please select a role"),
   resume: z.any().refine(files => files?.length === 1, "Resume is required."),
   reason: z.string().min(10, "Please tell us a bit more (min. 10 characters)"),
@@ -35,7 +36,7 @@ export default function ApplicationForm() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { name: "", email: "", role: "", reason: "" },
+    defaultValues: { name: "", email: "", contactNumber: "", role: "", reason: "" },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -101,6 +102,19 @@ export default function ApplicationForm() {
                         <FormLabel className="sr-only">Your Email</FormLabel>
                         <FormControl>
                             <Input type="email" placeholder="Your Email" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                        </FormControl>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                    />
+                    <FormField
+                    control={form.control}
+                    name="contactNumber"
+                    render={({ field }) => (
+                        <FormItem className="sm:col-span-2">
+                        <FormLabel className="sr-only">Contact Number</FormLabel>
+                        <FormControl>
+                            <Input type="tel" placeholder="Contact Number" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
                         </FormControl>
                         <FormMessage />
                         </FormItem>
