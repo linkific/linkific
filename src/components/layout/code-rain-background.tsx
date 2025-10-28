@@ -4,14 +4,18 @@ import React, { useEffect, useState } from 'react';
 
 const CHARACTERS = 'Σ=({[<a/>]})=>φ;01';
 const FONT_SIZE = 16;
+const COLORS = ['text-accent', 'text-secondary']; // Using theme colors
 
 const RainColumn = ({ height, id }: { height: number; id: number }) => {
   const [startDelay] = useState(Math.random() * 20);
-  const [animationDuration] = useState(2 + Math.random() * 4);
+  // Increased duration for a slower fall
+  const [animationDuration] = useState(8 + Math.random() * 8); 
   const [characters] = useState(() =>
-    Array.from({ length: Math.floor(height / FONT_SIZE) }, () =>
-      CHARACTERS.charAt(Math.floor(Math.random() * CHARACTERS.length))
-    )
+    Array.from({ length: Math.floor(height / FONT_SIZE) }, () => ({
+      char: CHARACTERS.charAt(Math.floor(Math.random() * CHARACTERS.length)),
+      // Randomly assign a special color to ~0.2% of characters
+      color: Math.random() < 0.002 ? COLORS[Math.floor(Math.random() * COLORS.length)] : null,
+    }))
   );
 
   return (
@@ -22,8 +26,14 @@ const RainColumn = ({ height, id }: { height: number; id: number }) => {
         animation: `fall ${animationDuration}s linear ${startDelay}s infinite`,
       }}
     >
-      {characters.map((char, index) => (
-        <span key={index} style={{ opacity: Math.max(0.1, (index / characters.length)) }}>{char}</span>
+      {characters.map(({ char, color }, index) => (
+        <span 
+          key={index} 
+          className={color || ''}
+          style={{ opacity: Math.max(0.1, (index / characters.length)) }}
+        >
+          {char}
+        </span>
       ))}
     </div>
   );
