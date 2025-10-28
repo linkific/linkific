@@ -3,7 +3,6 @@ import Footer from '@/components/layout/footer';
 import Header from '@/components/layout/header';
 import ApplicationForm from '@/components/sections/careers/application-form';
 import CareersHero from '@/components/sections/careers/careers-hero';
-import InternLife from '@/components/sections/careers/intern-life';
 import OpenPositions from '@/components/sections/careers/open-positions';
 import WhyWorkWithUs from '@/components/sections/careers/why-work-with-us';
 
@@ -18,7 +17,6 @@ export default function CareersPage() {
           <CareersHero />
           <WhyWorkWithUs />
           <OpenPositions />
-          <InternLife />
           <ApplicationForm />
         </main>
         <Footer />
