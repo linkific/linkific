@@ -42,39 +42,11 @@ export default function HeroSection() {
             >
                  <motion.div className="relative" variants={itemVariants}>
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter">
-                        <span className="text-yellow-400">Linkific</span> — purposeful software & product craft
+                        Automate What Slows You Down. <span className="text-primary">Focus on What Matters.</span>
                     </h1>
-                    <div className="absolute -top-8 -right-32 hidden lg:block transform -rotate-12">
-                        <div className="relative">
-                            <svg 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                width="150" 
-                                height="100" 
-                                viewBox="0 0 150 100" 
-                                className="transform -scale-x-100"
-                            >
-                                <path 
-                                    d="M10 50 Q 50 20, 90 50 T 140 60" 
-                                    stroke="white" 
-                                    strokeWidth="2" 
-                                    fill="none" 
-                                    strokeDasharray="5, 5"
-                                />
-                                <path 
-                                    d="M135 55 L 140 60 L 135 65" 
-                                    stroke="white" 
-                                    strokeWidth="2" 
-                                    fill="none" 
-                                />
-                            </svg>
-                            <p className="absolute -top-2 left-0 text-sm text-white/80 w-max transform -rotate-3">
-                                yes we do things differently
-                            </p>
-                        </div>
-                    </div>
                 </motion.div>
                 <motion.p 
-                    className="text-white/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0"
+                    className="text-white/70 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0"
                     variants={itemVariants}
                 >
                     Linkific's smart software and AI-powered automation streamlines your workflow, boosts efficiency, and drives unprecedented growth.
