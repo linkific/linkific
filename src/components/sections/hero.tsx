@@ -37,9 +37,7 @@ export default function HeroSection() {
                     Revolutionize Your Business with <br />
                     <span className="
                         relative
-                        bg-gradient-to-r from-primary via-secondary to-primary 
-                        bg-clip-text text-transparent 
-                        animate-shimmer bg-[length:200%_auto]
+                        text-accent
                         inline-block
                         px-4 py-2
                     ">
