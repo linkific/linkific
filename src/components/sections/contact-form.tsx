@@ -3,66 +3,46 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowRight } from "lucide-react";
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
+  name: z.string().min(1, "Your Name is required"),
+  email: z.string().email("A valid email is required"),
+  message: z.string().min(1, "Your Message is required"),
 });
 
 export function ContactForm() {
-    const { toast } = useToast();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
+    defaultValues: { name: "", email: "", message: "" },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // This is a mock submission. In a real app, you would send this to a server.
     console.log(values);
     toast({
-        title: "Message Sent!",
-        description: "Thank you for contacting us. We'll get back to you shortly.",
+      title: "Message Sent!",
+      description: "We'll get back to you shortly.",
     });
     form.reset();
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-foreground/80">Name</FormLabel>
+              <FormLabel className="sr-only">Your Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your Name" {...field} className="bg-background/50 backdrop-blur-sm border-foreground/20 focus:bg-background/70" />
+                <Input placeholder="Your Name" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -73,9 +53,9 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-foreground/80">Email</FormLabel>
+              <FormLabel className="sr-only">Your Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="your.email@example.com" {...field} className="bg-background/50 backdrop-blur-sm border-foreground/20 focus:bg-background/70" />
+                <Input type="email" placeholder="Your Email" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -85,19 +65,20 @@ export function ContactForm() {
           control={form.control}
           name="message"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-foreground/80">Message</FormLabel>
+            <FormItem className="sm:col-span-2">
+              <FormLabel className="sr-only">Your Message</FormLabel>
               <FormControl>
-                <Textarea placeholder="How can we help you automate your world?" {...field} className="bg-background/50 backdrop-blur-sm border-foreground/20 min-h-[120px] focus:bg-background/70" />
+                <Textarea placeholder="Your Message" rows={4} {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group">
-            Send Message
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </Button>
+        <div className="sm:col-span-2 flex justify-center">
+            <button type="submit" className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">
+                <span className="truncate">Send Message</span>
+            </button>
+        </div>
       </form>
     </Form>
   );

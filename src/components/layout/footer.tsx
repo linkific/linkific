@@ -1,74 +1,75 @@
-import { Mountain, Github, Twitter, Linkedin } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 
-const footerNavs = [
-  { href: '#projects', name: 'Projects' },
-  { href: '#services', name: 'Services' },
-  { href: '#contact', name: 'Contact' },
-  { href: '#', name: 'Terms' },
-  { href: '#', name: 'Privacy' },
-];
+const footerNavs = {
+  'Quick Links': [
+    { href: '#projects', name: 'Projects' },
+    { href: '#services', name: 'Services' },
+    { href: '#contact', name: 'Contact' },
+  ],
+  'Contact': [
+    { href: 'mailto:contact@linkific.com', name: 'contact@linkific.com' },
+    { href: 'tel:+15551234567', name: '+1 (555) 123-4567' },
+  ]
+};
 
 const socialLinks = [
-  { Icon: Twitter, href: '#', name: 'Twitter' },
-  { Icon: Github, href: '#', name: 'GitHub' },
-  { Icon: Linkedin, href: '#', name: 'LinkedIn' },
+  { href: '#', name: 'LinkedIn', icon: <svg aria-hidden="true" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path clipRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fillRule="evenodd"></path></svg> },
+  { href: '#', name: 'Twitter', icon: <svg aria-hidden="true" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg> },
 ];
 
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-foreground/10 bg-background/50 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-                <Mountain className="h-7 w-7 text-primary" />
-                <span className="text-xl font-bold text-foreground">Linkific</span>
-            </Link>
-            <p className="text-sm text-muted-foreground max-w-xs">
-              AI-Powered Automation for a Smarter Future.
-            </p>
+    <footer className="mt-16 sm:mt-24 bg-black/20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
+              <h2 className="text-white text-xl font-bold">Linkific</h2>
+            </div>
+            <p className="text-white/60 text-sm">AI-powered automation for the modern business.</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 col-span-2">
-            <div>
-              <h3 className="text-sm font-semibold text-foreground">Quick Links</h3>
-              <ul className="mt-4 space-y-2">
-                {footerNavs.map((item) => (
-                  <li key={item.name}>
-                    <a
-                      href={item.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {item.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-                <h3 className="text-sm font-semibold text-foreground">Contact</h3>
-                <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                    <li><a href="mailto:hello@linkific.com" className="hover:text-primary">hello@linkific.com</a></li>
-                    <li><a href="tel:+1234567890" className="hover:text-primary">+1 (234) 567-890</a></li>
-                </ul>
-            </div>
-             <div>
-                <h3 className="text-sm font-semibold text-foreground">Follow Us</h3>
-                <div className="flex items-center space-x-2 mt-4">
-                  {socialLinks.map((social) => (
-                    <Button key={social.name} variant="ghost" size="icon" asChild>
-                      <a href={social.href} aria-label={social.name}>
-                        <social.Icon className="h-5 w-5 text-muted-foreground hover:text-primary" />
-                      </a>
-                    </Button>
-                  ))}
-                </div>
+          <div>
+            <h4 className="text-white font-bold mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              {footerNavs['Quick Links'].map((item) => (
+                <li key={item.name}>
+                  <a href={item.href} className="text-white/60 hover:text-white text-sm transition-colors">
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white font-bold mb-4">Contact</h4>
+            <ul className="space-y-2 text-sm text-white/60">
+               {footerNavs['Contact'].map((item) => (
+                <li key={item.name}>
+                  <a href={item.href} className="text-white/60 hover:text-white text-sm transition-colors">
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white font-bold mb-4">Follow Us</h4>
+            <div className="flex items-center gap-4">
+              {socialLinks.map((social) => (
+                <a key={social.name} href={social.href} className="text-white/60 hover:text-white transition-colors">
+                  {social.icon}
+                </a>
+              ))}
             </div>
           </div>
         </div>
-        <div className="py-8 border-t border-foreground/10 flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Linkific, Inc. All rights reserved.</p>
+        <div className="mt-8 border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-white/50">
+          <p>© 2024 Linkific. All rights reserved.</p>
+          <div className="flex gap-4 mt-4 sm:mt-0">
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>
