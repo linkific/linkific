@@ -8,8 +8,8 @@ const COLUMN_SPACING_FACTOR = 1.5; // Increased for less clutter
 const COLORS = ['text-accent', 'text-secondary']; // Using theme colors
 
 const RainColumn = ({ height, id }: { height: number; id: number }) => {
-  const [startDelay] = useState(Math.random() * 20);
   const [animationDuration] = useState(8 + Math.random() * 8); 
+  const [startDelay] = useState(Math.random() * -animationDuration);
   const [characters] = useState(() =>
     Array.from({ length: Math.floor(height / FONT_SIZE) }, () => ({
       char: CHARACTERS.charAt(Math.floor(Math.random() * CHARACTERS.length)),
