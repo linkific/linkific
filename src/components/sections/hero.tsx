@@ -31,7 +31,7 @@ export default function HeroSection() {
             )}
             <div className="flex flex-col gap-6 items-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter">
-                    Revolutionize Your Business with <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">AI Automation</span>
+                    Revolutionize Your Business with <br /><span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">AI Automation</span>
                 </h1>
                 <p className="text-white/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
                     Linkific's smart software and AI-powered automation streamlines your workflow, boosts efficiency, and drives unprecedented growth.
