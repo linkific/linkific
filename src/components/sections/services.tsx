@@ -1,3 +1,5 @@
+'use client';
+import { motion } from 'framer-motion';
 
 const services = [
     {
@@ -17,6 +19,19 @@ const services = [
     },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      type: 'spring',
+      stiffness: 100,
+    },
+  }),
+};
+
 export default function ServicesSection() {
     return (
         <section id="services" className="pt-24 sm:pt-32">
@@ -24,13 +39,21 @@ export default function ServicesSection() {
             <p className="text-white/70 text-center mt-2 mb-12 max-w-2xl mx-auto">A clear breakdown of our core offerings designed to elevate your business operations.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {services.map((service, index) => (
-                    <div key={index} className="flex flex-col items-center text-center p-8 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
+                    <motion.div 
+                        key={index} 
+                        custom={index}
+                        variants={cardVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.5 }}
+                        className="flex flex-col items-center text-center p-8 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10"
+                    >
                         <div className="flex items-center justify-center size-16 rounded-full bg-gradient-to-br from-primary to-secondary mb-6 shadow-lg">
                             <span className="material-symbols-outlined text-3xl">{service.icon}</span>
                         </div>
                         <h3 className="text-xl font-bold mb-2">{service.title}</h3>
                         <p className="text-white/60 text-sm">{service.description}</p>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </section>

@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const allProjects = [
     {
@@ -53,8 +56,27 @@ const allProjects = [
     },
 ];
 
-const ProjectCard = ({ project }: { project: typeof allProjects[0] & { "data-ai-hint"?: string } }) => (
-    <div className="flex flex-col gap-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 h-full group hover:-translate-y-2 transition-transform duration-300">
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      type: 'spring',
+      stiffness: 100,
+    },
+  }),
+};
+
+const ProjectCard = ({ project, index }: { project: typeof allProjects[0] & { "data-ai-hint"?: string }, index: number }) => (
+    <motion.div 
+        custom={index}
+        variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        className="flex flex-col gap-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 h-full group hover:-translate-y-2 transition-transform duration-300">
         <div className="relative w-full aspect-video rounded-lg overflow-hidden">
              <Image src={project.imageUrl} alt={project.alt} layout="fill" objectFit="cover" data-ai-hint={project['data-ai-hint']} />
         </div>
@@ -67,7 +89,7 @@ const ProjectCard = ({ project }: { project: typeof allProjects[0] & { "data-ai-
                 <span className="truncate">View Case Study</span>
             </button>
         </div>
-    </div>
+    </motion.div>
 );
 
 
@@ -80,7 +102,7 @@ export default function ProjectsSection({ featured = false }: { featured?: boole
                 <p className="text-white/70 text-center mt-2 mb-12 max-w-2xl mx-auto">A curated gallery of successful case studies, showcasing the real-world application of our technology.</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {projects.map((project, index) => (
-                        <ProjectCard key={index} project={project} />
+                        <ProjectCard key={index} project={project} index={index} />
                     ))}
                 </div>
                  {featured && (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function HeroSection() {
     const [scrollY, setScrollY] = useState(0);
@@ -13,10 +14,33 @@ export default function HeroSection() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const containerVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                staggerChildren: 0.2,
+                duration: 0.5
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 }
+    };
+
+
     return (
         <section className="relative grid grid-cols-1 items-center gap-12 text-center min-h-[70vh]">
-            <div className="flex flex-col gap-6 items-center">
-                 <div className="relative">
+            <motion.div 
+                className="flex flex-col gap-6 items-center"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                 <motion.div className="relative" variants={itemVariants}>
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter">
                         <span className="text-yellow-400">Linkific</span> — purposeful software & product craft
                     </h1>
@@ -48,16 +72,22 @@ export default function HeroSection() {
                             </p>
                         </div>
                     </div>
-                </div>
-                <p className="text-white/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0">
+                </motion.div>
+                <motion.p 
+                    className="text-white/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0"
+                    variants={itemVariants}
+                >
                     Linkific's smart software and AI-powered automation streamlines your workflow, boosts efficiency, and drives unprecedented growth.
-                </p>
-                <div className="flex items-center justify-center gap-4 mt-4">
+                </motion.p>
+                <motion.div 
+                    className="flex items-center justify-center gap-4 mt-4"
+                    variants={itemVariants}
+                >
                     <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">
                         <span className="truncate">Explore Solutions</span>
                     </button>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </section>
     );
 }
