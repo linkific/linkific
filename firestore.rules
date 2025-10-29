@@ -1,0 +1,25 @@
+/**
+ * @file Firestore Security Rules
+ * @core-philosophy This ruleset allows public read access and open write access (no authorization) for contact messages.
+ * @data-structure All contact messages are stored in the `/contactMessages/{contactMessageId}` collection.
+ * @key-security-decisions Contact messages are publicly visible and can be created by anyone, even unauthenticated users.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Allows public read access and open write access (no authorization) for contact messages.
+     * @path /contactMessages/{contactMessageId}
+     * @allow (get, list): Public read access.
+     * @allow (create): Any user, even unauthenticated, can create a contact message.
+     * @deny (update, delete): Not applicable, as no authorization checks are required.
+     * @principle Allows public access to contact messages.
+     */
+    match /contactMessages/{contactMessageId} {
+      allow get, list: if true;
+      allow create: if true;
+      allow update, delete: if false;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "ContactMessage": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ContactMessage",
+      "type": "object",
+      "description": "Represents a message sent by a user through the contact form.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the contact message."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the user sending the message."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user sending the message.",
+          "format": "email"
+        },
+        "message": {
+          "type": "string",
+          "description": "The message content."
+        },
+        "sentAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the message was sent.",
+          "format": "date-time"
+        },
+        "page": {
+          "type": "string",
+          "description": "Page from which the message was sent (e.g., 'home', 'contact')."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "message",
+        "sentAt",
+        "page"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/contactMessages/{contactMessageId}",
+        "definition": {
+          "entityName": "ContactMessage",
+          "schema": {
+            "$ref": "#/backend/entities/ContactMessage"
+          },
+          "description": "Stores contact messages received from the website's home and contact pages.",
+          "params": [
+            {
+              "name": "contactMessageId",
+              "description": "Unique identifier for the contact message."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The data structure is designed to store contact messages received from the website's home and contact pages. All messages are stored in a single collection, `/contactMessages`, to facilitate easy retrieval and display in the dashboard. This structure ensures that security rules can be applied uniformly to all contact messages. It also simplifies queries for displaying the messages in the dashboard.\n\nThis design prioritizes simplicity and ease of management.  No authorization checks are required as all messages are publicly visible to the dashboard. Thus, authorization independence is not applicable in this scenario.\n\nQAPs: `list` operations are secure because the entire collection stores messages that are meant to be visible in the dashboard."
+  }
+}
