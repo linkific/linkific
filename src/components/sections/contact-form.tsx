@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useFirestore } from "@/firebase";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
@@ -31,16 +31,26 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!firestore) return;
+    if (!firestore) {
+      toast({
+        variant: "destructive",
+        title: "Database not available",
+        description: "Please try again later.",
+      });
+      return;
+    }
     setIsSubmitting(true);
-    
+
     try {
       const messagesCollection = collection(firestore, "contactMessages");
-      await addDoc(messagesCollection, {
+      const dataToSave = {
         ...values,
         sentAt: serverTimestamp(),
         page: page,
-      });
+      };
+
+      // Use the non-blocking function to add the document
+      addDocumentNonBlocking(messagesCollection, dataToSave);
 
       toast({
         title: "Message Sent!",
