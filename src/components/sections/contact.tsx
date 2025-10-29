@@ -10,7 +10,7 @@ export default function ContactSection() {
                         Linkific delivers AI-powered automation and smart software, transforming your workflows into actionable results in as little as 1-4 weeks. Let us build the tech, so you can focus on what matters: your business.
                     </p>
                 </div>
-                <ContactForm />
+                <ContactForm page="home" />
             </div>
         </section>
     );

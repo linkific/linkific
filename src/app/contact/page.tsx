@@ -62,7 +62,7 @@ export default function ContactPage() {
                 <p className="text-white/70 mb-8">
                   We'll get back to you as soon as possible.
                 </p>
-                <ContactForm />
+                <ContactForm page="contact" />
               </div>
             </div>
           </div>

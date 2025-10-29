@@ -8,6 +8,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useFirestore } from "@/firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
 
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
@@ -15,21 +20,43 @@ const formSchema = z.object({
   message: z.string().min(1, "Your Message is required"),
 });
 
-export function ContactForm() {
+export function ContactForm({ page }: { page: 'home' | 'contact' }) {
   const { toast } = useToast();
+  const firestore = useFirestore();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: "", email: "", message: "" },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you shortly.",
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!firestore) return;
+    setIsSubmitting(true);
+    
+    try {
+      const messagesCollection = collection(firestore, "contactMessages");
+      await addDoc(messagesCollection, {
+        ...values,
+        sentAt: serverTimestamp(),
+        page: page,
+      });
+
+      toast({
+        title: "Message Sent!",
+        description: "We'll get back to you shortly.",
+      });
+      form.reset();
+    } catch (error) {
+       const e = error as Error;
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: e.message || "Could not send message.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -75,8 +102,8 @@ export function ContactForm() {
           )}
         />
         <div className="sm:col-span-2 flex justify-center">
-            <button type="submit" className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">
-                <span className="truncate">Send Message</span>
+            <button type="submit" className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow" disabled={isSubmitting}>
+                 {isSubmitting ? <Loader2 className="animate-spin" /> : <span className="truncate">Send Message</span>}
             </button>
         </div>
       </form>
