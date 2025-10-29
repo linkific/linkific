@@ -6,6 +6,34 @@ import { motion } from 'framer-motion';
 
 const allProjects = [
     {
+        title: "Financial Firm: Predictive Analytics",
+        description: "Increased predictive accuracy by 35% with our custom AI models.",
+        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBA4hqTAAm6mZOcgulHLlHmN6hVFhk9LTLNcqwlTdEsNRVLwlSf_gd9Qur6Pu7gdv6GdeXUlM0s2RuaSlj7Gm2doNknTgzhWX4g3VvkaPJ1i-Z8bM3zP-2DMdfJ2KAV3o3Qv_ut_VNavCUgnkIsgeBfiRo6K_u96SA1Y_UR8eQ-jHBXS18D0RtqmV7aYw_yk7W2Gymtwn6jZDQETlAEWdmy-SiKPwONeo3Ba57_ZP1jyMBMxYPNL6gXkuVsG0opzmRFNOGyGkypgPLI",
+        alt: "Abstract visualization of financial data charts",
+        "data-ai-hint": "financial data"
+    },
+    {
+        title: "Logistics Co: Workflow Automation",
+        description: "Reduced manual processing time by 80% through intelligent automation.",
+        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBiyJWy9-KFMJt3N1tcOlZXiYcC3OhWyclxbiseCxwSQwIvUdX7gmdpRao1HPGyqxud-XKxn0Bk57MYqVGuJSyOeqZYUuG0ft29IvdUX6tMJZTwvvhMY-lq8xpYZbF2zCtxcbawlrxLnIEqnhWxVeKnjWta9I5P5l3_qh5IZXYNsIgE_WJWuWkFqbUg9kaoeq3Dg_PCc0tXcShuf4s5XQ1y8hCxFMtAv2nnY51cRufnMytLFjBB0YGAyTuTtfhNOegmairIRaIwWb5v",
+        alt: "Stylized graphic of automated warehouse conveyor belts",
+        "data-ai-hint": "warehouse automation"
+    },
+    {
+        title: "Healthcare Inc: Custom Software",
+        description: "Developed a compliant and efficient patient management system.",
+        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuC83IBjzURxK3GdJfIyrdX00gaODvro2HgSotVnBJsYjXhEdhui44EZfOB4MxmQxIRmJbe_nZonMqFwEsz5Zr12FPnnz4-XUtUzmH3TSsKLkptiwThpi9C19Iw3a4mLfP4W3MeYO7Dyp2p8Cib-yhIHwGcz0BK1HV4hpc9JF6sRJBKtpMt91aeoeT_SIDcskw-iBvcPxki1KigDUfEIIFRbF79s8lhALYeF0WJtHekY8m7cw-FQHT9cLXUjrrma6TonUcnbqEv_HOT7",
+        alt: "Clean interface of a patient management software",
+        "data-ai-hint": "management software"
+    },
+    {
+        title: "Retail Tech: Personalization Engine",
+        description: "Boosted customer engagement by 50% with AI-driven recommendations.",
+        imageUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBARyTVCbXNkAwfJRgNGKky_5Pi5_pUZc-qCAmOLDnQF0quEZhpLgRKnXkReH8WA17xAP1p0zgAhYM69QW0H3ok_pNAUUyTBwTX35rH8PX11QhX1PEBabOc8UU1H1rMaFf3ngwt6Sbq5jA1EDGy-PGB365eHz_ZsfNLqYBvo3bC37l9S6PFgnFIDRb7gGo8Ajb-U5YbwVh_KTFlhkU9rznDzhY_H-yFMsgQSvzm3Ndd04C6zpRfaRSxnSFAavjaJ4KaiGWeXasTfv5r",
+        alt: "E-commerce dashboard showing sales analytics",
+        "data-ai-hint": "sales analytics"
+    },
+     {
         title: "Hospital support chatbot",
         description: "A healthcare support chatbot for bookings and query resolutions for doctors.",
         imageUrl: "/assets/hospital-support-chatbot.png",
@@ -60,7 +88,7 @@ const allProjects = [
         imageUrl: "/assets/ai-command-center.png",
         alt: "Breakout rooms AI command system",
         "data-ai-hint": "ai command center"
-    },
+    }
 ];
 
 const cardVariants = {
