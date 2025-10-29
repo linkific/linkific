@@ -8,56 +8,56 @@ const allProjects = [
     {
         title: "Hospital support chatbot",
         description: "A healthcare support chatbot for bookings and query resolutions for doctors.",
-        imageUrl: "/assets/hospital-support-chatbot.png",
+        imageUrl: "/assets/hospital.webp",
         alt: "Hospital support chatbot",
         "data-ai-hint": "hospital interior"
     },
     {
         title: "AI assisted chrome extension",
         description: "An API integrated chrome extension that allows user to manage different EHR systems at once.",
-        imageUrl: "/assets/ai-chrome-extension.png",
+        imageUrl: "/assets/EHR.webp",
         alt: "AI assisted chrome extension",
         "data-ai-hint": "browser extension"
     },
     {
         title: "Poultry Farm management application",
         description: "A android app that allows user to keep track of poultry with a integrated system.",
-        imageUrl: "/assets/poultry-farm-app.png",
+        imageUrl: "/assets/poultry.webp",
         alt: "Poultry Farm management application",
         "data-ai-hint": "poultry farm"
     },
     {
         title: "Hotel kiosk + AI detection",
         description: "A kiosk system with hand movement detection to handle ordering with wireless communications.",
-        imageUrl: "/assets/hotel-kiosk.png",
+        imageUrl: "/assets/kiosk.webp",
         alt: "Hotel kiosk with AI detection",
         "data-ai-hint": "hotel kiosk"
     },
     {
         title: "Pose detection with armed drone",
         description: "A pose detection software that enables a drone to understand position of a person in front for friend or foe detection.",
-        imageUrl: "/assets/drone-detection.png",
+        imageUrl: "/assets/armed%20drone.webp",
         alt: "Pose detection with armed drone",
         "data-ai-hint": "drone detection"
     },
     {
         title: "Object detection through restaurants cams",
         description: "Computer vision for hotel table management (detects empty tables, hand signals for service, etc.)",
-        imageUrl: "/assets/restaurant-vision.png",
+        imageUrl: "/assets/hotel%20cams.webp",
         alt: "Object detection in a restaurant",
         "data-ai-hint": "restaurant vision"
     },
     {
         title: "Document Classification ML Model",
         description: "Automatically identifies document types (Aadhaar card, PAN card, income certificates, etc.)",
-        imageUrl: "/assets/document-classifier.png",
+        imageUrl: "/assets/doc%20classification.webp",
         alt: "Document Classification ML Model",
         "data-ai-hint": "document classifier"
     },
     {
         title: "Breakout rooms - AI command",
         description: "A AI integrated sales and management system with integrated call agents.",
-        imageUrl: "/assets/ai-command-center.png",
+        imageUrl: "/assets/breakout%20rooms.webp",
         alt: "Breakout rooms AI command system",
         "data-ai-hint": "ai command center"
     }
