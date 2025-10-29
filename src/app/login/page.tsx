@@ -91,7 +91,7 @@ export default function LoginPage() {
                   className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition"
                 />
               </div>
-              <Button type="submit" className="w-full flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow" disabled={isLoading || !areServicesAvailable}>
+              <Button type="submit" className="w-full flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow" disabled={isLoading}>
                 {isLoading ? <Loader2 className="animate-spin" /> : 'Login'}
               </Button>
             </form>
