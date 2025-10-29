@@ -45,8 +45,10 @@ export default function Header() {
                     ))}
                 </nav>
                 <div className="flex items-center gap-2">
-                    <Button className="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-gradient-to-r from-primary to-secondary text-white text-sm font-bold shadow-md hover:shadow-primary/50 transition-shadow">
-                        <span className="truncate">Get Started</span>
+                    <Button asChild className="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-gradient-to-r from-primary to-secondary text-white text-sm font-bold shadow-md hover:shadow-primary/50 transition-shadow">
+                        <Link href="/contact">
+                            <span className="truncate">Get Started</span>
+                        </Link>
                     </Button>
                     <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
                         <SheetTrigger asChild className="md:hidden">

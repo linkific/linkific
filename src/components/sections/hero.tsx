@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Button } from '../ui/button';
+import Link from 'next/link';
 
 export default function HeroSection() {
     const [scrollY, setScrollY] = useState(0);
@@ -55,9 +57,11 @@ export default function HeroSection() {
                     className="flex items-center justify-center gap-4 mt-4"
                     variants={itemVariants}
                 >
-                    <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">
-                        <span className="truncate">Get a POC in for free</span>
-                    </button>
+                    <Button asChild className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">
+                        <Link href="/contact">
+                            <span className="truncate">Get a POC in for free</span>
+                        </Link>
+                    </Button>
                 </motion.div>
             </motion.div>
         </section>
