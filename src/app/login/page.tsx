@@ -10,32 +10,34 @@ import { CodeRainBackground } from '@/components/layout/code-rain-background';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from '@/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('linkific@gmail.com');
+  const [password, setPassword] = useState('#Linkific123');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+  const auth = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Hardcoded credentials check
-    if (email === 'linkific@gmail.com' && password === '#Linkific123') {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       toast({
         title: 'Login Successful',
         description: 'Redirecting to your dashboard...',
       });
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 1000);
-    } else {
+      router.push('/dashboard');
+    } catch (error) {
+       const e = error as Error;
       toast({
         variant: 'destructive',
         title: 'Login Failed',
-        description: 'Invalid email or password. Please try again.',
+        description: e.message || 'Invalid email or password. Please try again.',
       });
       setIsLoading(false);
     }

@@ -4,10 +4,12 @@ import { CodeRainBackground } from '@/components/layout/code-rain-background';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useCollection, useFirebase, useMemoFirebase } from '@/firebase';
+import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 interface ContactMessage {
   id: string;
@@ -154,6 +156,24 @@ function ApplicationsTable() {
 
 
 export default function DashboardPage() {
+  const { user, isUserLoading } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isUserLoading && !user) {
+      router.push('/login');
+    }
+  }, [user, isUserLoading, router]);
+
+  if (isUserLoading || !user) {
+    return (
+       <div className="relative w-full min-h-screen overflow-x-hidden bg-transparent font-display text-white flex items-center justify-center">
+        <CodeRainBackground />
+        <Loader2 className="size-24 text-primary animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden bg-transparent font-display text-white">
       <CodeRainBackground />
