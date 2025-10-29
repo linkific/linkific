@@ -12,6 +12,9 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Loader2 } from "lucide-react";
+import { useFirestore } from "@/firebase";
+import { collection, serverTimestamp } from "firebase/firestore";
+import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
 
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
@@ -50,6 +53,7 @@ export default function ApplicationForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const firestore = useFirestore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -57,12 +61,32 @@ export default function ApplicationForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!firestore) {
+      toast({
+        variant: "destructive",
+        title: "Database not available",
+        description: "Please try again later.",
+      });
+      return;
+    }
     setIsSubmitting(true);
-    console.log(values);
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    // Note: We are not handling file uploads yet. 
+    // This would require setting up Firebase Storage.
+    // For now, we'll save the form data and the resume's file name.
+    const { resume, ...formData } = values;
+    const resumeFileName = resume?.[0]?.name || 'N/A';
+
+    try {
+      const applicationsCollection = collection(firestore, "jobApplications");
+      const dataToSave = {
+        ...formData,
+        resumeFileName: resumeFileName,
+        submittedAt: serverTimestamp(),
+      };
+
+      addDocumentNonBlocking(applicationsCollection, dataToSave);
+      
       setIsSuccess(true);
       toast({
         title: "Application Sent!",
@@ -70,9 +94,17 @@ export default function ApplicationForm() {
       });
       form.reset();
       
-      // Reset success state after animation
       setTimeout(() => setIsSuccess(false), 4000);
-    }, 2000);
+    } catch (error) {
+      const e = error as Error;
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: e.message || "Could not send application.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (

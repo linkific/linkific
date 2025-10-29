@@ -41,6 +41,57 @@
         "sentAt",
         "page"
       ]
+    },
+    "JobApplication": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "JobApplication",
+      "type": "object",
+      "description": "Represents a job application submitted by a user.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the job application."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the applicant."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the applicant.",
+          "format": "email"
+        },
+        "contactNumber": {
+          "type": "string",
+          "description": "Contact number of the applicant."
+        },
+        "role": {
+          "type": "string",
+          "description": "The role the user is applying for."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The applicant's reason for wanting to join."
+        },
+        "resumeFileName": {
+          "type": "string",
+          "description": "The filename of the uploaded resume."
+        },
+        "submittedAt": {
+          "type": "string",
+          "description": "Timestamp indicating when the application was submitted.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "contactNumber",
+        "role",
+        "reason",
+        "submittedAt"
+      ]
     }
   },
   "auth": {
@@ -66,8 +117,24 @@
             }
           ]
         }
+      },
+      {
+        "path": "/jobApplications/{jobApplicationId}",
+        "definition": {
+          "entityName": "JobApplication",
+          "schema": {
+            "$ref": "#/backend/entities/JobApplication"
+          },
+          "description": "Stores job applications submitted through the careers page.",
+          "params": [
+            {
+              "name": "jobApplicationId",
+              "description": "Unique identifier for the job application."
+            }
+          ]
+        }
       }
     ],
-    "reasoning": "The data structure is designed to store contact messages received from the website's home and contact pages. All messages are stored in a single collection, `/contactMessages`, to facilitate easy retrieval and display in the dashboard. This structure ensures that security rules can be applied uniformly to all contact messages. It also simplifies queries for displaying the messages in the dashboard.\n\nThis design prioritizes simplicity and ease of management.  No authorization checks are required as all messages are publicly visible to the dashboard. Thus, authorization independence is not applicable in this scenario.\n\nQAPs: `list` operations are secure because the entire collection stores messages that are meant to be visible in the dashboard."
+    "reasoning": "The data structure is designed to store contact messages and job applications. All messages are stored in a single collection, `/contactMessages`, and all applications in `/jobApplications`, to facilitate easy retrieval and display in the dashboard. This structure ensures that security rules can be applied uniformly to each data type. It also simplifies queries for displaying the data in the dashboard.\n\nThis design prioritizes simplicity and ease of management. No authorization checks are required for writes as the forms are public. Reads are restricted to authenticated users on the dashboard. Thus, authorization independence is not applicable in this scenario.\n\nQAPs: `list` operations are secure because the collections store data meant to be visible in the dashboard to authenticated employee users."
   }
 }

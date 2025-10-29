@@ -21,6 +21,20 @@ interface ContactMessage {
   page: 'home' | 'contact';
 }
 
+interface JobApplication {
+  id: string;
+  name: string;
+  email: string;
+  contactNumber: string;
+  role: string;
+  reason: string;
+  resumeFileName: string;
+  submittedAt: {
+    seconds: number;
+    nanoseconds: number;
+  } | null;
+}
+
 function MessagesTable() {
   const { firestore } = useFirebase();
   
@@ -77,6 +91,67 @@ function MessagesTable() {
   );
 }
 
+function ApplicationsTable() {
+  const { firestore } = useFirebase();
+
+  const applicationsQuery = useMemoFirebase(
+    () =>
+      firestore
+        ? query(collection(firestore, 'jobApplications'), orderBy('submittedAt', 'desc'))
+        : null,
+    [firestore]
+  );
+
+  const { data: applications, isLoading, error } = useCollection<JobApplication>(applicationsQuery);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center p-16">
+        <Loader2 className="size-12 text-primary animate-spin" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className="text-destructive p-8 text-center">Error loading applications: {error.message}</p>;
+  }
+
+  if (!applications || applications.length === 0) {
+    return <p className="p-8 text-center text-white/70">No applications yet.</p>;
+  }
+
+  return (
+    <div className="overflow-x-auto">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Submitted</TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Role</TableHead>
+            <TableHead>Reason</TableHead>
+            <TableHead>Resume</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {applications.map((app) => (
+            <TableRow key={app.id}>
+              <TableCell className="text-white/80">
+                {app.submittedAt ? new Date(app.submittedAt.seconds * 1000).toLocaleString() : 'N/A'}
+              </TableCell>
+              <TableCell className="font-medium">{app.name}</TableCell>
+              <TableCell>{app.email}</TableCell>
+              <TableCell>{app.role}</TableCell>
+              <TableCell className="max-w-xs truncate">{app.reason}</TableCell>
+              <TableCell>{app.resumeFileName}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+
 
 export default function DashboardPage() {
   return (
@@ -96,7 +171,7 @@ export default function DashboardPage() {
             </Button>
         </div>
       </header>
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-16">
          <Card className="bg-white/5 backdrop-blur-xl border border-white/10">
             <CardHeader>
               <CardTitle className="text-3xl font-bold">Contact Messages</CardTitle>
@@ -104,6 +179,15 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
                 <MessagesTable />
+            </CardContent>
+         </Card>
+         <Card className="bg-white/5 backdrop-blur-xl border border-white/10">
+            <CardHeader>
+              <CardTitle className="text-3xl font-bold">Job Applications</CardTitle>
+              <CardDescription>Here are the applications submitted through your careers page.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <ApplicationsTable />
             </CardContent>
          </Card>
       </main>
