@@ -8,51 +8,58 @@ const allProjects = [
     {
         title: "Hospital support chatbot",
         description: "A healthcare support chatbot for bookings and query resolutions for doctors.",
-        imageUrl: "https://picsum.photos/seed/hospital-interior/800/600",
+        imageUrl: "/assets/hospital-support-chatbot.png",
         alt: "Hospital support chatbot",
         "data-ai-hint": "hospital interior"
     },
     {
         title: "AI assisted chrome extension",
         description: "An API integrated chrome extension that allows user to manage different EHR systems at once.",
-        imageUrl: "https://picsum.photos/seed/browser-extension/300/200",
-        alt: "AI assisted chrome extension"
+        imageUrl: "/assets/ai-chrome-extension.png",
+        alt: "AI assisted chrome extension",
+        "data-ai-hint": "browser extension"
     },
     {
         title: "Poultry Farm management application",
         description: "A android app that allows user to keep track of poultry with a integrated system.",
-        imageUrl: "https://picsum.photos/seed/poultry-farm/300/200",
-        alt: "Poultry Farm management application"
+        imageUrl: "/assets/poultry-farm-app.png",
+        alt: "Poultry Farm management application",
+        "data-ai-hint": "poultry farm"
     },
     {
         title: "Hotel kiosk + AI detection",
         description: "A kiosk system with hand movement detection to handle ordering with wireless communications.",
-        imageUrl: "https://picsum.photos/seed/hotel-kiosk/300/200",
-        alt: "Hotel kiosk with AI detection"
+        imageUrl: "/assets/hotel-kiosk.png",
+        alt: "Hotel kiosk with AI detection",
+        "data-ai-hint": "hotel kiosk"
     },
     {
         title: "Pose detection with armed drone",
         description: "A pose detection software that enables a drone to understand position of a person in front for friend or foe detection.",
-        imageUrl: "https://picsum.photos/seed/drone-detection/300/200",
-        alt: "Pose detection with armed drone"
+        imageUrl: "/assets/drone-detection.png",
+        alt: "Pose detection with armed drone",
+        "data-ai-hint": "drone detection"
     },
     {
         title: "Object detection through restaurants cams",
         description: "Computer vision for hotel table management (detects empty tables, hand signals for service, etc.)",
-        imageUrl: "https://picsum.photos/seed/restaurant-vision/300/200",
-        alt: "Object detection in a restaurant"
+        imageUrl: "/assets/restaurant-vision.png",
+        alt: "Object detection in a restaurant",
+        "data-ai-hint": "restaurant vision"
     },
     {
         title: "Document Classification ML Model",
         description: "Automatically identifies document types (Aadhaar card, PAN card, income certificates, etc.)",
-        imageUrl: "https://picsum.photos/seed/document-classifier/300/200",
-        alt: "Document Classification ML Model"
+        imageUrl: "/assets/document-classifier.png",
+        alt: "Document Classification ML Model",
+        "data-ai-hint": "document classifier"
     },
     {
         title: "Breakout rooms - AI command",
         description: "A AI integrated sales and management system with integrated call agents.",
-        imageUrl: "https://picsum.photos/seed/ai-command-center/300/200",
-        alt: "Breakout rooms AI command system"
+        imageUrl: "/assets/ai-command-center.png",
+        alt: "Breakout rooms AI command system",
+        "data-ai-hint": "ai command center"
     },
 ];
 
