@@ -1,70 +1,58 @@
 /**
- * @file Firebase Security Rules for Firestore.
- * @description This ruleset enforces a role-based access control model. Only authenticated users can read data.
- * All write operations are disallowed for prototyping.
+ * @file Firestore Security Rules
+ * @description This ruleset defines access control for the ContactMessage and JobApplication collections.
+ *
+ * Core Philosophy:
+ *   This ruleset prioritizes simplicity and assumes that all contact messages and job applications
+ *   are publicly submittable but only readable by authenticated users. No authorization checks are required for writes as the forms are public, reads are restricted to authenticated users on the dashboard.
  *
  * Data Structure:
- * - /contactMessages/{contactMessageId}: Stores contact messages.
- * - /jobApplications/{jobApplicationId}: Stores job applications.
+ *   - /contactMessages/{contactMessageId}: Stores contact messages.
+ *   - /jobApplications/{jobApplicationId}: Stores job applications.
  *
  * Key Security Decisions:
- * - Write operations are explicitly denied for all users during prototyping to allow for flexible data shapes.
- * - Read operations are allowed only for authenticated users.
- * - No user listing is allowed (explicitly denied).
+ *   - Contact messages and job applications can be created by anyone (public forms).
+ *   - Only authenticated users can read (get/list) contact messages and job applications.
+ *   - No updates or deletes are allowed via the client. These actions should be performed
+ *     through a backend process with elevated privileges (e.g., Cloud Functions).
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Secures the /contactMessages collection. Only authenticated users can read messages.
+     * @description Controls access to the contactMessages collection.
      * @path /contactMessages/{contactMessageId}
-     * @allow (get) Authenticated user can read a contact message.
-     * @deny (get) Unauthenticated user cannot read a contact message.
-     * @allow (list) Authenticated user can list contact messages.
-     * @deny (list) Unauthenticated user cannot list contact messages.
-     * @allow (create) Contact messages are not to be created during prototyping.
-     * @deny (create) All users cannot create contact messages during prototyping.
-     * @allow (update) Contact messages are not to be updated during prototyping.
-     * @deny (update) All users cannot update contact messages during prototyping.
-     * @allow (delete) Contact messages are not to be deleted during prototyping.
-     * @deny (delete) All users cannot delete contact messages during prototyping.
-     * @principle Authenticated users can read, no one can write.
+     * @allow (create) - Any user can submit a contact message.
+     * @deny (get) - Unauthenticated users cannot read contact messages.
+     * @principle Allows public creation of contact messages, but restricts read access to authenticated users.
      */
     match /contactMessages/{contactMessageId} {
       allow get: if isSignedIn();
       allow list: if isSignedIn();
-      allow create: if false;
+      allow create: if true;
       allow update: if false;
       allow delete: if false;
     }
 
     /**
-     * @description Secures the /jobApplications collection. Only authenticated users can read job applications.
+     * @description Controls access to the jobApplications collection.
      * @path /jobApplications/{jobApplicationId}
-     * @allow (get) Authenticated user can read a job application.
-     * @deny (get) Unauthenticated user cannot read a job application.
-     * @allow (list) Authenticated user can list job applications.
-     * @deny (list) Unauthenticated user cannot list job applications.
-     * @allow (create) Job applications are not to be created during prototyping.
-     * @deny (create) All users cannot create job applications during prototyping.
-     * @allow (update) Job applications are not to be updated during prototyping.
-     * @deny (update) All users cannot update job applications during prototyping.
-     * @allow (delete) Job applications are not to be deleted during prototyping.
-     * @deny (delete) All users cannot delete job applications during prototyping.
-     * @principle Authenticated users can read, no one can write.
+     * @allow (create) - Any user can submit a job application.
+     * @deny (get) - Unauthenticated users cannot read job applications.
+     * @principle Allows public creation of job applications, but restricts read access to authenticated users.
      */
     match /jobApplications/{jobApplicationId} {
       allow get: if isSignedIn();
       allow list: if isSignedIn();
-      allow create: if false;
+      allow create: if true;
       allow update: if false;
       allow delete: if false;
     }
-  }
 
-  // Helper function to determine if a user is signed in.
-  function isSignedIn() {
-    return request.auth != null;
+    // Helper function to determine if a user is signed in.
+    function isSignedIn() {
+      return request.auth != null;
+    }
   }
 }
