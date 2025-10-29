@@ -33,20 +33,23 @@ export default function LoginPage() {
     }
     setIsLoading(true);
 
+    const hardcodedEmail = 'linkific@gmail.com';
+    const hardcodedPassword = '#Linkific123';
+
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, hardcodedEmail, hardcodedPassword);
       toast({
         title: 'Login Successful',
         description: 'Redirecting to your dashboard...',
       });
       router.push('/dashboard');
     } catch (error: any) {
-      if (error.code === 'auth/user-not-found') {
-        // If user doesn't exist, create them
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+        // If user doesn't exist or creds are wrong for a new setup, create them
         try {
-          await createUserWithEmailAndPassword(auth, email, password);
+          await createUserWithEmailAndPassword(auth, hardcodedEmail, hardcodedPassword);
            // Now sign in the newly created user
-          await signInWithEmailAndPassword(auth, email, password);
+          await signInWithEmailAndPassword(auth, hardcodedEmail, hardcodedPassword);
           toast({
             title: 'Account Created & Logged In',
             description: 'Redirecting to your dashboard...',
