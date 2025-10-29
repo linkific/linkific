@@ -4,7 +4,7 @@ const footerNavs = {
   'Quick Links': [
     { href: '/projects', name: 'Projects' },
     { href: '/services', name: 'Services' },
-    { href: '/contact', name: 'Contact' },
+    { href: '/contact', name: 'Contact Us' },
     { href: '/about', name: 'About Us' },
     { href: '/careers', name: 'Careers' },
   ],
