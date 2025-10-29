@@ -14,8 +14,8 @@ import { useFirebase } from '@/firebase';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('linkific@gmail.com');
-  const [password, setPassword] = useState('#Linkific123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
@@ -37,7 +37,11 @@ export default function LoginPage() {
     const hardcodedPassword = '#Linkific123';
 
     try {
-      await signInWithEmailAndPassword(auth, hardcodedEmail, hardcodedPassword);
+      // Use the email and password from the form state if they are entered, otherwise use hardcoded credentials
+      const loginEmail = email || hardcodedEmail;
+      const loginPassword = password || hardcodedPassword;
+
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
       toast({
         title: 'Login Successful',
         description: 'Redirecting to your dashboard...',
@@ -47,8 +51,9 @@ export default function LoginPage() {
       if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
         // If user doesn't exist or creds are wrong for a new setup, create them
         try {
+          // Use the hardcoded credentials to create the account
           await createUserWithEmailAndPassword(auth, hardcodedEmail, hardcodedPassword);
-           // Now sign in the newly created user
+           // Now sign in the newly created user with the same hardcoded credentials
           await signInWithEmailAndPassword(auth, hardcodedEmail, hardcodedPassword);
           toast({
             title: 'Account Created & Logged In',
@@ -94,7 +99,7 @@ export default function LoginPage() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="linkific@gmail.com"
+                  placeholder="your@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
