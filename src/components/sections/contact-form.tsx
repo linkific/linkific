@@ -8,11 +8,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { useFirestore } from "@/firebase";
-import { collection, serverTimestamp } from "firebase/firestore";
+import { useFirebase } from "@/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
 
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
@@ -22,7 +21,7 @@ const formSchema = z.object({
 
 export function ContactForm({ page }: { page: 'home' | 'contact' }) {
   const { toast } = useToast();
-  const firestore = useFirestore();
+  const { firestore } = useFirebase();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,8 +48,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
         page: page,
       };
 
-      // Use the non-blocking function to add the document
-      addDocumentNonBlocking(messagesCollection, dataToSave);
+      await addDoc(messagesCollection, dataToSave);
 
       toast({
         title: "Message Sent!",
@@ -120,3 +118,5 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
     </Form>
   );
 }
+
+    

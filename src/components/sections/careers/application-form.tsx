@@ -12,9 +12,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Loader2 } from "lucide-react";
-import { useFirestore } from "@/firebase";
-import { collection, serverTimestamp } from "firebase/firestore";
-import { addDocumentNonBlocking } from "@/firebase/non-blocking-updates";
+import { useFirebase } from "@/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
@@ -53,14 +52,14 @@ export default function ApplicationForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const firestore = useFirestore();
+  const { firestore } = useFirebase();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: "", email: "", contactNumber: "", role: "", reason: "" },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!firestore) {
       toast({
         variant: "destructive",
@@ -71,9 +70,6 @@ export default function ApplicationForm() {
     }
     setIsSubmitting(true);
     
-    // Note: We are not handling file uploads yet. 
-    // This would require setting up Firebase Storage.
-    // For now, we'll save the form data and the resume's file name.
     const { resume, ...formData } = values;
     const resumeFileName = resume?.[0]?.name || 'N/A';
 
@@ -85,7 +81,7 @@ export default function ApplicationForm() {
         submittedAt: serverTimestamp(),
       };
 
-      addDocumentNonBlocking(applicationsCollection, dataToSave);
+      await addDoc(applicationsCollection, dataToSave);
       
       setIsSuccess(true);
       toast({
@@ -247,3 +243,5 @@ export default function ApplicationForm() {
     </section>
   );
 }
+
+    

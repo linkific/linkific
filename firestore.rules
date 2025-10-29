@@ -1,56 +1,49 @@
 /**
  * @file Firestore Security Rules
- * @description This ruleset defines access control for the ContactMessage and JobApplication collections.
- *
- * Core Philosophy:
- *   This ruleset prioritizes simplicity and assumes that all contact messages and job applications
- *   are publicly submittable but only readable by authenticated users. No authorization checks are required for writes as the forms are public, reads are restricted to authenticated users on the dashboard.
- *
- * Data Structure:
- *   - /contactMessages/{contactMessageId}: Stores contact messages.
- *   - /jobApplications/{jobApplicationId}: Stores job applications.
- *
- * Key Security Decisions:
- *   - Contact messages and job applications can be created by anyone (public forms).
- *   - Only authenticated users can read (get/list) contact messages and job applications.
- *   - No updates or deletes are allowed via the client. These actions should be performed
- *     through a backend process with elevated privileges (e.g., Cloud Functions).
+ * @description This ruleset allows anyone to submit contact messages and job applications.
+ *              Access to view (read) these submissions is restricted to authenticated users.
+ * @dataStructure
+ *  - /contactMessages/{contactMessageId}: Stores contact messages.
+ *  - /jobApplications/{jobApplicationId}: Stores job applications.
+ * @keySecurityDecisions
+ *  - Public submissions: Anyone can submit contact messages and job applications without authentication.
+ *  - Authenticated-only access for reading: Only logged-in users can view the submissions.
+ * @denormalizationForAuthorization Not applicable in this scenario.
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Controls access to the contactMessages collection.
+     * @description Allows anyone to create contact messages, but restricts reading to authenticated users.
      * @path /contactMessages/{contactMessageId}
-     * @allow (create) - Any user can submit a contact message.
-     * @deny (get) - Unauthenticated users cannot read contact messages.
-     * @principle Allows public creation of contact messages, but restricts read access to authenticated users.
+     * @allow (create) - Any user can create a contact message.
+     * @deny (get, list, update, delete) - Anonymous users cannot read, update, or delete messages.
+     * @principle Allows public submissions with authenticated-only reads.
      */
     match /contactMessages/{contactMessageId} {
-      allow get: if isSignedIn();
-      allow list: if isSignedIn();
+      allow get, list: if isSignedIn();
       allow create: if true;
-      allow update: if false;
-      allow delete: if false;
+      allow update, delete: if false;
     }
 
     /**
-     * @description Controls access to the jobApplications collection.
+     * @description Allows anyone to submit job applications, but restricts reading to authenticated users.
      * @path /jobApplications/{jobApplicationId}
-     * @allow (create) - Any user can submit a job application.
-     * @deny (get) - Unauthenticated users cannot read job applications.
-     * @principle Allows public creation of job applications, but restricts read access to authenticated users.
+     * @allow (create) - Any user can create a job application.
+     * @deny (get, list, update, delete) - Anonymous users cannot read, update, or delete applications.
+     * @principle Allows public submissions with authenticated-only reads.
      */
     match /jobApplications/{jobApplicationId} {
-      allow get: if isSignedIn();
-      allow list: if isSignedIn();
+      allow get, list: if isSignedIn();
       allow create: if true;
-      allow update: if false;
-      allow delete: if false;
+      allow update, delete: if false;
     }
 
-    // Helper function to determine if a user is signed in.
+    /**
+     * @description Checks if the user is signed in.
+     * @return {bool} True if the user is signed in, false otherwise.
+     */
     function isSignedIn() {
       return request.auth != null;
     }
