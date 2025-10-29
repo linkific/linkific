@@ -12,8 +12,13 @@ const contactDetails = [
   },
   {
     icon: Phone,
-    text: '+90 22143695',
-    href: 'tel:+9022143695',
+    text: '+91 9022143695',
+    href: 'tel:+919022143695',
+  },
+  {
+    icon: Phone,
+    text: '+91 9209147566',
+    href: 'tel:+919209147566',
   },
   {
     icon: MapPin,
