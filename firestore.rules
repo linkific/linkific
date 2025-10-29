@@ -1,25 +1,70 @@
 /**
- * @file Firestore Security Rules
- * @core-philosophy This ruleset allows public read access and open write access (no authorization) for contact messages.
- * @data-structure All contact messages are stored in the `/contactMessages/{contactMessageId}` collection.
- * @key-security-decisions Contact messages are publicly visible and can be created by anyone, even unauthenticated users.
+ * @file Firebase Security Rules for Firestore.
+ * @description This ruleset enforces a role-based access control model. Only authenticated users can read data.
+ * All write operations are disallowed for prototyping.
+ *
+ * Data Structure:
+ * - /contactMessages/{contactMessageId}: Stores contact messages.
+ * - /jobApplications/{jobApplicationId}: Stores job applications.
+ *
+ * Key Security Decisions:
+ * - Write operations are explicitly denied for all users during prototyping to allow for flexible data shapes.
+ * - Read operations are allowed only for authenticated users.
+ * - No user listing is allowed (explicitly denied).
  */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Allows public read access and open write access (no authorization) for contact messages.
+     * @description Secures the /contactMessages collection. Only authenticated users can read messages.
      * @path /contactMessages/{contactMessageId}
-     * @allow (get, list): Public read access.
-     * @allow (create): Any user, even unauthenticated, can create a contact message.
-     * @deny (update, delete): Not applicable, as no authorization checks are required.
-     * @principle Allows public access to contact messages.
+     * @allow (get) Authenticated user can read a contact message.
+     * @deny (get) Unauthenticated user cannot read a contact message.
+     * @allow (list) Authenticated user can list contact messages.
+     * @deny (list) Unauthenticated user cannot list contact messages.
+     * @allow (create) Contact messages are not to be created during prototyping.
+     * @deny (create) All users cannot create contact messages during prototyping.
+     * @allow (update) Contact messages are not to be updated during prototyping.
+     * @deny (update) All users cannot update contact messages during prototyping.
+     * @allow (delete) Contact messages are not to be deleted during prototyping.
+     * @deny (delete) All users cannot delete contact messages during prototyping.
+     * @principle Authenticated users can read, no one can write.
      */
     match /contactMessages/{contactMessageId} {
-      allow get, list: if true;
-      allow create: if true;
-      allow update, delete: if false;
+      allow get: if isSignedIn();
+      allow list: if isSignedIn();
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
     }
+
+    /**
+     * @description Secures the /jobApplications collection. Only authenticated users can read job applications.
+     * @path /jobApplications/{jobApplicationId}
+     * @allow (get) Authenticated user can read a job application.
+     * @deny (get) Unauthenticated user cannot read a job application.
+     * @allow (list) Authenticated user can list job applications.
+     * @deny (list) Unauthenticated user cannot list job applications.
+     * @allow (create) Job applications are not to be created during prototyping.
+     * @deny (create) All users cannot create job applications during prototyping.
+     * @allow (update) Job applications are not to be updated during prototyping.
+     * @deny (update) All users cannot update job applications during prototyping.
+     * @allow (delete) Job applications are not to be deleted during prototyping.
+     * @deny (delete) All users cannot delete job applications during prototyping.
+     * @principle Authenticated users can read, no one can write.
+     */
+    match /jobApplications/{jobApplicationId} {
+      allow get: if isSignedIn();
+      allow list: if isSignedIn();
+      allow create: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+
+  // Helper function to determine if a user is signed in.
+  function isSignedIn() {
+    return request.auth != null;
   }
 }
