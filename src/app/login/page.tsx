@@ -10,7 +10,7 @@ import { CodeRainBackground } from '@/components/layout/code-rain-background';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { useAuth } from '@/firebase';
+import { useFirebase } from '@/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function LoginPage() {
@@ -19,10 +19,18 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
-  const auth = useAuth();
+  const { auth, areServicesAvailable } = useFirebase();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!auth) {
+       toast({
+        variant: 'destructive',
+        title: 'Authentication service not ready',
+        description: 'Please wait a moment and try again.',
+      });
+      return;
+    }
     setIsLoading(true);
 
     try {
@@ -39,7 +47,8 @@ export default function LoginPage() {
         title: 'Login Failed',
         description: e.message || 'Invalid email or password. Please try again.',
       });
-      setIsLoading(false);
+    } finally {
+        setIsLoading(false);
     }
   };
 
@@ -67,6 +76,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={!areServicesAvailable}
                   className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition"
                 />
               </div>
@@ -79,10 +89,11 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  disabled={!areServicesAvailable}
                   className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition"
                 />
               </div>
-              <Button type="submit" className="w-full flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow" disabled={isLoading}>
+              <Button type="submit" className="w-full flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow" disabled={isLoading || !areServicesAvailable}>
                 {isLoading ? <Loader2 className="animate-spin" /> : 'Login'}
               </Button>
             </form>
