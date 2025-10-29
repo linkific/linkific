@@ -36,28 +36,28 @@ const allProjects = [
     {
         title: "Pose detection with armed drone",
         description: "A pose detection software that enables a drone to understand position of a person in front for friend or foe detection.",
-        imageUrl: "/assets/armed%20drone.webp",
+        imageUrl: "/assets/armed drone.webp",
         alt: "Pose detection with armed drone",
         "data-ai-hint": "drone detection"
     },
     {
         title: "Object detection through restaurants cams",
         description: "Computer vision for hotel table management (detects empty tables, hand signals for service, etc.)",
-        imageUrl: "/assets/hotel%20cams.webp",
+        imageUrl: "/assets/hotel cams.webp",
         alt: "Object detection in a restaurant",
         "data-ai-hint": "restaurant vision"
     },
     {
         title: "Document Classification ML Model",
         description: "Automatically identifies document types (Aadhaar card, PAN card, income certificates, etc.)",
-        imageUrl: "/assets/doc%20classification.webp",
+        imageUrl: "/assets/doc classification.webp",
         alt: "Document Classification ML Model",
         "data-ai-hint": "document classifier"
     },
     {
         title: "Breakout rooms - AI command",
         description: "A AI integrated sales and management system with integrated call agents.",
-        imageUrl: "/assets/breakout%20rooms.webp",
+        imageUrl: "/assets/breakout rooms.webp",
         alt: "Breakout rooms AI command system",
         "data-ai-hint": "ai command center"
     }
@@ -85,7 +85,7 @@ const ProjectCard = ({ project, index }: { project: typeof allProjects[0] & { "d
         viewport={{ once: true, amount: 0.5 }}
         className="flex flex-col gap-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 h-full group hover:-translate-y-2 transition-transform duration-300">
         <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-             <Image src={project.imageUrl} alt={project.alt} layout="fill" objectFit="cover" data-ai-hint={project['data-ai-hint']} />
+             <Image src={project.imageUrl} alt={project.alt} fill className="object-cover" data-ai-hint={project['data-ai-hint']} />
         </div>
         <div className="flex flex-col flex-1 justify-between gap-4">
             <div>
