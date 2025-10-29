@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useFirebase } from '@/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('linkific@gmail.com');
@@ -19,7 +19,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
-  const { auth, areServicesAvailable } = useFirebase();
+  const { auth } = useFirebase();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,13 +40,32 @@ export default function LoginPage() {
         description: 'Redirecting to your dashboard...',
       });
       router.push('/dashboard');
-    } catch (error) {
-       const e = error as Error;
-      toast({
-        variant: 'destructive',
-        title: 'Login Failed',
-        description: e.message || 'Invalid email or password. Please try again.',
-      });
+    } catch (error: any) {
+      if (error.code === 'auth/user-not-found') {
+        // If user doesn't exist, create them
+        try {
+          await createUserWithEmailAndPassword(auth, email, password);
+           // Now sign in the newly created user
+          await signInWithEmailAndPassword(auth, email, password);
+          toast({
+            title: 'Account Created & Logged In',
+            description: 'Redirecting to your dashboard...',
+          });
+          router.push('/dashboard');
+        } catch (creationError: any) {
+           toast({
+            variant: 'destructive',
+            title: 'Account Creation Failed',
+            description: creationError.message || 'Could not create a new user.',
+          });
+        }
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Login Failed',
+          description: error.message || 'Invalid email or password. Please try again.',
+        });
+      }
     } finally {
         setIsLoading(false);
     }
