@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
 import { collection, orderBy, query } from 'firebase/firestore';
 import { Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -179,12 +180,9 @@ export default function DashboardPage() {
       <CodeRainBackground />
       <header className="sticky top-4 z-50 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-6 shadow-lg">
-            <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
-                <Link href="/" className="text-white text-xl font-bold">
-                    Linkific
-                </Link>
-            </div>
+            <Link href="/" className="flex items-center">
+                <Image src="/assets/logo.png" alt="Linkific Logo" width={140} height={40} className="object-contain" />
+            </Link>
             <h1 className="text-xl font-semibold">Dashboard</h1>
             <Button asChild variant="outline" className="bg-white/10 hover:bg-white/20">
                 <Link href="/">Logout</Link>

@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/s
 import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 const navLinks = [
     { name: 'Home', href: '/' },
@@ -24,12 +25,9 @@ export default function Header() {
     return (
         <header className="sticky top-4 z-50 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-6 shadow-lg">
-                <div className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
-                    <Link href="/" className="text-white text-xl font-bold">
-                        Linkific
-                    </Link>
-                </div>
+                <Link href="/" className="flex items-center gap-2">
+                    <Image src="/assets/logo.png" alt="Linkific Logo" width={140} height={40} className="object-contain" />
+                </Link>
                 <nav className="hidden md:flex items-center gap-8">
                     {navLinks.map((link) => (
                         <Link 

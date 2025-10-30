@@ -12,6 +12,7 @@ import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useFirebase } from '@/firebase';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -85,9 +86,8 @@ export default function LoginPage() {
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
         <Card className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10">
           <CardHeader className="text-center">
-             <Link href="/" className="flex items-center gap-3 justify-center mb-4">
-                <span className="material-symbols-outlined text-primary text-3xl">auto_awesome</span>
-                <h2 className="text-white text-2xl font-bold">Linkific</h2>
+             <Link href="/" className="flex items-center justify-center mb-4">
+                 <Image src="/assets/logo.png" alt="Linkific Logo" width={180} height={50} className="object-contain" />
             </Link>
             <CardTitle className="text-2xl font-bold">Employee Login</CardTitle>
             <CardDescription>Enter your credentials to access your dashboard.</CardDescription>
