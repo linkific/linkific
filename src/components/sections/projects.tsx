@@ -8,58 +8,58 @@ const allProjects = [
     {
         title: "Hospital support chatbot",
         description: "A healthcare support chatbot for bookings and query resolutions for doctors.",
-        imageUrl: "https://picsum.photos/seed/robot-doctor/800/600",
+        imageUrl: "https://picsum.photos/seed/tech-health/800/600",
         alt: "Hospital support chatbot",
-        "data-ai-hint": "robot doctor"
+        "data-ai-hint": "tech health"
     },
     {
         title: "AI assisted chrome extension",
         description: "An API integrated chrome extension that allows user to manage different EHR systems at once.",
-        imageUrl: "https://picsum.photos/seed/code-browser/800/600",
+        imageUrl: "https://picsum.photos/seed/browser-ai/800/600",
         alt: "AI assisted chrome extension",
-        "data-ai-hint": "code browser"
+        "data-ai-hint": "browser ai"
     },
     {
         title: "Poultry Farm management application",
         description: "A android app that allows user to keep track of poultry with a integrated system.",
-        imageUrl: "https://picsum.photos/seed/farm-tech/800/600",
+        imageUrl: "https://picsum.photos/seed/tech-farm/800/600",
         alt: "Poultry Farm management application",
-        "data-ai-hint": "farm tech"
+        "data-ai-hint": "tech farm"
     },
     {
         title: "Hotel kiosk + AI detection",
         description: "A kiosk system with hand movement detection to handle ordering with wireless communications.",
-        imageUrl: "https://picsum.photos/seed/touch-screen/800/600",
+        imageUrl: "https://picsum.photos/seed/ai-kiosk/800/600",
         alt: "Hotel kiosk with AI detection",
-        "data-ai-hint": "touch screen"
+        "data-ai-hint": "ai kiosk"
     },
     {
         title: "Pose detection with armed drone",
         description: "A pose detection software that enables a drone to understand position of a person in front for friend or foe detection.",
-        imageUrl: "https://picsum.photos/seed/drone-scan/800/600",
+        imageUrl: "https://picsum.photos/seed/ai-drone/800/600",
         alt: "Pose detection with armed drone",
-        "data-ai-hint": "drone scan"
+        "data-ai-hint": "ai drone"
     },
     {
         title: "Object detection through restaurants cams",
         description: "Computer vision for hotel table management (detects empty tables, hand signals for service, etc.)",
-        imageUrl: "https://picsum.photos/seed/security-camera/800/600",
+        imageUrl: "https://picsum.photos/seed/restaurant-vision/800/600",
         alt: "Object detection in a restaurant",
-        "data-ai-hint": "security camera"
+        "data-ai-hint": "restaurant vision"
     },
     {
         title: "Document Classification ML Model",
         description: "Automatically identifies document types (Aadhaar card, PAN card, income certificates, etc.)",
-        imageUrl: "https://picsum.photos/seed/digital-documents/800/600",
+        imageUrl: "https://picsum.photos/seed/document-scan/800/600",
         alt: "Document Classification ML Model",
-        "data-ai-hint": "digital documents"
+        "data-ai-hint": "document scan"
     },
     {
         title: "Breakout rooms - AI command",
         description: "A AI integrated sales and management system with integrated call agents.",
-        imageUrl: "https://picsum.photos/seed/team-collaboration/800/600",
+        imageUrl: "https://picsum.photos/seed/ai-meeting/800/600",
         alt: "Breakout rooms AI command system",
-        "data-ai-hint": "team collaboration"
+        "data-ai-hint": "ai meeting"
     }
 ];
 
@@ -83,7 +83,7 @@ const ProjectCard = ({ project, index }: { project: typeof allProjects[0] & { "d
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
-        className="flex flex-col gap-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 h-full group hover:-translate-y-2 transition-transform duration-300">
+        className="flex flex-col gap-4 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 p-4 h-full group hover:-translate-y-2 transition-transform duration-300 w-full max-w-sm">
         <div className="relative w-full aspect-video rounded-lg overflow-hidden">
              <Image src={project.imageUrl} alt={project.alt} fill className="object-cover" data-ai-hint={project['data-ai-hint']} />
         </div>
@@ -107,7 +107,7 @@ export default function ProjectsSection({ featured = false }: { featured?: boole
             <div className="p-8 sm:p-12 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
                 <h2 className="text-white text-3xl font-bold text-center">Our Projects</h2>
                 <p className="text-white/70 text-center mt-2 mb-12 max-w-2xl mx-auto">A curated gallery of successful case studies, showcasing the real-world application of our technology.</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
                     {projects.map((project, index) => (
                         <ProjectCard key={index} project={project} index={index} />
                     ))}
