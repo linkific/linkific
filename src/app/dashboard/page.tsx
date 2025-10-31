@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
 import { collection, orderBy, query, doc, deleteDoc } from 'firebase/firestore';
-import { Eye, Loader2, Trash2 } from 'lucide-react';
+import { Download, Eye, Loader2, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -53,7 +53,7 @@ interface JobApplication {
   contactNumber: string;
   role: string;
   reason: string;
-  resumeFileName: string;
+  resumeUrl: string;
   submittedAt: {
     seconds: number;
     nanoseconds: number;
@@ -245,7 +245,14 @@ function ApplicationsTable() {
               <TableCell className="font-medium">{app.name}</TableCell>
               <TableCell>{app.email}</TableCell>
               <TableCell>{app.role}</TableCell>
-              <TableCell>{app.resumeFileName}</TableCell>
+              <TableCell>
+                <Button asChild variant="link" size="sm">
+                  <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
+                    <Download className="mr-2 size-4" />
+                    Download
+                  </a>
+                </Button>
+              </TableCell>
                <TableCell className="text-right">
                 <div className="flex gap-2 justify-end">
                    <Dialog>
@@ -261,7 +268,15 @@ function ApplicationsTable() {
                       </DialogHeader>
                       <div className="py-4 space-y-4">
                         <p><strong>Contact:</strong> {app.email} | {app.contactNumber}</p>
-                         <p><strong>Resume:</strong> {app.resumeFileName || 'Not provided'}</p>
+                        <p>
+                          <strong>Resume:</strong>
+                           <Button asChild variant="link" size="sm" className="ml-2">
+                              <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
+                                <Download className="mr-2 size-4" />
+                                Download
+                              </a>
+                            </Button>
+                        </p>
                         <div>
                           <p><strong>Reason for applying:</strong></p>
                           <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>

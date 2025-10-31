@@ -14,13 +14,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, Loader2 } from "lucide-react";
 import { useFirebase } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid';
 
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
   email: z.string().email("A valid email is required"),
   contactNumber: z.string().min(1, "Contact number is required"),
   role: z.string().min(1, "Please select a role"),
-  resume: z.any().refine(files => files?.length === 1, "Resume is required."),
+  resume: z.any()
+    .refine(files => files?.length === 1, "Resume is required.")
+    .refine(files => files?.[0]?.size <= 5000000, `Max file size is 5MB.`)
+    .refine(
+      files => ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].includes(files?.[0]?.type),
+      ".pdf, .doc, and .docx files are accepted."
+    ),
   reason: z.string().min(10, "Please tell us a bit more (min. 10 characters)"),
 });
 
@@ -52,7 +60,7 @@ export default function ApplicationForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { firestore } = useFirebase();
+  const { firestore, firebaseApp } = useFirebase();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -60,10 +68,10 @@ export default function ApplicationForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!firestore) {
+    if (!firestore || !firebaseApp) {
       toast({
         variant: "destructive",
-        title: "Database not available",
+        title: "Services not available",
         description: "Please try again later.",
       });
       return;
@@ -71,13 +79,22 @@ export default function ApplicationForm() {
     setIsSubmitting(true);
     
     const { resume, ...formData } = values;
-    const resumeFileName = resume?.[0]?.name || 'N/A';
+    const resumeFile = resume[0];
 
     try {
+      // 1. Upload resume to Firebase Storage
+      const storage = getStorage(firebaseApp);
+      // Create a unique path for the resume to avoid overwrites
+      const storagePath = `resumes/${uuidv4()}/${resumeFile.name}`;
+      const storageRef = ref(storage, storagePath);
+      const uploadResult = await uploadBytes(storageRef, resumeFile);
+      const resumeUrl = await getDownloadURL(uploadResult.ref);
+
+      // 2. Save application data to Firestore
       const applicationsCollection = collection(firestore, "jobApplications");
       const dataToSave = {
         ...formData,
-        resumeFileName: resumeFileName,
+        resumeUrl,
         submittedAt: serverTimestamp(),
       };
 
@@ -93,6 +110,7 @@ export default function ApplicationForm() {
       setTimeout(() => setIsSuccess(false), 4000);
     } catch (error) {
       const e = error as Error;
+      console.error("Application submission error: ", e);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
@@ -116,7 +134,6 @@ export default function ApplicationForm() {
                 >
                     <h2 className="text-3xl font-bold mb-4">Welcome to Failing Out Success!</h2>
                     <p className="text-white/70">Your application has been received. We're excited to learn more about you.</p>
-                    {/* Add confetti animation here if desired */}
                 </motion.div>
             ) : (
             <motion.div key="form">
@@ -243,5 +260,3 @@ export default function ApplicationForm() {
     </section>
   );
 }
-
-    

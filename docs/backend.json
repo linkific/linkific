@@ -73,9 +73,9 @@
           "type": "string",
           "description": "The applicant's reason for wanting to join."
         },
-        "resumeFileName": {
+        "resumeUrl": {
           "type": "string",
-          "description": "The filename of the uploaded resume."
+          "description": "The URL of the uploaded resume in Firebase Storage."
         },
         "submittedAt": {
           "type": "string",
@@ -90,6 +90,7 @@
         "contactNumber",
         "role",
         "reason",
+        "resumeUrl",
         "submittedAt"
       ]
     }
