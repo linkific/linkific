@@ -92,13 +92,11 @@ export default function ApplicationForm() {
 
       // 2. Save application data to Firestore
       const applicationsCollection = collection(firestore, "jobApplications");
-      const dataToSave = {
+      await addDoc(applicationsCollection, {
         ...formData,
-        resumeUrl,
+        resumeUrl, // Save the actual download URL string
         submittedAt: serverTimestamp(),
-      };
-
-      await addDoc(applicationsCollection, dataToSave);
+      });
       
       setIsSuccess(true);
       toast({
@@ -216,14 +214,15 @@ export default function ApplicationForm() {
                      <FormField
                         control={form.control}
                         name="resume"
-                        render={({ field }) => (
+                        render={({ field: { onChange, ...fieldProps } }) => (
                             <FormItem className="sm:col-span-2">
                                 <FormLabel>Resume</FormLabel>
                                 <FormControl>
                                     <Input 
+                                      {...fieldProps}
                                       type="file" 
                                       accept=".pdf,.doc,.docx"
-                                      onChange={(e) => field.onChange(e.target.files)}
+                                      onChange={(e) => onChange(e.target.files)}
                                       className="w-full bg-white/5 border border-white/20 rounded-lg text-white file:text-white/80 placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
                                 </FormControl>
                                 <FormMessage />
@@ -260,3 +259,5 @@ export default function ApplicationForm() {
     </section>
   );
 }
+
+    
