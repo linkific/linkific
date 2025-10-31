@@ -53,7 +53,7 @@ interface JobApplication {
   contactNumber: string;
   role: string;
   reason: string;
-  resumeUrl?: string; // resumeUrl is optional now
+  resumeUrl?: string; // resumeUrl is optional
   submittedAt: {
     seconds: number;
     nanoseconds: number;
