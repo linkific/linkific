@@ -30,9 +30,10 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="flex flex-col gap-4">
-             <Link href="/" className="flex items-center">
-                 <Image src="/assets/logo.png" alt="Linkific Logo" width={140} height={40} className="object-contain" />
-              </Link>
+             <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
+                <h2 className="text-white text-xl font-bold">Linkific</h2>
+            </div>
             <p className="text-white/60 text-sm">If you are reading this. why wait? lets have a chat.</p>
           </div>
           <div>
