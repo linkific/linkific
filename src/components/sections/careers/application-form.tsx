@@ -11,9 +11,11 @@ import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2 } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
 import { useFirebase } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid';
 
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
@@ -21,6 +23,7 @@ const formSchema = z.object({
   contactNumber: z.string().min(1, "Contact number is required"),
   role: z.string().min(1, "Please select a role"),
   reason: z.string().min(10, "Please tell us a bit more (min. 10 characters)"),
+  resume: z.instanceof(File).refine(file => file.size > 0, 'Resume is required.'),
 });
 
 const jobOpenings = [
@@ -51,7 +54,8 @@ export default function ApplicationForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { firestore } = useFirebase();
+  const [resumeFileName, setResumeFileName] = useState("");
+  const { firestore, storage } = useFirebase();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -59,7 +63,7 @@ export default function ApplicationForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!firestore) {
+    if (!firestore || !storage) {
       toast({
         variant: "destructive",
         title: "Services not available",
@@ -70,10 +74,20 @@ export default function ApplicationForm() {
     setIsSubmitting(true);
     
     try {
+      // 1. Upload resume to Firebase Storage
+      const resumeFile = values.resume;
+      const fileExtension = resumeFile.name.split('.').pop();
+      const uniqueFileName = `${uuidv4()}.${fileExtension}`;
+      const storageRef = ref(storage, `resumes/${uniqueFileName}`);
+      const uploadResult = await uploadBytes(storageRef, resumeFile);
+      const resumeUrl = await getDownloadURL(uploadResult.ref);
+
+      // 2. Save application to Firestore with the resume URL
       const applicationsCollection = collection(firestore, "jobApplications");
+      const { resume, ...applicationData } = values;
       await addDoc(applicationsCollection, {
-        ...values,
-        resumeUrl: '', // Saving an empty string as placeholder
+        ...applicationData,
+        resumeUrl: resumeUrl,
         submittedAt: serverTimestamp(),
       });
       
@@ -83,6 +97,7 @@ export default function ApplicationForm() {
         description: "We'll get back to you shortly.",
       });
       form.reset();
+      setResumeFileName("");
       
       setTimeout(() => setIsSuccess(false), 4000);
     } catch (error) {
@@ -121,43 +136,43 @@ export default function ApplicationForm() {
                 <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className="sr-only">Full Name</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Full Name" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                          <FormItem>
+                          <FormLabel className="sr-only">Full Name</FormLabel>
+                          <FormControl>
+                              <Input placeholder="Full Name" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                          </FormControl>
+                          <FormMessage />
+                          </FormItem>
+                      )}
                     />
                     <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className="sr-only">Your Email</FormLabel>
-                        <FormControl>
-                            <Input type="email" placeholder="Your Email" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                          <FormItem>
+                          <FormLabel className="sr-only">Your Email</FormLabel>
+                          <FormControl>
+                              <Input type="email" placeholder="Your Email" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                          </FormControl>
+                          <FormMessage />
+                          </FormItem>
+                      )}
                     />
                     <FormField
-                    control={form.control}
-                    name="contactNumber"
-                    render={({ field }) => (
-                        <FormItem className="sm:col-span-2">
-                        <FormLabel className="sr-only">Contact Number</FormLabel>
-                        <FormControl>
-                            <Input type="tel" placeholder="Contact Number" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
-                        </FormControl>
-                        <FormMessage />
-                        </FormItem>
-                    )}
+                      control={form.control}
+                      name="contactNumber"
+                      render={({ field }) => (
+                          <FormItem className="sm:col-span-2">
+                          <FormLabel className="sr-only">Contact Number</FormLabel>
+                          <FormControl>
+                              <Input type="tel" placeholder="Contact Number" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                          </FormControl>
+                          <FormMessage />
+                          </FormItem>
+                      )}
                     />
                     <FormField
                         control={form.control}
@@ -190,18 +205,52 @@ export default function ApplicationForm() {
                             </FormItem>
                         )}
                     />
-                    <FormField
-                    control={form.control}
-                    name="reason"
-                    render={({ field }) => (
+                     <FormField
+                      control={form.control}
+                      name="resume"
+                      render={({ field: { onChange, ...props } }) => (
                         <FormItem className="sm:col-span-2">
-                        <FormLabel className="sr-only">Why do you want to join Linkific?</FormLabel>
-                        <FormControl>
-                            <Textarea placeholder="Why do you want to join Linkific?" rows={4} {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
-                        </FormControl>
-                        <FormMessage />
+                          <FormLabel className="sr-only">Resume</FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                               <Input 
+                                id="resume"
+                                type="file" 
+                                accept=".pdf,.doc,.docx"
+                                className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition h-auto file:hidden cursor-pointer"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0];
+                                  if (file) {
+                                    onChange(file);
+                                    setResumeFileName(file.name);
+                                  }
+                                }}
+                                {...props}
+                              />
+                              <Button asChild variant="ghost" className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer">
+                                <label htmlFor="resume" className="flex items-center gap-2 cursor-pointer">
+                                  <Upload className="size-4" />
+                                  <span>{resumeFileName || "Upload Resume"}</span>
+                                </label>
+                              </Button>
+                            </div>
+                          </FormControl>
+                          <FormMessage />
                         </FormItem>
-                    )}
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="reason"
+                      render={({ field }) => (
+                          <FormItem className="sm:col-span-2">
+                          <FormLabel className="sr-only">Why do you want to join Linkific?</FormLabel>
+                          <FormControl>
+                              <Textarea placeholder="Why do you want to join Linkific?" rows={4} {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                          </FormControl>
+                          <FormMessage />
+                          </FormItem>
+                      )}
                     />
                     <div className="sm:col-span-2 flex justify-center">
                         <Button type="submit" disabled={isSubmitting} className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">

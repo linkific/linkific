@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
 import { collection, orderBy, query, doc, deleteDoc } from 'firebase/firestore';
-import { Eye, Loader2, Trash2 } from 'lucide-react';
+import { Eye, Loader2, Trash2, Download } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -53,6 +53,7 @@ interface JobApplication {
   contactNumber: string;
   role: string;
   reason: string;
+  resumeUrl?: string; // resumeUrl is optional now
   submittedAt: {
     seconds: number;
     nanoseconds: number;
@@ -249,18 +250,36 @@ function ApplicationsTable() {
                     <DialogTrigger asChild>
                       <Button variant="ghost" size="icon"><Eye className="size-4" /></Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="max-w-4xl h-[90vh]">
                       <DialogHeader>
                         <DialogTitle>Application from {app.name}</DialogTitle>
                         <DialogDescription>
                          Applied for: {app.role} on {app.submittedAt ? new Date(app.submittedAt.seconds * 1000).toLocaleString() : 'N/A'}
                         </DialogDescription>
                       </DialogHeader>
-                      <div className="py-4 space-y-4">
-                        <p><strong>Contact:</strong> {app.email} | {app.contactNumber}</p>
-                        <div>
-                          <p><strong>Reason for applying:</strong></p>
-                          <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
+                      <div className="grid md:grid-cols-2 gap-8 py-4 h-full">
+                        <div className="space-y-4">
+                          <p><strong>Contact:</strong> {app.email} | {app.contactNumber}</p>
+                          <div>
+                            <p><strong>Reason for applying:</strong></p>
+                            <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
+                          </div>
+                          {app.resumeUrl && (
+                            <Button asChild>
+                                <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
+                                <Download className="mr-2 size-4" /> Download Resume
+                                </a>
+                            </Button>
+                          )}
+                        </div>
+                        <div className="h-full">
+                          {app.resumeUrl ? (
+                             <iframe src={app.resumeUrl} className="w-full h-full rounded-md border" title="Resume Preview" />
+                          ) : (
+                            <div className="flex items-center justify-center h-full border rounded-md bg-muted/50">
+                                <p className="text-white/70">No resume uploaded.</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <DialogFooter>
@@ -270,6 +289,11 @@ function ApplicationsTable() {
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
+                  {app.resumeUrl && (
+                    <Button asChild variant="ghost" size="icon">
+                        <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer"><Download className="size-4" /></a>
+                    </Button>
+                  )}
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
                       <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive"><Trash2 className="size-4" /></Button>
