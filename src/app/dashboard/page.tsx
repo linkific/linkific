@@ -259,27 +259,35 @@ function ApplicationsTable() {
                     <DialogTrigger asChild>
                       <Button variant="ghost" size="icon"><Eye className="size-4" /></Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="max-w-4xl h-[90vh]">
                       <DialogHeader>
                         <DialogTitle>Application from {app.name}</DialogTitle>
                         <DialogDescription>
                          Applied for: {app.role} on {app.submittedAt ? new Date(app.submittedAt.seconds * 1000).toLocaleString() : 'N/A'}
                         </DialogDescription>
                       </DialogHeader>
-                      <div className="py-4 space-y-4">
-                        <p><strong>Contact:</strong> {app.email} | {app.contactNumber}</p>
-                        <p>
-                          <strong>Resume:</strong>
-                           <Button asChild variant="link" size="sm" className="ml-2">
-                              <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 h-full">
+                        <div className="space-y-4">
+                          <p><strong>Contact:</strong> {app.email} | {app.contactNumber}</p>
+                          <div>
+                            <p><strong>Reason for applying:</strong></p>
+                            <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
+                          </div>
+                          <Button asChild variant="outline">
+                            <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
                                 <Download className="mr-2 size-4" />
-                                Download
-                              </a>
-                            </Button>
-                        </p>
-                        <div>
-                          <p><strong>Reason for applying:</strong></p>
-                          <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
+                                Download Resume
+                            </a>
+                          </Button>
+                        </div>
+                        <div className="rounded-lg overflow-hidden border border-border h-full">
+                          {app.resumeUrl ? (
+                            <iframe src={app.resumeUrl} className="w-full h-full" title={`Resume of ${app.name}`}></iframe>
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-muted/50">
+                                <p className="text-muted-foreground">No resume uploaded.</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <DialogFooter>
@@ -374,5 +382,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-    
