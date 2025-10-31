@@ -79,11 +79,11 @@ function MessagesTable() {
         title: "Success",
         description: "Message deleted successfully.",
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Could not delete message.",
+        description: `Could not delete message: ${error.message}`,
       });
     }
   };
@@ -162,7 +162,7 @@ function MessagesTable() {
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                  <AlertDialogAction onClick={() => handleDelete(msg.id)}>Delete</AlertDialogAction>
+                                  <AlertDialogAction onClick={(e) => { e.preventDefault(); handleDelete(msg.id); }}>Delete</AlertDialogAction>
                                 </AlertDialogFooter>
                               </AlertDialogContent>
                             </AlertDialog>
@@ -198,11 +198,11 @@ function ApplicationsTable() {
         title: "Success",
         description: "Application deleted successfully.",
       });
-    } catch (error) {
+    } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Could not delete application.",
+        description: `Could not delete application: ${error.message}`,
       });
     }
   };
@@ -287,7 +287,7 @@ function ApplicationsTable() {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => handleDelete(app.id)}>Delete</AlertDialogAction>
+                        <AlertDialogAction onClick={(e) => { e.preventDefault(); handleDelete(app.id); }}>Delete</AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
@@ -359,5 +359,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-  
