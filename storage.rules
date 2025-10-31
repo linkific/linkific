@@ -2,7 +2,7 @@
  * @file Firebase Storage Security Rules
  * @description This ruleset allows public uploads for job application resumes while restricting read access to authenticated users.
  * @keySecurityDecisions
- *  - Public write access for resumes: Allows any user to upload a resume to the 'resumes/{userId}/{fileName}' path.
+ *  - Public write access for resumes: Allows any user to upload a resume to the 'resumes/**' path.
  *    This is necessary for the public-facing application form.
  *  - Authenticated read access: Only authenticated users (i.e., employees on the dashboard) can read/download resumes.
  *  - File validation: Enforces that uploaded files are of common document types and are under 5MB to prevent abuse.
@@ -13,13 +13,13 @@ service firebase.storage {
   match /b/{bucket}/o {
 
     /**
-     * @description Rules for the 'resumes' folder.
-     * @path /resumes/{userId}/{fileName}
+     * @description Rules for all files within the 'resumes' folder.
+     * @path /resumes/{allPaths=**}
      * @allow (read) - Authenticated users can download resumes.
      * @allow (write) - Any user can upload a resume, with validation for file size and type.
      * @principle Allow public submission of resumes but restrict access to authenticated users.
      */
-    match /resumes/{userId}/{fileName} {
+    match /resumes/{allPaths=**} {
       // Only authenticated users (employees) can download resumes.
       allow read: if request.auth != null;
 
