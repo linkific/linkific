@@ -5,12 +5,34 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
-import { collection, orderBy, query } from 'firebase/firestore';
-import { Loader2 } from 'lucide-react';
-import Image from 'next/image';
+import { collection, orderBy, query, doc, deleteDoc } from 'firebase/firestore';
+import { Eye, Loader2, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { useToast } from '@/hooks/use-toast';
+
 
 interface ContactMessage {
   id: string;
@@ -40,6 +62,7 @@ interface JobApplication {
 
 function MessagesTable() {
   const { firestore } = useFirebase();
+  const { toast } = useToast();
   
   const messagesQuery = useMemoFirebase(() => 
     firestore ? query(collection(firestore, 'contactMessages'), orderBy('sentAt', 'desc')) : null,
@@ -47,6 +70,23 @@ function MessagesTable() {
   );
   
   const { data: messages, isLoading, error } = useCollection<ContactMessage>(messagesQuery);
+
+  const handleDelete = async (id: string) => {
+    if (!firestore) return;
+    try {
+      await deleteDoc(doc(firestore, "contactMessages", id));
+      toast({
+        title: "Success",
+        description: "Message deleted successfully.",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Could not delete message.",
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -72,8 +112,8 @@ function MessagesTable() {
                     <TableHead>Received</TableHead>
                     <TableHead>Name</TableHead>
                     <TableHead>Email</TableHead>
-                    <TableHead>Page</TableHead>
                     <TableHead>Message</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -84,8 +124,50 @@ function MessagesTable() {
                         </TableCell>
                         <TableCell className="font-medium">{msg.name}</TableCell>
                         <TableCell>{msg.email}</TableCell>
-                        <TableCell className="capitalize">{msg.page}</TableCell>
                         <TableCell className="max-w-xs truncate">{msg.message}</TableCell>
+                        <TableCell className="text-right">
+                          <div className="flex gap-2 justify-end">
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                <Button variant="ghost" size="icon"><Eye className="size-4" /></Button>
+                              </DialogTrigger>
+                              <DialogContent>
+                                <DialogHeader>
+                                  <DialogTitle>Message from {msg.name}</DialogTitle>
+                                  <DialogDescription>
+                                    Sent on {msg.sentAt ? new Date(msg.sentAt.seconds * 1000).toLocaleString() : 'N/A'} from the {msg.page} page.
+                                  </DialogDescription>
+                                </DialogHeader>
+                                <div className="py-4 space-y-2">
+                                  <p><strong>Email:</strong> {msg.email}</p>
+                                  <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{msg.message}</p>
+                                </div>
+                                <DialogFooter>
+                                  <DialogClose asChild>
+                                    <Button>Close</Button>
+                                  </DialogClose>
+                                </DialogFooter>
+                              </DialogContent>
+                            </Dialog>
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive"><Trash2 className="size-4" /></Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    This action cannot be undone. This will permanently delete the message from {msg.name}.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction onClick={() => handleDelete(msg.id)}>Delete</AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
+                          </div>
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
@@ -96,6 +178,7 @@ function MessagesTable() {
 
 function ApplicationsTable() {
   const { firestore } = useFirebase();
+  const { toast } = useToast();
 
   const applicationsQuery = useMemoFirebase(
     () =>
@@ -106,6 +189,23 @@ function ApplicationsTable() {
   );
 
   const { data: applications, isLoading, error } = useCollection<JobApplication>(applicationsQuery);
+
+  const handleDelete = async (id: string) => {
+    if (!firestore) return;
+    try {
+      await deleteDoc(doc(firestore, "jobApplications", id));
+      toast({
+        title: "Success",
+        description: "Application deleted successfully.",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Could not delete application.",
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -132,8 +232,8 @@ function ApplicationsTable() {
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Role</TableHead>
-            <TableHead>Reason</TableHead>
             <TableHead>Resume</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -145,8 +245,54 @@ function ApplicationsTable() {
               <TableCell className="font-medium">{app.name}</TableCell>
               <TableCell>{app.email}</TableCell>
               <TableCell>{app.role}</TableCell>
-              <TableCell className="max-w-xs truncate">{app.reason}</TableCell>
               <TableCell>{app.resumeFileName}</TableCell>
+               <TableCell className="text-right">
+                <div className="flex gap-2 justify-end">
+                   <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" size="icon"><Eye className="size-4" /></Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Application from {app.name}</DialogTitle>
+                        <DialogDescription>
+                         Applied for: {app.role} on {app.submittedAt ? new Date(app.submittedAt.seconds * 1000).toLocaleString() : 'N/A'}
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="py-4 space-y-4">
+                        <p><strong>Contact:</strong> {app.email} | {app.contactNumber}</p>
+                         <p><strong>Resume:</strong> {app.resumeFileName || 'Not provided'}</p>
+                        <div>
+                          <p><strong>Reason for applying:</strong></p>
+                          <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
+                        </div>
+                      </div>
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button>Close</Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive"><Trash2 className="size-4" /></Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently delete the application from {app.name}.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => handleDelete(app.id)}>Delete</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -213,3 +359,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+  
