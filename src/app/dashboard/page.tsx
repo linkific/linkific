@@ -246,7 +246,7 @@ function ApplicationsTable() {
               <TableCell>{app.email}</TableCell>
               <TableCell>{app.role}</TableCell>
               <TableCell>
-                <Button asChild variant="link" size="sm">
+                <Button asChild variant="link" size="sm" disabled={!app.resumeUrl}>
                   <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
                     <Download className="mr-2 size-4" />
                     Download
@@ -273,7 +273,7 @@ function ApplicationsTable() {
                             <p><strong>Reason for applying:</strong></p>
                             <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
                           </div>
-                          <Button asChild variant="outline">
+                          <Button asChild variant="outline" disabled={!app.resumeUrl}>
                             <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
                                 <Download className="mr-2 size-4" />
                                 Download Resume

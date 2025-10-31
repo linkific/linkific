@@ -84,17 +84,18 @@ export default function ApplicationForm() {
     try {
       // 1. Upload resume to Firebase Storage
       const storage = getStorage(firebaseApp);
-      // Create a unique path for the resume to avoid overwrites
       const storagePath = `resumes/${uuidv4()}/${resumeFile.name}`;
       const storageRef = ref(storage, storagePath);
       const uploadResult = await uploadBytes(storageRef, resumeFile);
+      
+      // 2. Get the download URL
       const resumeUrl = await getDownloadURL(uploadResult.ref);
 
-      // 2. Save application data to Firestore
+      // 3. Save application data to Firestore, including the correct URL string
       const applicationsCollection = collection(firestore, "jobApplications");
       await addDoc(applicationsCollection, {
         ...formData,
-        resumeUrl, // Save the actual download URL string
+        resumeUrl: resumeUrl, // Save the actual download URL string
         submittedAt: serverTimestamp(),
       });
       
