@@ -11,24 +11,15 @@ import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useFirebase } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { v4 as uuidv4 } from 'uuid';
 
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
   email: z.string().email("A valid email is required"),
   contactNumber: z.string().min(1, "Contact number is required"),
   role: z.string().min(1, "Please select a role"),
-  resume: z.any()
-    .refine(files => files?.length === 1, "Resume is required.")
-    .refine(files => files?.[0]?.size <= 5000000, `Max file size is 5MB.`)
-    .refine(
-      files => ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].includes(files?.[0]?.type),
-      ".pdf, .doc, and .docx files are accepted."
-    ),
   reason: z.string().min(10, "Please tell us a bit more (min. 10 characters)"),
 });
 
@@ -60,7 +51,7 @@ export default function ApplicationForm() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { firestore, firebaseApp } = useFirebase();
+  const { firestore } = useFirebase();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,7 +59,7 @@ export default function ApplicationForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!firestore || !firebaseApp) {
+    if (!firestore) {
       toast({
         variant: "destructive",
         title: "Services not available",
@@ -78,24 +69,11 @@ export default function ApplicationForm() {
     }
     setIsSubmitting(true);
     
-    const { resume, ...formData } = values;
-    const resumeFile = resume[0];
-
     try {
-      // 1. Upload resume to Firebase Storage
-      const storage = getStorage(firebaseApp);
-      const storagePath = `resumes/${uuidv4()}/${resumeFile.name}`;
-      const storageRef = ref(storage, storagePath);
-      const uploadResult = await uploadBytes(storageRef, resumeFile);
-      
-      // 2. Get the download URL
-      const resumeUrl = await getDownloadURL(uploadResult.ref);
-
-      // 3. Save application data to Firestore, including the correct URL string
       const applicationsCollection = collection(firestore, "jobApplications");
       await addDoc(applicationsCollection, {
-        ...formData,
-        resumeUrl: resumeUrl, // Save the actual download URL string
+        ...values,
+        resumeUrl: '', // Saving an empty string as placeholder
         submittedAt: serverTimestamp(),
       });
       
@@ -208,24 +186,6 @@ export default function ApplicationForm() {
                                         </SelectGroup>
                                     </SelectContent>
                                 </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                     <FormField
-                        control={form.control}
-                        name="resume"
-                        render={({ field: { onChange, ...fieldProps } }) => (
-                            <FormItem className="sm:col-span-2">
-                                <FormLabel>Resume</FormLabel>
-                                <FormControl>
-                                    <Input 
-                                      {...fieldProps}
-                                      type="file" 
-                                      accept=".pdf,.doc,.docx"
-                                      onChange={(e) => onChange(e.target.files)}
-                                      className="w-full bg-white/5 border border-white/20 rounded-lg text-white file:text-white/80 placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
-                                </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}

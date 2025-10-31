@@ -6,10 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
 import { collection, orderBy, query, doc, deleteDoc } from 'firebase/firestore';
-import { Download, Eye, Loader2, Trash2 } from 'lucide-react';
+import { Eye, Loader2, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -53,7 +53,6 @@ interface JobApplication {
   contactNumber: string;
   role: string;
   reason: string;
-  resumeUrl: string;
   submittedAt: {
     seconds: number;
     nanoseconds: number;
@@ -162,7 +161,7 @@ function MessagesTable() {
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                  <AlertDialogAction onClick={(e) => { e.preventDefault(); handleDelete(msg.id); }}>Delete</AlertDialogAction>
+                                  <AlertDialogAction onClick={() => handleDelete(msg.id)}>Delete</AlertDialogAction>
                                 </AlertDialogFooter>
                               </AlertDialogContent>
                             </AlertDialog>
@@ -232,7 +231,6 @@ function ApplicationsTable() {
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Role</TableHead>
-            <TableHead>Resume</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -245,49 +243,24 @@ function ApplicationsTable() {
               <TableCell className="font-medium">{app.name}</TableCell>
               <TableCell>{app.email}</TableCell>
               <TableCell>{app.role}</TableCell>
-              <TableCell>
-                <Button asChild variant="link" size="sm" disabled={!app.resumeUrl}>
-                  <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
-                    <Download className="mr-2 size-4" />
-                    Download
-                  </a>
-                </Button>
-              </TableCell>
-               <TableCell className="text-right">
+              <TableCell className="text-right">
                 <div className="flex gap-2 justify-end">
                    <Dialog>
                     <DialogTrigger asChild>
                       <Button variant="ghost" size="icon"><Eye className="size-4" /></Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-4xl h-[90vh]">
+                    <DialogContent>
                       <DialogHeader>
                         <DialogTitle>Application from {app.name}</DialogTitle>
                         <DialogDescription>
                          Applied for: {app.role} on {app.submittedAt ? new Date(app.submittedAt.seconds * 1000).toLocaleString() : 'N/A'}
                         </DialogDescription>
                       </DialogHeader>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4 h-full">
-                        <div className="space-y-4">
-                          <p><strong>Contact:</strong> {app.email} | {app.contactNumber}</p>
-                          <div>
-                            <p><strong>Reason for applying:</strong></p>
-                            <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
-                          </div>
-                          <Button asChild variant="outline" disabled={!app.resumeUrl}>
-                            <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
-                                <Download className="mr-2 size-4" />
-                                Download Resume
-                            </a>
-                          </Button>
-                        </div>
-                        <div className="rounded-lg overflow-hidden border border-border h-full">
-                          {app.resumeUrl ? (
-                            <iframe src={app.resumeUrl} className="w-full h-full" title={`Resume of ${app.name}`}></iframe>
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-muted/50">
-                                <p className="text-muted-foreground">No resume uploaded.</p>
-                            </div>
-                          )}
+                      <div className="py-4 space-y-4">
+                        <p><strong>Contact:</strong> {app.email} | {app.contactNumber}</p>
+                        <div>
+                          <p><strong>Reason for applying:</strong></p>
+                          <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
                         </div>
                       </div>
                       <DialogFooter>
@@ -310,7 +283,7 @@ function ApplicationsTable() {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={(e) => { e.preventDefault(); handleDelete(app.id); }}>Delete</AlertDialogAction>
+                        <AlertDialogAction onClick={() => handleDelete(app.id)}>Delete</AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
