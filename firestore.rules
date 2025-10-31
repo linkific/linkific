@@ -1,13 +1,13 @@
 /**
  * @file Firestore Security Rules
  * @description This ruleset allows anyone to submit contact messages and job applications.
- *              Access to view (read) these submissions is restricted to authenticated users.
+ *              Access to read, update, or delete these submissions is restricted to authenticated users.
  * @dataStructure
  *  - /contactMessages/{contactMessageId}: Stores contact messages.
  *  - /jobApplications/{jobApplicationId}: Stores job applications.
  * @keySecurityDecisions
  *  - Public submissions: Anyone can submit contact messages and job applications without authentication.
- *  - Authenticated-only access for reading: Only logged-in users can view the submissions.
+ *  - Authenticated-only access for management: Only logged-in users can view, update, or delete submissions.
  * @denormalizationForAuthorization Not applicable in this scenario.
  */
 rules_version = '2';
@@ -15,29 +15,29 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * @description Allows anyone to create contact messages, but restricts reading to authenticated users.
+     * @description Allows anyone to create contact messages, but restricts reading, updating, and deleting to authenticated users.
      * @path /contactMessages/{contactMessageId}
      * @allow (create) - Any user can create a contact message.
-     * @deny (get, list, update, delete) - Anonymous users cannot read, update, or delete messages.
-     * @principle Allows public submissions with authenticated-only reads.
+     * @allow (get, list, update, delete) - Authenticated users can manage messages.
+     * @principle Allows public submissions with authenticated-only management.
      */
     match /contactMessages/{contactMessageId} {
       allow get, list: if isSignedIn();
       allow create: if true;
-      allow update, delete: if false;
+      allow update, delete: if isSignedIn();
     }
 
     /**
-     * @description Allows anyone to submit job applications, but restricts reading to authenticated users.
+     * @description Allows anyone to submit job applications, but restricts reading, updating, and deleting to authenticated users.
      * @path /jobApplications/{jobApplicationId}
      * @allow (create) - Any user can create a job application.
-     * @deny (get, list, update, delete) - Anonymous users cannot read, update, or delete applications.
-     * @principle Allows public submissions with authenticated-only reads.
+     * @allow (get, list, update, delete) - Authenticated users can manage applications.
+     * @principle Allows public submissions with authenticated-only management.
      */
     match /jobApplications/{jobApplicationId} {
       allow get, list: if isSignedIn();
       allow create: if true;
-      allow update, delete: if false;
+      allow update, delete: if isSignedIn();
     }
 
     /**
