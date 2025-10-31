@@ -67,7 +67,7 @@ export default function ApplicationForm() {
       toast({
         variant: "destructive",
         title: "Services not available",
-        description: "Please try again later.",
+        description: "Firebase is not ready. Please try again later.",
       });
       return;
     }
@@ -80,9 +80,11 @@ export default function ApplicationForm() {
       const uniqueFileName = `${uuidv4()}.${fileExtension}`;
       const storageRef = ref(storage, `resumes/${uniqueFileName}`);
       const uploadResult = await uploadBytes(storageRef, resumeFile);
+      
+      // 2. Get the download URL
       const resumeUrl = await getDownloadURL(uploadResult.ref);
 
-      // 2. Save application to Firestore with the resume URL
+      // 3. Save application to Firestore with the resume URL
       const applicationsCollection = collection(firestore, "jobApplications");
       const { resume, ...applicationData } = values;
       await addDoc(applicationsCollection, {
@@ -106,7 +108,7 @@ export default function ApplicationForm() {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: e.message || "Could not send application.",
+        description: e.message || "Could not send application. Please check the console for more details.",
       });
     } finally {
       setIsSubmitting(false);
