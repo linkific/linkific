@@ -1,22 +1,16 @@
 
+
 'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-import hospitalChatbot from '@/assets/projects/hospital-chatbot.webp';
-import poultryFarm from '@/assets/projects/poultry-farm.webp';
-import hotelKiosk from '@/assets/projects/hotel-kiosk.webp';
-import poseDrone from '@/assets/projects/pose-drone.webp';
-import restaurantVision from '@/assets/projects/restaurant-vision.webp';
-
-
 const allProjects = [
     {
         title: "Hospital support chatbot",
         description: "A healthcare support chatbot for bookings and query resolutions for doctors.",
-        imageUrl: hospitalChatbot,
+        imageUrl: 'https://picsum.photos/seed/hospital-chatbot/800/600',
         alt: "Hospital support chatbot",
         "data-ai-hint": "tech health"
     },
@@ -30,28 +24,28 @@ const allProjects = [
     {
         title: "Poultry Farm management application",
         description: "A android app that allows user to keep track of poultry with a integrated system.",
-        imageUrl: poultryFarm,
+        imageUrl: 'https://picsum.photos/seed/poultry-farm/800/600',
         alt: "Poultry Farm management application",
         "data-ai-hint": "tech farm"
     },
     {
         title: "Hotel kiosk + AI detection",
         description: "A kiosk system with hand movement detection to handle ordering with wireless communications.",
-        imageUrl: hotelKiosk,
+        imageUrl: 'https://picsum.photos/seed/hotel-kiosk/800/600',
         alt: "Hotel kiosk with AI detection",
         "data-ai-hint": "ai kiosk"
     },
     {
         title: "Pose detection with armed drone",
         description: "A pose detection software that enables a drone to understand position of a person in front for friend or foe detection.",
-        imageUrl: poseDrone,
+        imageUrl: 'https://picsum.photos/seed/pose-drone/800/600',
         alt: "Pose detection with armed drone",
         "data-ai-hint": "ai drone"
     },
     {
         title: "Object detection through restaurants cams",
         description: "Computer vision for hotel table management (detects empty tables, hand signals for service, etc.)",
-        imageUrl: restaurantVision,
+        imageUrl: 'https://picsum.photos/seed/restaurant-vision/800/600',
         alt: "Object detection in a restaurant",
         "data-ai-hint": "restaurant vision"
     },
