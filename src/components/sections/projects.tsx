@@ -6,14 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-import hospitalChatbot from '@/assets/projects/hospital.webp';
-import chromeExtension from '@/assets/projects/EHR.webp';
-import poultryFarm from '@/assets/projects/poultry.webp';
-import hotelKiosk from '@/assets/projects/kiosk.webp';
-import poseDrone from '@/assets/projects/armed drone.webp';
-import restaurantVision from '@/assets/projects/hotel cams.webp';
-import docClassifier from '@/assets/projects/doc classification.webp';
-import aiMeeting from '@/assets/projects/breakout rooms.webp';
+import hospitalChatbot from '@/assets/hospital.webp';
+import chromeExtension from '@/assets/EHR.webp';
+import poultryFarm from '@/assets/poultry.webp';
+import hotelKiosk from '@/assets/kiosk.webp';
+import poseDrone from '@/assets/armed drone.webp';
+import restaurantVision from '@/assets/hotel cams.webp';
+import docClassifier from '@/assets/doc classification.webp';
+import aiMeeting from '@/assets/breakout rooms.webp';
 
 
 const allProjects = [
