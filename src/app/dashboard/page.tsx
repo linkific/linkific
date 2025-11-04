@@ -227,11 +227,20 @@ function ApplicationsTable() {
     }
   };
 
-  const handleOpenDialog = async (resumePath: string | undefined) => {
-    if (!resumePath) return;
+ const handleOpenDialog = async (resumeUrl: string | undefined) => {
+    if (!resumeUrl) return;
     setIsUrlLoading(true);
     setSignedUrl(null);
     try {
+      // The resume_url from the DB is the full public URL.
+      // We need to extract the path for the createSignedUrl function.
+      const url = new URL(resumeUrl);
+      const resumePath = url.pathname.split('/Resume/')[1];
+
+      if (!resumePath) {
+        throw new Error("Could not extract resume path from URL.");
+      }
+
       const { data, error } = await supabase
         .storage
         .from('Resume')
