@@ -111,12 +111,12 @@ export default function ApplicationForm() {
       
       setTimeout(() => setIsSuccess(false), 4000);
     } catch (error) {
-      const e = error as Error;
-      console.error("Application submission error: ", e);
+      console.error("Application submission error: ", error);
+      const e = error as { message?: string };
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: e.message || "Could not send application. Please check the console for more details.",
+        description: e.message || JSON.stringify(error),
       });
     } finally {
       setIsSubmitting(false);
@@ -226,7 +226,8 @@ export default function ApplicationForm() {
                             className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition h-auto file:hidden cursor-pointer"
                             {...resumeRef}
                             onChange={(e) => {
-                                const file = e.target.files?.[0];
+                                const target = e.target as HTMLInputElement;
+                                const file = target.files?.[0];
                                 if (file) {
                                 setResumeFileName(file.name);
                                 }
