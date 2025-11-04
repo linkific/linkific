@@ -1,56 +1,64 @@
+
 'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import hospitalChatbot from '@/assets/projects/hospital-chatbot.png';
+import poultryFarm from '@/assets/projects/poultry-farm.png';
+import hotelKiosk from '@/assets/projects/hotel-kiosk.png';
+import poseDrone from '@/assets/projects/pose-drone.png';
+import restaurantVision from '@/assets/projects/restaurant-vision.png';
+
+
 const allProjects = [
     {
         title: "Hospital support chatbot",
         description: "A healthcare support chatbot for bookings and query resolutions for doctors.",
-        imageUrl: "https://picsum.photos/seed/tech-health/800/600",
+        imageUrl: hospitalChatbot,
         alt: "Hospital support chatbot",
         "data-ai-hint": "tech health"
     },
     {
         title: "AI assisted chrome extension",
         description: "An API integrated chrome extension that allows user to manage different EHR systems at once.",
-        imageUrl: "https://picsum.photos/seed/browser-ai/800/600",
+        imageUrl: "https://picsum.photos/seed/chrome-extension/800/600",
         alt: "AI assisted chrome extension",
         "data-ai-hint": "browser ai"
     },
     {
         title: "Poultry Farm management application",
         description: "A android app that allows user to keep track of poultry with a integrated system.",
-        imageUrl: "https://picsum.photos/seed/tech-farm/800/600",
+        imageUrl: poultryFarm,
         alt: "Poultry Farm management application",
         "data-ai-hint": "tech farm"
     },
     {
         title: "Hotel kiosk + AI detection",
         description: "A kiosk system with hand movement detection to handle ordering with wireless communications.",
-        imageUrl: "https://picsum.photos/seed/ai-kiosk/800/600",
+        imageUrl: hotelKiosk,
         alt: "Hotel kiosk with AI detection",
         "data-ai-hint": "ai kiosk"
     },
     {
         title: "Pose detection with armed drone",
         description: "A pose detection software that enables a drone to understand position of a person in front for friend or foe detection.",
-        imageUrl: "https://picsum.photos/seed/ai-drone/800/600",
+        imageUrl: poseDrone,
         alt: "Pose detection with armed drone",
         "data-ai-hint": "ai drone"
     },
     {
         title: "Object detection through restaurants cams",
         description: "Computer vision for hotel table management (detects empty tables, hand signals for service, etc.)",
-        imageUrl: "https://picsum.photos/seed/restaurant-vision/800/600",
+        imageUrl: restaurantVision,
         alt: "Object detection in a restaurant",
         "data-ai-hint": "restaurant vision"
     },
     {
         title: "Document Classification ML Model",
         description: "Automatically identifies document types (Aadhaar card, PAN card, income certificates, etc.)",
-        imageUrl: "https://picsum.photos/seed/document-scan/800/600",
+        imageUrl: "https://picsum.photos/seed/doc-classifier/800/600",
         alt: "Document Classification ML Model",
         "data-ai-hint": "document scan"
     },
@@ -76,7 +84,7 @@ const cardVariants = {
   }),
 };
 
-const ProjectCard = ({ project, index }: { project: typeof allProjects[0] & { "data-ai-hint"?: string }, index: number }) => (
+const ProjectCard = ({ project, index }: { project: { title: string, description: string, imageUrl: any, alt: string, "data-ai-hint"?: string }, index: number }) => (
     <motion.div 
         custom={index}
         variants={cardVariants}
@@ -107,7 +115,7 @@ export default function ProjectsSection({ featured = false }: { featured?: boole
             <div className="p-8 sm:p-12 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
                 <h2 className="text-white text-3xl font-bold text-center">Our Projects</h2>
                 <p className="text-white/70 text-center mt-2 mb-12 max-w-2xl mx-auto">A curated gallery of successful case studies, showcasing the real-world application of our technology.</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                     {projects.map((project, index) => (
                         <ProjectCard key={index} project={project} index={index} />
                     ))}
