@@ -5,11 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-import hospitalChatbot from '@/assets/projects/hospital-chatbot.png';
-import poultryFarm from '@/assets/projects/poultry-farm.png';
-import hotelKiosk from '@/assets/projects/hotel-kiosk.png';
-import poseDrone from '@/assets/projects/pose-drone.png';
-import restaurantVision from '@/assets/projects/restaurant-vision.png';
+import hospitalChatbot from '@/assets/projects/hospital-chatbot.webp';
+import poultryFarm from '@/assets/projects/poultry-farm.webp';
+import hotelKiosk from '@/assets/projects/hotel-kiosk.webp';
+import poseDrone from '@/assets/projects/pose-drone.webp';
+import restaurantVision from '@/assets/projects/restaurant-vision.webp';
 
 
 const allProjects = [
@@ -23,7 +23,7 @@ const allProjects = [
     {
         title: "AI assisted chrome extension",
         description: "An API integrated chrome extension that allows user to manage different EHR systems at once.",
-        imageUrl: "https://picsum.photos/seed/chrome-extension/800/600",
+        imageUrl: 'https://picsum.photos/seed/chrome-extension/800/600',
         alt: "AI assisted chrome extension",
         "data-ai-hint": "browser ai"
     },
@@ -58,14 +58,14 @@ const allProjects = [
     {
         title: "Document Classification ML Model",
         description: "Automatically identifies document types (Aadhaar card, PAN card, income certificates, etc.)",
-        imageUrl: "https://picsum.photos/seed/doc-classifier/800/600",
+        imageUrl: 'https://picsum.photos/seed/doc-classifier/800/600',
         alt: "Document Classification ML Model",
         "data-ai-hint": "document scan"
     },
     {
         title: "Breakout rooms - AI command",
         description: "A AI integrated sales and management system with integrated call agents.",
-        imageUrl: "https://picsum.photos/seed/ai-meeting/800/600",
+        imageUrl: 'https://picsum.photos/seed/ai-meeting/800/600',
         alt: "Breakout rooms AI command system",
         "data-ai-hint": "ai meeting"
     }
