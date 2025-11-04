@@ -12,10 +12,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, Upload } from "lucide-react";
-import { useFirebase } from "@/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { v4 as uuidv4 } from 'uuid';
+import { supabase } from "@/lib/supabase-client";
 
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
@@ -23,7 +20,7 @@ const formSchema = z.object({
   contactNumber: z.string().min(1, "Contact number is required"),
   role: z.string().min(1, "Please select a role"),
   reason: z.string().min(10, "Please tell us a bit more (min. 10 characters)"),
-  resume: z.instanceof(File).refine(file => file.size > 0, 'Resume is required.'),
+  resume: z.instanceof(File).optional(),
 });
 
 const jobOpenings = [
@@ -55,7 +52,6 @@ export default function ApplicationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [resumeFileName, setResumeFileName] = useState("");
-  const { firestore, storage } = useFirebase();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,35 +59,44 @@ export default function ApplicationForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!firestore || !storage) {
-      toast({
-        variant: "destructive",
-        title: "Services not available",
-        description: "Firebase is not ready. Please try again later.",
-      });
-      return;
-    }
     setIsSubmitting(true);
     
     try {
-      // 1. Upload resume to Firebase Storage
-      const resumeFile = values.resume;
-      const fileExtension = resumeFile.name.split('.').pop();
-      const uniqueFileName = `${uuidv4()}.${fileExtension}`;
-      const storageRef = ref(storage, `resumes/${uniqueFileName}`);
-      const uploadResult = await uploadBytes(storageRef, resumeFile);
+      let resumeUrl = null;
       
-      // 2. Get the download URL
-      const resumeUrl = await getDownloadURL(uploadResult.ref);
+      if (values.resume) {
+        const file = values.resume;
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+        const filePath = `resumes/${fileName}`;
 
-      // 3. Save application to Firestore with the resume URL
-      const applicationsCollection = collection(firestore, "jobApplications");
-      const { resume, ...applicationData } = values;
-      await addDoc(applicationsCollection, {
-        ...applicationData,
-        resumeUrl: resumeUrl,
-        submittedAt: serverTimestamp(),
-      });
+        const { error: uploadError } = await supabase
+          .storage
+          .from('resumes')
+          .upload(filePath, file);
+
+        if (uploadError) throw uploadError;
+
+        const { data: publicURLData } = supabase
+          .storage
+          .from('resumes')
+          .getPublicUrl(filePath);
+        
+        resumeUrl = publicURLData.publicUrl;
+      }
+
+      const { error: insertError } = await supabase
+        .from('applicants')
+        .insert([{
+          name: values.name,
+          email: values.email,
+          contact_number: values.contactNumber,
+          role: values.role,
+          reason: values.reason,
+          resume_url: resumeUrl
+        }]);
+
+      if (insertError) throw insertError;
       
       setIsSuccess(true);
       toast({

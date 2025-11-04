@@ -9,7 +9,7 @@ import { collection, orderBy, query, doc, deleteDoc } from 'firebase/firestore';
 import { Eye, Loader2, Trash2, Download } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -32,6 +32,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/lib/supabase-client';
 
 
 interface ContactMessage {
@@ -47,17 +48,14 @@ interface ContactMessage {
 }
 
 interface JobApplication {
-  id: string;
+  id: number;
   name: string;
   email: string;
-  contactNumber: string;
+  contact_number: string;
   role: string;
   reason: string;
-  resumeUrl?: string; // resumeUrl is optional
-  submittedAt: {
-    seconds: number;
-    nanoseconds: number;
-  } | null;
+  resume_url?: string;
+  created_at: string;
 }
 
 function MessagesTable() {
@@ -177,33 +175,53 @@ function MessagesTable() {
 }
 
 function ApplicationsTable() {
-  const { firestore } = useFirebase();
+  const [applications, setApplications] = useState<JobApplication[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const applicationsQuery = useMemoFirebase(
-    () =>
-      firestore
-        ? query(collection(firestore, 'jobApplications'), orderBy('submittedAt', 'desc'))
-        : null,
-    [firestore]
-  );
+  useEffect(() => {
+    async function fetchApplications() {
+      const { data, error } = await supabase
+        .from('applicants')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-  const { data: applications, isLoading, error } = useCollection<JobApplication>(applicationsQuery);
+      if (error) {
+        console.error('Error fetching applications from Supabase:', error);
+        setError(error.message);
+        toast({
+            variant: "destructive",
+            title: "Error fetching applications",
+            description: error.message,
+        });
+      } else {
+        setApplications(data as JobApplication[]);
+      }
+      setIsLoading(false);
+    }
 
-  const handleDelete = async (id: string) => {
-    if (!firestore) return;
-    try {
-      await deleteDoc(doc(firestore, "jobApplications", id));
-      toast({
-        title: "Success",
-        description: "Application deleted successfully.",
-      });
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: `Could not delete application: ${error.message}`,
-      });
+    fetchApplications();
+  }, [toast]);
+
+  const handleDelete = async (id: number) => {
+    const { error } = await supabase
+        .from('applicants')
+        .delete()
+        .match({ id: id });
+    
+    if (error) {
+        toast({
+            variant: "destructive",
+            title: "Error deleting application",
+            description: error.message,
+        });
+    } else {
+        setApplications(applications.filter(app => app.id !== id));
+        toast({
+            title: "Success",
+            description: "Application deleted successfully.",
+        });
     }
   };
 
@@ -216,7 +234,7 @@ function ApplicationsTable() {
   }
 
   if (error) {
-    return <p className="text-destructive p-8 text-center">Error loading applications: {error.message}</p>;
+    return <p className="text-destructive p-8 text-center">Error loading applications: {error}</p>;
   }
 
   if (!applications || applications.length === 0) {
@@ -239,7 +257,7 @@ function ApplicationsTable() {
           {applications.map((app) => (
             <TableRow key={app.id}>
               <TableCell className="text-white/80">
-                {app.submittedAt ? new Date(app.submittedAt.seconds * 1000).toLocaleString() : 'N/A'}
+                {new Date(app.created_at).toLocaleString()}
               </TableCell>
               <TableCell className="font-medium">{app.name}</TableCell>
               <TableCell>{app.email}</TableCell>
@@ -254,27 +272,27 @@ function ApplicationsTable() {
                       <DialogHeader>
                         <DialogTitle>Application from {app.name}</DialogTitle>
                         <DialogDescription>
-                         Applied for: {app.role} on {app.submittedAt ? new Date(app.submittedAt.seconds * 1000).toLocaleString() : 'N/A'}
+                         Applied for: {app.role} on {new Date(app.created_at).toLocaleString()}
                         </DialogDescription>
                       </DialogHeader>
                       <div className="grid md:grid-cols-2 gap-8 py-4 h-full">
                         <div className="space-y-4">
-                          <p><strong>Contact:</strong> {app.email} | {app.contactNumber}</p>
+                          <p><strong>Contact:</strong> {app.email} | {app.contact_number}</p>
                           <div>
                             <p><strong>Reason for applying:</strong></p>
                             <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
                           </div>
-                          {app.resumeUrl && (
+                          {app.resume_url && (
                             <Button asChild>
-                                <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">
+                                <a href={app.resume_url} target="_blank" rel="noopener noreferrer">
                                 <Download className="mr-2 size-4" /> Download Resume
                                 </a>
                             </Button>
                           )}
                         </div>
                         <div className="h-full">
-                          {app.resumeUrl ? (
-                             <iframe src={app.resumeUrl} className="w-full h-full rounded-md border" title="Resume Preview" />
+                          {app.resume_url ? (
+                             <iframe src={app.resume_url} className="w-full h-full rounded-md border" title="Resume Preview" />
                           ) : (
                             <div className="flex items-center justify-center h-full border rounded-md bg-muted/50">
                                 <p className="text-white/70">No resume uploaded.</p>
@@ -289,9 +307,9 @@ function ApplicationsTable() {
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
-                  {app.resumeUrl && (
+                  {app.resume_url && (
                     <Button asChild variant="ghost" size="icon">
-                        <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer"><Download className="size-4" /></a>
+                        <a href={app.resume_url} target="_blank" rel="noopener noreferrer"><Download className="size-4" /></a>
                     </Button>
                   )}
                   <AlertDialog>

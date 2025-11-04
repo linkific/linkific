@@ -118,24 +118,8 @@
             }
           ]
         }
-      },
-      {
-        "path": "/jobApplications/{jobApplicationId}",
-        "definition": {
-          "entityName": "JobApplication",
-          "schema": {
-            "$ref": "#/backend/entities/JobApplication"
-          },
-          "description": "Stores job applications submitted through the careers page.",
-          "params": [
-            {
-              "name": "jobApplicationId",
-              "description": "Unique identifier for the job application."
-            }
-          ]
-        }
       }
     ],
-    "reasoning": "The data structure is designed to store contact messages and job applications. All messages are stored in a single collection, `/contactMessages`, and all applications in `/jobApplications`, to facilitate easy retrieval and display in the dashboard. This structure ensures that security rules can be applied uniformly to each data type. It also simplifies queries for displaying the data in the dashboard.\n\nThis design prioritizes simplicity and ease of management. No authorization checks are required for writes as the forms are public. Reads are restricted to authenticated users on the dashboard. Thus, authorization independence is not applicable in this scenario.\n\nQAPs: `list` operations are secure because the collections store data meant to be visible in the dashboard to authenticated employee users."
+    "reasoning": "The data structure is designed to store contact messages. All messages are stored in a single collection, `/contactMessages`, to facilitate easy retrieval and display in the dashboard. This structure ensures that security rules can be applied uniformly to each data type. It also simplifies queries for displaying the data in the dashboard.\n\nJob Applications have been migrated to Supabase and are no longer represented in the Firestore structure.\n\nThis design prioritizes simplicity and ease of management. No authorization checks are required for writes as the forms are public. Reads are restricted to authenticated users on the dashboard. Thus, authorization independence is not applicable in this scenario.\n\nQAPs: `list` operations are secure because the collections store data meant to be visible in the dashboard to authenticated employee users."
   }
 }
