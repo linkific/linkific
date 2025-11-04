@@ -4,7 +4,7 @@ import { CodeRainBackground } from '@/components/layout/code-rain-background';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useCollection, useFirebase, useMemoFirebase } from '@/firebase';
+import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
 import { collection, orderBy, query, doc, deleteDoc } from 'firebase/firestore';
 import { Eye, Loader2, Trash2, Download } from 'lucide-react';
 import Link from 'next/link';
@@ -423,5 +423,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-    
