@@ -48,12 +48,12 @@ interface ContactMessage {
 }
 
 interface JobApplication {
-  id: number;
-  name: string;
+  id: string;
+  full_name: string;
   email: string;
-  contact_number: string;
+  contact: string;
   role: string;
-  reason: string;
+  message: string;
   resume_url?: string;
   created_at: string;
 }
@@ -204,7 +204,7 @@ function ApplicationsTable() {
     fetchApplications();
   }, [toast]);
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     const { error } = await supabase
         .from('applicants')
         .delete()
@@ -259,7 +259,7 @@ function ApplicationsTable() {
               <TableCell className="text-white/80">
                 {new Date(app.created_at).toLocaleString()}
               </TableCell>
-              <TableCell className="font-medium">{app.name}</TableCell>
+              <TableCell className="font-medium">{app.full_name}</TableCell>
               <TableCell>{app.email}</TableCell>
               <TableCell>{app.role}</TableCell>
               <TableCell className="text-right">
@@ -270,17 +270,17 @@ function ApplicationsTable() {
                     </DialogTrigger>
                     <DialogContent className="max-w-4xl h-[90vh]">
                       <DialogHeader>
-                        <DialogTitle>Application from {app.name}</DialogTitle>
+                        <DialogTitle>Application from {app.full_name}</DialogTitle>
                         <DialogDescription>
                          Applied for: {app.role} on {new Date(app.created_at).toLocaleString()}
                         </DialogDescription>
                       </DialogHeader>
                       <div className="grid md:grid-cols-2 gap-8 py-4 h-full">
                         <div className="space-y-4">
-                          <p><strong>Contact:</strong> {app.email} | {app.contact_number}</p>
+                          <p><strong>Contact:</strong> {app.email} | {app.contact}</p>
                           <div>
                             <p><strong>Reason for applying:</strong></p>
-                            <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.reason}</p>
+                            <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.message}</p>
                           </div>
                           {app.resume_url && (
                             <Button asChild>
@@ -320,7 +320,7 @@ function ApplicationsTable() {
                       <AlertDialogHeader>
                         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                         <AlertDialogDescription>
-                          This action cannot be undone. This will permanently delete the application from {app.name}.
+                          This action cannot be undone. This will permanently delete the application from {app.full_name}.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>

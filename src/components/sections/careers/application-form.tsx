@@ -91,11 +91,11 @@ export default function ApplicationForm() {
       const { error: insertError } = await supabase
         .from('applicants')
         .insert([{
-          name: values.name,
+          full_name: values.name,
           email: values.email,
-          contact_number: values.contactNumber,
+          contact: values.contactNumber,
           role: values.role,
-          reason: values.reason,
+          message: values.reason,
           resume_url: resumeUrl
         }]);
 
