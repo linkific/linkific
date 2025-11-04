@@ -179,6 +179,7 @@ function ApplicationsTable() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [signedUrl, setSignedUrl] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isUrlLoading, setIsUrlLoading] = useState(false);
   const { toast } = useToast();
 
@@ -231,11 +232,10 @@ function ApplicationsTable() {
     if (!resumeUrl) return;
     setIsUrlLoading(true);
     setSignedUrl(null);
+    setPreviewUrl(null);
     try {
-      // The resume_url from the DB is the full public URL.
-      // We need to extract the path for the createSignedUrl function.
       const url = new URL(resumeUrl);
-      const resumePath = url.pathname.split('/Resume/')[1];
+      const resumePath = url.pathname.split('/storage/v1/object/public/Resume/')[1];
 
       if (!resumePath) {
         throw new Error("Could not extract resume path from URL.");
@@ -247,7 +247,11 @@ function ApplicationsTable() {
         .createSignedUrl(resumePath, 300); // URL valid for 5 minutes
 
       if (error) throw error;
-      setSignedUrl(data.signedUrl);
+      
+      const directUrl = data.signedUrl;
+      setSignedUrl(directUrl);
+      setPreviewUrl(`https://docs.google.com/gview?url=${encodeURIComponent(directUrl)}&embedded=true`);
+
     } catch (error: any) {
       console.error('Error creating signed URL:', error);
       toast({
@@ -331,8 +335,8 @@ function ApplicationsTable() {
                              <div className="flex items-center justify-center h-full border rounded-md bg-muted/50">
                                 <Loader2 className="size-8 text-primary animate-spin" />
                             </div>
-                          ) : signedUrl ? (
-                             <iframe src={signedUrl} className="w-full h-full rounded-md border" title="Resume Preview" />
+                          ) : previewUrl ? (
+                             <iframe src={previewUrl} className="w-full h-full rounded-md border" title="Resume Preview" />
                           ) : (
                             <div className="flex items-center justify-center h-full border rounded-md bg-muted/50">
                                 <p className="text-white/70">No resume uploaded or failed to load.</p>
@@ -432,3 +436,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+    
