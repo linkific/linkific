@@ -4,7 +4,7 @@ import { CodeRainBackground } from '@/components/layout/code-rain-background';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
+import { useCollection, useFirebase, useMemoFirebase } from '@/firebase';
 import { collection, orderBy, query, doc, deleteDoc } from 'firebase/firestore';
 import { Eye, Loader2, Trash2, Download } from 'lucide-react';
 import Link from 'next/link';
@@ -178,6 +178,8 @@ function ApplicationsTable() {
   const [applications, setApplications] = useState<JobApplication[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [signedUrl, setSignedUrl] = useState<string | null>(null);
+  const [isUrlLoading, setIsUrlLoading] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -225,6 +227,31 @@ function ApplicationsTable() {
     }
   };
 
+  const handleOpenDialog = async (resumePath: string | undefined) => {
+    if (!resumePath) return;
+    setIsUrlLoading(true);
+    setSignedUrl(null);
+    try {
+      const { data, error } = await supabase
+        .storage
+        .from('Resume')
+        .createSignedUrl(resumePath, 300); // URL valid for 5 minutes
+
+      if (error) throw error;
+      setSignedUrl(data.signedUrl);
+    } catch (error: any) {
+      console.error('Error creating signed URL:', error);
+      toast({
+        variant: "destructive",
+        title: "Could not load resume",
+        description: error.message,
+      });
+    } finally {
+      setIsUrlLoading(false);
+    }
+  }
+
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center p-16">
@@ -264,7 +291,7 @@ function ApplicationsTable() {
               <TableCell>{app.role}</TableCell>
               <TableCell className="text-right">
                 <div className="flex gap-2 justify-end">
-                   <Dialog>
+                   <Dialog onOpenChange={(open) => open && handleOpenDialog(app.resume_url)}>
                     <DialogTrigger asChild>
                       <Button variant="ghost" size="icon"><Eye className="size-4" /></Button>
                     </DialogTrigger>
@@ -282,20 +309,24 @@ function ApplicationsTable() {
                             <p><strong>Reason for applying:</strong></p>
                             <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.message}</p>
                           </div>
-                          {app.resume_url && (
+                           {signedUrl && (
                             <Button asChild>
-                                <a href={app.resume_url} target="_blank" rel="noopener noreferrer">
+                                <a href={signedUrl} target="_blank" rel="noopener noreferrer">
                                 <Download className="mr-2 size-4" /> Download Resume
                                 </a>
                             </Button>
                           )}
                         </div>
                         <div className="h-full">
-                          {app.resume_url ? (
-                             <iframe src={app.resume_url} className="w-full h-full rounded-md border" title="Resume Preview" />
+                          {isUrlLoading ? (
+                             <div className="flex items-center justify-center h-full border rounded-md bg-muted/50">
+                                <Loader2 className="size-8 text-primary animate-spin" />
+                            </div>
+                          ) : signedUrl ? (
+                             <iframe src={signedUrl} className="w-full h-full rounded-md border" title="Resume Preview" />
                           ) : (
                             <div className="flex items-center justify-center h-full border rounded-md bg-muted/50">
-                                <p className="text-white/70">No resume uploaded.</p>
+                                <p className="text-white/70">No resume uploaded or failed to load.</p>
                             </div>
                           )}
                         </div>
@@ -307,11 +338,6 @@ function ApplicationsTable() {
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
-                  {app.resume_url && (
-                    <Button asChild variant="ghost" size="icon">
-                        <a href={app.resume_url} target="_blank" rel="noopener noreferrer"><Download className="size-4" /></a>
-                    </Button>
-                  )}
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
                       <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive"><Trash2 className="size-4" /></Button>
