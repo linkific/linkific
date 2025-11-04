@@ -75,14 +75,14 @@ export default function ApplicationForm() {
 
         const { error: uploadError } = await supabase
           .storage
-          .from('resumes')
+          .from('Resume')
           .upload(filePath, file);
 
         if (uploadError) throw uploadError;
 
         const { data: publicURLData } = supabase
           .storage
-          .from('resumes')
+          .from('Resume')
           .getPublicUrl(filePath);
         
         resumeUrl = publicURLData.publicUrl;
