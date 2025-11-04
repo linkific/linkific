@@ -20,7 +20,7 @@ const formSchema = z.object({
   contactNumber: z.string().min(1, "Contact number is required"),
   role: z.string().min(1, "Please select a role"),
   reason: z.string().min(10, "Please tell us a bit more (min. 10 characters)"),
-  resume: z.instanceof(File).optional(),
+  resume: z.any().optional(),
 });
 
 const jobOpenings = [
@@ -57,15 +57,18 @@ export default function ApplicationForm() {
     resolver: zodResolver(formSchema),
     defaultValues: { name: "", email: "", contactNumber: "", role: "", reason: "" },
   });
+  
+  const resumeRef = form.register("resume");
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     
     try {
       let resumeUrl = null;
-      
-      if (values.resume) {
-        const file = values.resume;
+      const resumeFile = values.resume?.[0];
+
+      if (resumeFile) {
+        const file = resumeFile;
         const fileExt = file.name.split('.').pop();
         const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
         const filePath = `resumes/${fileName}`;
@@ -212,40 +215,35 @@ export default function ApplicationForm() {
                             </FormItem>
                         )}
                     />
-                     <FormField
-                      control={form.control}
-                      name="resume"
-                      render={({ field: { onChange, ...props } }) => (
-                        <FormItem className="sm:col-span-2">
-                          <FormLabel className="sr-only">Resume</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                               <Input 
-                                id="resume"
-                                type="file" 
-                                accept=".pdf,.doc,.docx"
-                                className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition h-auto file:hidden cursor-pointer"
-                                onChange={(e) => {
-                                  const file = e.target.files?.[0];
-                                  if (file) {
-                                    onChange(file);
-                                    setResumeFileName(file.name);
-                                  }
-                                }}
-                                {...props}
-                              />
-                              <Button asChild variant="ghost" className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer">
-                                <label htmlFor="resume" className="flex items-center gap-2 cursor-pointer">
-                                  <Upload className="size-4" />
-                                  <span>{resumeFileName || "Upload Resume"}</span>
-                                </label>
-                              </Button>
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <FormItem className="sm:col-span-2">
+                        <FormLabel className="sr-only">Resume</FormLabel>
+                        <FormControl>
+                        <div className="relative">
+                            <Input 
+                            id="resume"
+                            type="file" 
+                            accept=".pdf,.doc,.docx"
+                            className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition h-auto file:hidden cursor-pointer"
+                            {...resumeRef}
+                            onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (file) {
+                                setResumeFileName(file.name);
+                                }
+                                resumeRef.onChange(e); // Propagate change to form hook
+                            }}
+                            />
+                            <Button asChild variant="ghost" className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer">
+                            <label htmlFor="resume" className="flex items-center gap-2 cursor-pointer">
+                                <Upload className="size-4" />
+                                <span>{resumeFileName || "Upload Resume"}</span>
+                            </label>
+                            </Button>
+                        </div>
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
+
                     <FormField
                       control={form.control}
                       name="reason"
