@@ -1,11 +1,12 @@
 
+
 import Link from 'next/link';
 
 // Minimalist components defined directly in the file for simplicity
 
 function MinimalistHeader() {
     return (
-        <header className="w-full bg-white border-b border-gray-200">
+        <header className="absolute top-0 left-0 w-full z-10">
             <div className="flex items-center justify-between h-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <Link href="/" className="flex items-center gap-3 text-black">
                     <span className="material-symbols-outlined text-black text-2xl">auto_awesome</span>
@@ -25,7 +26,7 @@ function MinimalistHeader() {
 
 function MinimalistHero() {
     return (
-        <section className="text-center py-24 sm:py-32">
+        <section className="text-center pt-32 pb-20 sm:pt-40 sm:pb-28">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter text-black">
                 Automate What Slows You Down. <br /> <span className="text-gray-700">Focus on What Matters.</span>
             </h1>
@@ -62,16 +63,16 @@ function MinimalistServices() {
 
     return (
         <section id="services" className="py-24 sm:py-32">
-            <h2 className="text-black text-3xl font-bold text-center">Our Services</h2>
-            <p className="text-gray-600 text-center mt-2 mb-12 max-w-2xl mx-auto">A clear breakdown of our core offerings designed to elevate your business operations.</p>
+            <h2 className="text-white text-3xl font-bold text-center">Our Services</h2>
+            <p className="text-gray-300 text-center mt-2 mb-12 max-w-2xl mx-auto">A clear breakdown of our core offerings designed to elevate your business operations.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {services.map((service, index) => (
-                    <div key={index} className="flex flex-col items-center text-center p-8 rounded-xl bg-white border border-gray-200">
-                        <div className="flex items-center justify-center size-16 rounded-full bg-black text-white mb-6">
+                    <div key={index} className="flex flex-col items-center text-center p-8 rounded-xl bg-gray-900/50 border border-gray-700">
+                        <div className="flex items-center justify-center size-16 rounded-full bg-white text-black mb-6">
                             <span className="material-symbols-outlined text-3xl">{service.icon}</span>
                         </div>
-                        <h3 className="text-xl font-bold mb-2 text-black">{service.title}</h3>
-                        <p className="text-gray-600 text-sm">{service.description}</p>
+                        <h3 className="text-xl font-bold mb-2 text-white">{service.title}</h3>
+                        <p className="text-gray-400 text-sm">{service.description}</p>
                     </div>
                 ))}
             </div>
@@ -113,14 +114,12 @@ function MinimalistContact() {
 
 function MinimalistFooter() {
   return (
-    <footer className="mt-16 sm:mt-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-             <div className="flex items-center justify-center gap-3 text-black">
-                <span className="material-symbols-outlined text-black text-2xl">auto_awesome</span>
-                <h2 className="text-xl font-bold">Linkific</h2>
-            </div>
-            <p className="text-gray-600 text-sm mt-4">© 2025 Linkific. All rights reserved.</p>
+    <footer className="mt-16 sm:mt-24 py-12 text-center">
+         <div className="flex items-center justify-center gap-3 text-white">
+            <span className="material-symbols-outlined text-white text-2xl">auto_awesome</span>
+            <h2 className="text-xl font-bold">Linkific</h2>
         </div>
+        <p className="text-gray-400 text-sm mt-4">© 2025 Linkific. All rights reserved.</p>
     </footer>
   )
 }
@@ -130,12 +129,34 @@ export default function Version1Page() {
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden bg-white font-display text-black">
         <MinimalistHeader />
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <MinimalistHero />
-            <MinimalistServices />
-            <MinimalistContact />
-        </main>
-        <MinimalistFooter />
+
+        {/* Hero Section - White BG */}
+        <div className="bg-white">
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <MinimalistHero />
+            </main>
+        </div>
+
+        {/* Services Section - Black BG with top diagonal clip */}
+        <div className="bg-black text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+             <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+                <MinimalistServices />
+            </main>
+        </div>
+
+        {/* Contact Section - White BG with top diagonal clip */}
+        <div className="bg-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+                <MinimalistContact />
+            </main>
+        </div>
+
+        {/* Footer Section - Black BG with top diagonal clip */}
+        <div className="bg-black text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+             <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <MinimalistFooter />
+            </main>
+        </div>
     </div>
   );
 }
