@@ -42,6 +42,90 @@ function MinimalistHero() {
     );
 }
 
+function MinimalistProcess() {
+    const processSteps = [
+      {
+        icon: 'mail',
+        title: '1. Contact Us',
+        description: 'Drop a quick note — tell us your problem, data, or workflow you want fixed.',
+      },
+      {
+        icon: 'zap',
+        title: '2. POC in 3 Days',
+        description: 'We’ll deliver a focused proof-of-concept that shows the idea working with your data.',
+      },
+      {
+        icon: 'check_circle',
+        title: '3. Confirm & Build',
+        description: 'Once you approve the POC, we build a production-ready prototype in 1–4 weeks.',
+      },
+      {
+        icon: 'celebration',
+        title: '4. Enjoy Your Work',
+        description: 'You get a working system that automates the grunt work so your team can focus on growth.',
+      },
+    ];
+
+    return (
+        <section id="process" className="py-24 sm:py-32">
+            <h2 className="text-white text-3xl font-bold text-center">Our Process</h2>
+            <p className="text-gray-300 text-center mt-2 mb-12 max-w-2xl mx-auto">From idea to impact in four simple steps. Fast, tangible, and built on trust.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {processSteps.map((step, index) => (
+                    <div key={index} className="flex flex-col items-start text-left p-6 rounded-xl border border-gray-700 hover:border-white/50 transition-colors cursor-pointer">
+                        <div className="flex items-center justify-center size-12 rounded-lg bg-white text-black mb-5">
+                            <span className="material-symbols-outlined text-2xl">{step.icon}</span>
+                        </div>
+                        <h3 className="text-lg font-bold mb-2 text-white">{step.title}</h3>
+                        <p className="text-gray-400 text-sm">{step.description}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+}
+
+function MinimalistKpi() {
+    const kpis = [
+      {
+        icon: 'rocket_launch',
+        value: '50+',
+        label: 'Projects Delivered',
+      },
+      {
+        icon: 'sentiment_satisfied',
+        value: '98%',
+        label: 'Client Satisfaction',
+      },
+      {
+        icon: 'calendar_month',
+        value: '6+',
+        label: 'Years of Experience',
+      },
+      {
+        icon: 'groups',
+        value: '20+',
+        label: 'Skilled Professionals',
+      },
+    ];
+
+    return (
+        <section id="kpis" className="py-24 sm:py-32">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {kpis.map((kpi, index) => (
+                    <div key={index} className="p-8 rounded-xl bg-gray-100 border border-gray-200 text-center flex flex-col items-center">
+                        <div className="flex items-center justify-center size-16 rounded-full bg-black text-white mb-5">
+                             <span className="material-symbols-outlined text-3xl">{kpi.icon}</span>
+                        </div>
+                        <p className="text-4xl font-bold text-black">{kpi.value}</p>
+                        <p className="text-sm text-gray-600 mt-1">{kpi.label}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+}
+
 function MinimalistServices() {
     const services = [
         {
@@ -134,6 +218,20 @@ export default function Version1Page() {
         <div className="bg-white">
             <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <MinimalistHero />
+            </main>
+        </div>
+
+        {/* Process Section - Black BG with top diagonal clip */}
+        <div className="bg-black text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+             <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+                <MinimalistProcess />
+            </main>
+        </div>
+        
+        {/* KPI Section - White BG with top diagonal clip */}
+        <div className="bg-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+                <MinimalistKpi />
             </main>
         </div>
 
