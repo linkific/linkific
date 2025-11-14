@@ -126,42 +126,27 @@ function MinimalistProcess() {
             <h2 className="text-white text-3xl font-bold text-center">Our Process</h2>
             <p className="text-gray-300 text-center mt-2 mb-12 max-w-2xl mx-auto">From idea to impact in four simple steps. Fast, tangible, and built on trust.</p>
             <motion.div 
-                className="relative"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
             >
-                <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-y-12 md:gap-x-8">
                 {processSteps.map((step, index) => (
-                    <React.Fragment key={index}>
-                        <motion.div 
-                            variants={itemVariants}
-                            whileHover={{ scale: 1.04, y: -5 }}
-                            transition={{ type: "spring", stiffness: 300 }}
-                            className="relative flex-1 flex flex-col items-center md:items-start text-center md:text-left p-6 rounded-xl border border-gray-700 hover:border-white/50 transition-colors cursor-pointer max-w-xs w-full"
-                        >
-                            <div className="flex items-center justify-center size-12 rounded-lg bg-white text-black mb-5">
-                                <span className="material-symbols-outlined text-2xl">{step.icon}</span>
-                            </div>
-                            <h3 className="text-lg font-bold mb-2 text-white">{step.title}</h3>
-                            <p className="text-gray-400 text-sm">{step.description}</p>
-                        </motion.div>
-
-                        {index < processSteps.length - 1 && (
-                            <div className="hidden md:flex flex-1 items-center justify-center min-w-[6rem] pt-12">
-                                <svg className="w-full h-8 text-gray-600" fill="none" viewBox="0 0 100 20" preserveAspectRatio="none">
-                                    <path d="M0 10 L90 10" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" />
-                                    <path d="M85 5 L95 10 L85 15" stroke="currentColor" strokeWidth="2" fill="none" />
-                                </svg>
-                           </div>
-                        )}
-                         {index < processSteps.length - 1 && (
-                             <div className="block md:hidden h-16 w-px bg-gray-600 my-4"></div>
-                         )}
-                    </React.Fragment>
+                    <motion.div 
+                        key={index}
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.04, y: -5 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                        className="flex flex-col items-start text-left p-6 rounded-xl border border-gray-700 hover:border-white/50 transition-colors cursor-pointer"
+                    >
+                        <div className="flex items-center justify-center size-12 rounded-lg bg-white text-black mb-5">
+                            <span className="material-symbols-outlined text-2xl">{step.icon}</span>
+                        </div>
+                        <h3 className="text-lg font-bold mb-2 text-white">{step.title}</h3>
+                        <p className="text-gray-400 text-sm">{step.description}</p>
+                    </motion.div>
                 ))}
-                </div>
             </motion.div>
         </section>
     );
