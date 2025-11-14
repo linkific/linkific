@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ContactForm } from '@/components/sections/contact-form'; // Re-using for simplicity
+import React from 'react';
 
 // Minimalist components defined directly in the file for simplicity
 
