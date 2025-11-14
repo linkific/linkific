@@ -1,6 +1,9 @@
 
+'use client';
 
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ContactForm } from '@/components/sections/contact-form'; // Re-using for simplicity
 
 // Minimalist components defined directly in the file for simplicity
 
@@ -25,19 +28,48 @@ function MinimalistHeader() {
 }
 
 function MinimalistHero() {
+    const containerVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                staggerChildren: 0.2,
+                duration: 0.5
+            }
+        }
+    };
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 }
+    };
+
     return (
         <section className="text-center pt-32 pb-20 sm:pt-40 sm:pb-28">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter text-black">
-                Automate What Slows You Down. <br /> <span className="text-gray-700">Focus on What Matters.</span>
-            </h1>
-            <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto mt-6">
-                Linkific's smart software and AI-powered automation streamlines your workflow, boosts efficiency, and drives unprecedented growth.
-            </p>
-            <div className="mt-8">
-                <Link href="/contact" className="inline-flex items-center justify-center rounded-md h-12 px-6 bg-black text-white text-base font-bold transition-colors hover:bg-gray-800">
-                     Get a POC in for free
-                </Link>
-            </div>
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="flex flex-col items-center gap-6"
+            >
+                <motion.h1 
+                    variants={itemVariants}
+                    className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter text-black"
+                >
+                    Automate What Slows You Down. <br /> <span className="text-gray-700">Focus on What Matters.</span>
+                </motion.h1>
+                <motion.p 
+                    variants={itemVariants}
+                    className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto mt-6"
+                >
+                    Linkific's smart software and AI-powered automation streamlines your workflow, boosts efficiency, and drives unprecedented growth.
+                </motion.p>
+                <motion.div variants={itemVariants} className="mt-8">
+                    <Link href="/contact" className="inline-flex items-center justify-center rounded-md h-12 px-6 bg-black text-white text-base font-bold transition-colors hover:bg-gray-800">
+                         Get a POC in for free
+                    </Link>
+                </motion.div>
+            </motion.div>
         </section>
     );
 }
@@ -66,21 +98,55 @@ function MinimalistProcess() {
       },
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+            staggerChildren: 0.12,
+            },
+        },
+    };
+    const itemVariants = {
+        hidden: { opacity: 0, x: 12, scale: 0.98 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            transition: {
+            duration: 0.36,
+            ease: [0.22, 1, 0.36, 1],
+            },
+        },
+    };
+
     return (
         <section id="process" className="py-24 sm:py-32">
             <h2 className="text-white text-3xl font-bold text-center">Our Process</h2>
             <p className="text-gray-300 text-center mt-2 mb-12 max-w-2xl mx-auto">From idea to impact in four simple steps. Fast, tangible, and built on trust.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+            >
                 {processSteps.map((step, index) => (
-                    <div key={index} className="flex flex-col items-start text-left p-6 rounded-xl border border-gray-700 hover:border-white/50 transition-colors cursor-pointer">
+                    <motion.div 
+                        key={index}
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.04, y: -5 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                        className="flex flex-col items-start text-left p-6 rounded-xl border border-gray-700 hover:border-white/50 transition-colors cursor-pointer"
+                    >
                         <div className="flex items-center justify-center size-12 rounded-lg bg-white text-black mb-5">
                             <span className="material-symbols-outlined text-2xl">{step.icon}</span>
                         </div>
                         <h3 className="text-lg font-bold mb-2 text-white">{step.title}</h3>
                         <p className="text-gray-400 text-sm">{step.description}</p>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
         </section>
     );
 }
@@ -109,19 +175,52 @@ function MinimalistKpi() {
       },
     ];
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+            staggerChildren: 0.2,
+            delayChildren: 0.3,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+            type: 'spring',
+            stiffness: 100,
+            },
+        },
+    };
+
     return (
         <section id="kpis" className="py-24 sm:py-32">
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+             <motion.div 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+            >
                 {kpis.map((kpi, index) => (
-                    <div key={index} className="p-8 rounded-xl bg-gray-100 border border-gray-200 text-center flex flex-col items-center">
+                    <motion.div 
+                        key={index} 
+                        variants={itemVariants}
+                        className="p-8 rounded-xl bg-gray-100 border border-gray-200 text-center flex flex-col items-center"
+                    >
                         <div className="flex items-center justify-center size-16 rounded-full bg-black text-white mb-5">
                              <span className="material-symbols-outlined text-3xl">{kpi.icon}</span>
                         </div>
                         <p className="text-4xl font-bold text-black">{kpi.value}</p>
                         <p className="text-sm text-gray-600 mt-1">{kpi.label}</p>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
         </section>
     );
 }
@@ -145,19 +244,40 @@ function MinimalistServices() {
         },
     ];
 
+    const cardVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+            delay: i * 0.1,
+            type: 'spring',
+            stiffness: 100,
+            },
+        }),
+    };
+
     return (
         <section id="services" className="py-24 sm:py-32">
             <h2 className="text-white text-3xl font-bold text-center">Our Services</h2>
             <p className="text-gray-300 text-center mt-2 mb-12 max-w-2xl mx-auto">A clear breakdown of our core offerings designed to elevate your business operations.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {services.map((service, index) => (
-                    <div key={index} className="flex flex-col items-center text-center p-8 rounded-xl bg-gray-900/50 border border-gray-700">
+                    <motion.div 
+                        key={index} 
+                        custom={index}
+                        variants={cardVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.5 }}
+                        className="flex flex-col items-center text-center p-8 rounded-xl bg-gray-900/50 border border-gray-700"
+                    >
                         <div className="flex items-center justify-center size-16 rounded-full bg-white text-black mb-6">
                             <span className="material-symbols-outlined text-3xl">{service.icon}</span>
                         </div>
                         <h3 className="text-xl font-bold mb-2 text-white">{service.title}</h3>
                         <p className="text-gray-400 text-sm">{service.description}</p>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </section>
@@ -165,6 +285,8 @@ function MinimalistServices() {
 }
 
 function MinimalistContact() {
+    // This component is simplified for the black and white theme
+    // We are not using the original ContactForm to avoid theme conflicts
     return (
         <section className="py-24 sm:py-32" id="contact">
             <div className="p-8 sm:p-12 rounded-xl bg-white border border-gray-200">
