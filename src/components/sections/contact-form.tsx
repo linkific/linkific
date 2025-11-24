@@ -67,6 +67,8 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
     }
   }
 
+  const isDarkBg = page === 'home' || page === 'contact'; // Assuming contact page form is also on dark bg
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -77,7 +79,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
             <FormItem>
               <FormLabel className="sr-only">Your Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your Name" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                <Input placeholder="Your Name" {...field} className={isDarkBg ? "w-full bg-gray-900 border-gray-700 text-white placeholder-gray-400 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,7 +92,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
             <FormItem>
               <FormLabel className="sr-only">Your Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="Your Email" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                <Input type="email" placeholder="Your Email" {...field} className={isDarkBg ? "w-full bg-gray-900 border-gray-700 text-white placeholder-gray-400 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -103,20 +105,18 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
             <FormItem className="sm:col-span-2">
               <FormLabel className="sr-only">Your Message</FormLabel>
               <FormControl>
-                <Textarea placeholder="Your Message" rows={4} {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                <Textarea placeholder="Your Message" rows={4} {...field} className={isDarkBg ? "w-full bg-gray-900 border-gray-700 text-white placeholder-gray-400 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <div className="sm:col-span-2 flex justify-center">
-            <button type="submit" className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow" disabled={isSubmitting}>
+            <Button type="submit" disabled={isSubmitting} className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-white text-black text-base font-bold shadow-lg hover:bg-gray-200 transition-shadow">
                  {isSubmitting ? <Loader2 className="animate-spin" /> : <span className="truncate">Send Message</span>}
-            </button>
+            </Button>
         </div>
       </form>
     </Form>
   );
 }
-
-    

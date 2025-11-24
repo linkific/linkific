@@ -1,21 +1,10 @@
 "use client";
 
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
 export default function HeroSection() {
-    const [scrollY, setScrollY] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollY(window.scrollY);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     const containerVariants = {
         hidden: { opacity: 0, y: 50 },
         visible: {
@@ -33,7 +22,6 @@ export default function HeroSection() {
         visible: { opacity: 1, y: 0 }
     };
 
-
     return (
         <section className="relative grid grid-cols-1 items-center gap-12 text-center min-h-[70vh]">
             <motion.div 
@@ -43,12 +31,12 @@ export default function HeroSection() {
                 animate="visible"
             >
                  <motion.div className="relative" variants={itemVariants}>
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter">
-                        Automate What Slows You Down. <br /> <span className="text-primary">Focus on What Matters.</span>
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter text-black">
+                        Automate What Slows You Down. <br /> <span className="text-gray-700">Focus on What Matters.</span>
                     </h1>
                 </motion.div>
                 <motion.p 
-                    className="text-white/70 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0"
+                    className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0"
                     variants={itemVariants}
                 >
                     Linkific's smart software and AI-powered automation streamlines your workflow, boosts efficiency, and drives unprecedented growth.
@@ -57,7 +45,7 @@ export default function HeroSection() {
                     className="flex items-center justify-center gap-4 mt-4"
                     variants={itemVariants}
                 >
-                    <Button asChild className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">
+                    <Button asChild className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-black text-white text-base font-bold shadow-lg hover:bg-gray-800 transition-shadow">
                         <Link href="/contact">
                             <span className="truncate">Get a POC in for free</span>
                         </Link>

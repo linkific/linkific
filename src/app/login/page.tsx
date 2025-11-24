@@ -6,13 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CodeRainBackground } from '@/components/layout/code-rain-background';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useFirebase } from '@/firebase';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import Image from 'next/image';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -38,7 +36,6 @@ export default function LoginPage() {
     const hardcodedPassword = '#Linkific123';
 
     try {
-      // Use the email and password from the form state if they are entered, otherwise use hardcoded credentials
       const loginEmail = email || hardcodedEmail;
       const loginPassword = password || hardcodedPassword;
 
@@ -50,11 +47,8 @@ export default function LoginPage() {
       router.push('/dashboard');
     } catch (error: any) {
       if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
-        // If user doesn't exist or creds are wrong for a new setup, create them
         try {
-          // Use the hardcoded credentials to create the account
           await createUserWithEmailAndPassword(auth, hardcodedEmail, hardcodedPassword);
-           // Now sign in the newly created user with the same hardcoded credentials
           await signInWithEmailAndPassword(auth, hardcodedEmail, hardcodedPassword);
           toast({
             title: 'Account Created & Logged In',
@@ -81,14 +75,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative w-full min-h-screen overflow-x-hidden bg-transparent font-display text-white">
-      <CodeRainBackground />
+    <div className="relative w-full min-h-screen overflow-x-hidden bg-white font-display text-black">
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <Card className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10">
+        <Card className="w-full max-w-md bg-white border">
           <CardHeader className="text-center">
              <Link href="/" className="flex items-center justify-center mb-4 gap-3">
-                 <span className="material-symbols-outlined text-primary text-3xl">auto_awesome</span>
-                 <h2 className="text-white text-2xl font-bold">Linkific</h2>
+                 <span className="material-symbols-outlined text-black text-3xl">auto_awesome</span>
+                 <h2 className="text-black text-2xl font-bold">Linkific</h2>
             </Link>
             <CardTitle className="text-2xl font-bold">Employee Login</CardTitle>
             <CardDescription>Enter your credentials to access your dashboard.</CardDescription>
@@ -104,7 +97,6 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition"
                 />
               </div>
               <div className="space-y-2">
@@ -116,10 +108,9 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition"
                 />
               </div>
-              <Button type="submit" className="w-full flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow" disabled={isLoading}>
+              <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? <Loader2 className="animate-spin" /> : 'Login'}
               </Button>
             </form>

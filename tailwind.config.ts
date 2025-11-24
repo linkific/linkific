@@ -52,8 +52,6 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        'background-dark': '#0D0D2B',
-        violet: '#2B076E',
       },
       fontFamily: {
         display: ['Space Grotesk', 'sans-serif'],

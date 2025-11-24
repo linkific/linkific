@@ -63,13 +63,13 @@ export default function KpiSection() {
           <motion.div
             key={index}
             variants={itemVariants}
-            className="p-8 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 text-center flex flex-col items-center"
+            className="p-8 rounded-xl bg-gray-900/50 border border-gray-700 text-center flex flex-col items-center"
           >
-            <div className="flex items-center justify-center size-16 rounded-full bg-gradient-to-br from-primary to-secondary mb-5 shadow-lg">
-              <kpi.icon className="size-8 text-white" />
+            <div className="flex items-center justify-center size-16 rounded-full bg-white text-black mb-5">
+              <kpi.icon className="size-8" />
             </div>
             <p className="text-4xl font-bold text-white">{kpi.value}</p>
-            <p className="text-sm text-white/70 mt-1">{kpi.label}</p>
+            <p className="text-sm text-gray-400 mt-1">{kpi.label}</p>
           </motion.div>
         ))}
       </motion.div>

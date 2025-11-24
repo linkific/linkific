@@ -1,6 +1,5 @@
 'use client';
 
-import { CodeRainBackground } from '@/components/layout/code-rain-background';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -99,7 +98,7 @@ function MessagesTable() {
   }
 
   if (!messages || messages.length === 0) {
-    return <p className="p-8 text-center text-white/70">No messages yet.</p>;
+    return <p className="p-8 text-center text-muted-foreground">No messages yet.</p>;
   }
 
   return (
@@ -117,7 +116,7 @@ function MessagesTable() {
             <TableBody>
                 {messages.map((msg) => (
                     <TableRow key={msg.id}>
-                        <TableCell className="text-white/80">
+                        <TableCell className="text-muted-foreground">
                             {msg.sentAt ? new Date(msg.sentAt.seconds * 1000).toLocaleString() : 'N/A'}
                         </TableCell>
                         <TableCell className="font-medium">{msg.name}</TableCell>
@@ -138,7 +137,7 @@ function MessagesTable() {
                                 </DialogHeader>
                                 <div className="py-4 space-y-2">
                                   <p><strong>Email:</strong> {msg.email}</p>
-                                  <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{msg.message}</p>
+                                  <p className="text-muted-foreground bg-muted/50 p-4 rounded-md whitespace-pre-wrap">{msg.message}</p>
                                 </div>
                                 <DialogFooter>
                                   <DialogClose asChild>
@@ -278,7 +277,7 @@ function ApplicationsTable() {
   }
 
   if (!applications || applications.length === 0) {
-    return <p className="p-8 text-center text-white/70">No applications yet.</p>;
+    return <p className="p-8 text-center text-muted-foreground">No applications yet.</p>;
   }
 
   return (
@@ -296,7 +295,7 @@ function ApplicationsTable() {
         <TableBody>
           {applications.map((app) => (
             <TableRow key={app.id}>
-              <TableCell className="text-white/80">
+              <TableCell className="text-muted-foreground">
                 {new Date(app.created_at).toLocaleString()}
               </TableCell>
               <TableCell className="font-medium">{app.full_name}</TableCell>
@@ -320,7 +319,7 @@ function ApplicationsTable() {
                           <p><strong>Contact:</strong> {app.email} | {app.contact}</p>
                           <div>
                             <p><strong>Reason for applying:</strong></p>
-                            <p className="text-white/80 bg-background/50 p-4 rounded-md whitespace-pre-wrap">{app.message}</p>
+                            <p className="text-muted-foreground bg-muted/50 p-4 rounded-md whitespace-pre-wrap">{app.message}</p>
                           </div>
                            {signedUrl && (
                             <Button asChild>
@@ -339,7 +338,7 @@ function ApplicationsTable() {
                              <iframe src={previewUrl} className="w-full h-full rounded-md border" title="Resume Preview" />
                           ) : (
                             <div className="flex items-center justify-center h-full border rounded-md bg-muted/50">
-                                <p className="text-white/70">No resume uploaded or failed to load.</p>
+                                <p className="text-muted-foreground">No resume uploaded or failed to load.</p>
                             </div>
                           )}
                         </div>
@@ -391,30 +390,28 @@ export default function DashboardPage() {
 
   if (isUserLoading || !user) {
     return (
-       <div className="relative w-full min-h-screen overflow-x-hidden bg-transparent font-display text-white flex items-center justify-center">
-        <CodeRainBackground />
+       <div className="relative w-full min-h-screen font-display text-black flex items-center justify-center">
         <Loader2 className="size-24 text-primary animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="relative w-full min-h-screen overflow-x-hidden bg-transparent font-display text-white">
-      <CodeRainBackground />
-      <header className="sticky top-4 z-50 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-6 shadow-lg">
+    <div className="relative w-full min-h-screen bg-secondary">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b">
+        <div className="flex items-center justify-between h-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link href="/" className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
-                <h2 className="text-white text-xl font-bold">Linkific</h2>
+                <span className="material-symbols-outlined text-black text-2xl">auto_awesome</span>
+                <h2 className="text-black text-xl font-bold">Linkific</h2>
             </Link>
             <h1 className="text-xl font-semibold">Dashboard</h1>
-            <Button asChild variant="outline" className="bg-white/10 hover:bg-white/20">
+            <Button asChild>
                 <Link href="/">Logout</Link>
             </Button>
         </div>
       </header>
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-16">
-         <Card className="bg-white/5 backdrop-blur-xl border border-white/10">
+         <Card>
             <CardHeader>
               <CardTitle className="text-3xl font-bold">Contact Messages</CardTitle>
               <CardDescription>Here are the messages submitted through your website.</CardDescription>
@@ -423,7 +420,7 @@ export default function DashboardPage() {
                 <MessagesTable />
             </CardContent>
          </Card>
-         <Card className="bg-white/5 backdrop-blur-xl border border-white/10">
+         <Card>
             <CardHeader>
               <CardTitle className="text-3xl font-bold">Job Applications</CardTitle>
               <CardDescription>Here are the applications submitted through your careers page.</CardDescription>
@@ -436,5 +433,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-    
