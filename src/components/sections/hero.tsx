@@ -32,7 +32,7 @@ export default function HeroSection() {
             >
                  <motion.div className="relative" variants={itemVariants}>
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter text-midnight-blue">
-                        Automate What Slows You Down. <br /> <span className="text-steel-blue">Focus on What Matters.</span>
+                        Automate What Slows You Down. <br /> <span className="text-deep-blue">Focus on What Matters.</span>
                     </h1>
                 </motion.div>
                 <motion.p 
