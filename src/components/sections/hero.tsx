@@ -4,20 +4,6 @@ import { motion } from 'framer-motion';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
-// A simplified grid background component
-const GridBackground = () => {
-    return (
-        <div className="absolute inset-0 z-0 overflow-hidden">
-            <div className="absolute left-0 top-0 h-full w-full">
-                <div 
-                    className="absolute inset-0 h-full w-full bg-off-white [background-image:linear-gradient(to_right,theme(colors.midnight-blue)_50%,transparent_50%),linear-gradient(to_bottom,theme(colors.midnight-blue)_50%,transparent_50%)] [background-size:8rem_8rem] [mask-image:linear-gradient(to_right,white_50%,transparent_100%)]"
-                ></div>
-            </div>
-        </div>
-    );
-};
-
-
 export default function HeroSection() {
     const containerVariants = {
         hidden: { opacity: 0, y: 50 },
@@ -38,7 +24,6 @@ export default function HeroSection() {
 
     return (
         <section className="relative grid grid-cols-1 items-center gap-12 text-center min-h-[70vh]">
-            <GridBackground />
             <motion.div 
                 className="relative z-10 flex flex-col gap-6 items-center"
                 variants={containerVariants}
