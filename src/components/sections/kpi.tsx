@@ -1,27 +1,57 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useInView, animate } from 'framer-motion';
 import { Rocket, Smile, Calendar, Users } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+
+type AnimatedCounterProps = {
+  from: number;
+  to: number;
+  suffix?: string;
+};
+
+function AnimatedCounter({ from, to, suffix }: AnimatedCounterProps) {
+    const ref = useRef<HTMLParagraphElement>(null);
+
+    useEffect(() => {
+        const controls = animate(from, to, {
+            duration: 1.5,
+            onUpdate(value) {
+                if (ref.current) {
+                    ref.current.textContent = Math.round(value).toString() + (suffix || '');
+                }
+            },
+        });
+        return () => controls.stop();
+    }, [from, to, suffix]);
+
+    return <p ref={ref} className="text-4xl font-bold text-off-white" />;
+}
+
 
 const kpis = [
   {
     icon: Rocket,
-    value: '50+',
+    value: 50,
+    suffix: '+',
     label: 'Projects Delivered',
   },
   {
     icon: Smile,
-    value: '98%',
+    value: 98,
+    suffix: '%',
     label: 'Client Satisfaction',
   },
   {
     icon: Calendar,
-    value: '6+',
+    value: 6,
+    suffix: '+',
     label: 'Years of Experience',
   },
   {
     icon: Users,
-    value: '20+',
+    value: 20,
+    suffix: '+',
     label: 'Skilled Professionals',
   },
 ];
@@ -50,14 +80,17 @@ const itemVariants = {
 };
 
 export default function KpiSection() {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.5 });
+
   return (
     <section className="pt-24 sm:pt-32" id="kpis">
       <motion.div
+        ref={ref}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
+        animate={isInView ? "visible" : "hidden"}
       >
         {kpis.map((kpi, index) => (
           <motion.div
@@ -68,7 +101,11 @@ export default function KpiSection() {
             <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-5">
               <kpi.icon className="size-8" />
             </div>
-            <p className="text-4xl font-bold text-off-white">{kpi.value}</p>
+            {isInView ? 
+                <AnimatedCounter from={0} to={kpi.value} suffix={kpi.suffix} /> 
+                : 
+                <p className="text-4xl font-bold text-off-white">0{kpi.suffix}</p>
+            }
             <p className="text-sm text-sky-blue/70 mt-1">{kpi.label}</p>
           </motion.div>
         ))}
