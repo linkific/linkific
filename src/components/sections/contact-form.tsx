@@ -123,7 +123,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
         <div className="sm:col-span-2 flex justify-center">
              <Button type="submit" disabled={isSubmitting} className={cn(
                "flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-base font-bold shadow-lg transition-shadow",
-                isDarkBg ? "bg-sky-blue text-midnight-blue hover:bg-off-white" : "bg-steel-blue text-off-white hover:bg-deep-blue"
+                isDarkBg ? "bg-sky-blue text-midnight-blue hover:bg-off-white" : "bg-deep-blue text-off-white hover:bg-midnight-blue"
              )}>
                  {isSubmitting ? <Loader2 className="animate-spin" /> : <span className="truncate">Send Message</span>}
             </Button>

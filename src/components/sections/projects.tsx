@@ -103,7 +103,7 @@ const ProjectCard = ({ project, index }: { project: { title: string, description
                 <p className="text-midnight-blue text-lg font-medium">{project.title}</p>
                 <p className="text-deep-blue/80 text-sm mt-1">{project.description}</p>
             </div>
-            <Button variant="secondary" className="w-full h-10 px-4 font-bold hover:bg-sky-blue/50 transition-colors">
+            <Button variant="secondary" className="w-full h-10 px-4 font-bold bg-steel-blue text-off-white hover:bg-deep-blue transition-colors">
                 View Case Study
             </Button>
         </div>
@@ -124,7 +124,7 @@ export default function ProjectsSection({ featured = false }: { featured?: boole
             </div>
              {featured && (
                 <div className="mt-12 text-center">
-                     <Button asChild className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-steel-blue text-off-white text-base font-bold shadow-lg hover:bg-deep-blue transition-shadow mx-auto w-fit">
+                     <Button asChild className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-deep-blue text-off-white text-base font-bold shadow-lg hover:bg-midnight-blue transition-shadow mx-auto w-fit">
                         <Link href="/projects">
                             <span className="truncate">View All Projects</span>
                         </Link>

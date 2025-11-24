@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
 import { collection, orderBy, query, doc, deleteDoc } from 'firebase/firestore';
-import { Eye, Loader2, Trash2, Download } from 'lucide-react';
+import { Eye, Loader2, Trash2, Download, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase-client';
+import { signOut } from 'firebase/auth';
 
 
 interface ContactMessage {
@@ -322,7 +323,7 @@ function ApplicationsTable() {
                             <p className="text-muted-foreground bg-muted/50 p-4 rounded-md whitespace-pre-wrap">{app.message}</p>
                           </div>
                            {signedUrl && (
-                            <Button asChild>
+                            <Button asChild className="bg-deep-blue text-off-white hover:bg-midnight-blue">
                                 <a href={signedUrl} target="_blank" rel="noopener noreferrer">
                                 <Download className="mr-2 size-4" /> Download Resume
                                 </a>
@@ -379,7 +380,7 @@ function ApplicationsTable() {
 
 
 export default function DashboardPage() {
-  const { user, isUserLoading } = useUser();
+  const { user, auth, isUserLoading } = useFirebase();
   const router = useRouter();
 
   useEffect(() => {
@@ -387,6 +388,12 @@ export default function DashboardPage() {
       router.push('/login');
     }
   }, [user, isUserLoading, router]);
+
+  const handleLogout = async () => {
+    if (!auth) return;
+    await signOut(auth);
+    router.push('/login');
+  };
 
   if (isUserLoading || !user) {
     return (
@@ -405,8 +412,9 @@ export default function DashboardPage() {
                 <h2 className="text-midnight-blue text-xl font-bold">Linkific</h2>
             </Link>
             <h1 className="text-xl font-semibold text-midnight-blue">Dashboard</h1>
-            <Button asChild>
-                <Link href="/">Logout</Link>
+            <Button onClick={handleLogout} className="bg-deep-blue text-off-white hover:bg-midnight-blue">
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
             </Button>
         </div>
       </header>

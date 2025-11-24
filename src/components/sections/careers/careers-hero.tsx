@@ -19,7 +19,7 @@ export default function CareersHero() {
                 At Linkific, we believe in failing out success. We're a group of innovators who aren't afraid to experiment, learn, and grow together.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <Button onClick={() => scrollTo('#apply')} className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-steel-blue text-off-white text-base font-bold shadow-lg hover:bg-deep-blue transition-shadow">
+                <Button onClick={() => scrollTo('#apply')} className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-deep-blue text-off-white text-base font-bold shadow-lg hover:bg-midnight-blue transition-shadow">
                     Apply Now
                 </Button>
                  <Button onClick={() => scrollTo('#open-positions')} variant="secondary" className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-midnight-blue text-base font-bold transition-shadow hover:bg-sky-blue/50 border-0">

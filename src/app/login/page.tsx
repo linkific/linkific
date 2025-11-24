@@ -112,7 +112,7 @@ export default function LoginPage() {
                   className="bg-secondary border-sky-blue"
                 />
               </div>
-              <Button type="submit" className="w-full bg-steel-blue text-off-white hover:bg-deep-blue" disabled={isLoading}>
+              <Button type="submit" className="w-full bg-deep-blue text-off-white hover:bg-midnight-blue" disabled={isLoading}>
                 {isLoading ? <Loader2 className="animate-spin" /> : 'Login'}
               </Button>
             </form>
