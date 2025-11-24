@@ -88,7 +88,7 @@ function MessagesTable() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center p-16">
-        <Loader2 className="size-12 text-primary animate-spin" />
+        <Loader2 className="size-12 text-steel-blue animate-spin" />
       </div>
     );
   }
@@ -267,7 +267,7 @@ function ApplicationsTable() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center p-16">
-        <Loader2 className="size-12 text-primary animate-spin" />
+        <Loader2 className="size-12 text-steel-blue animate-spin" />
       </div>
     );
   }
@@ -332,7 +332,7 @@ function ApplicationsTable() {
                         <div className="h-full">
                           {isUrlLoading ? (
                              <div className="flex items-center justify-center h-full border rounded-md bg-muted/50">
-                                <Loader2 className="size-8 text-primary animate-spin" />
+                                <Loader2 className="size-8 text-steel-blue animate-spin" />
                             </div>
                           ) : previewUrl ? (
                              <iframe src={previewUrl} className="w-full h-full rounded-md border" title="Resume Preview" />
@@ -390,21 +390,21 @@ export default function DashboardPage() {
 
   if (isUserLoading || !user) {
     return (
-       <div className="relative w-full min-h-screen font-display text-black flex items-center justify-center">
-        <Loader2 className="size-24 text-primary animate-spin" />
+       <div className="relative w-full min-h-screen font-display text-midnight-blue flex items-center justify-center bg-off-white">
+        <Loader2 className="size-24 text-steel-blue animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="relative w-full min-h-screen bg-secondary">
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b">
+    <div className="relative w-full min-h-screen bg-secondary text-foreground">
+      <header className="sticky top-0 z-50 bg-off-white/80 backdrop-blur-xl border-b border-sky-blue/50">
         <div className="flex items-center justify-between h-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link href="/" className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-black text-2xl">auto_awesome</span>
-                <h2 className="text-black text-xl font-bold">Linkific</h2>
+                <span className="material-symbols-outlined text-steel-blue text-2xl">auto_awesome</span>
+                <h2 className="text-midnight-blue text-xl font-bold">Linkific</h2>
             </Link>
-            <h1 className="text-xl font-semibold">Dashboard</h1>
+            <h1 className="text-xl font-semibold text-midnight-blue">Dashboard</h1>
             <Button asChild>
                 <Link href="/">Logout</Link>
             </Button>

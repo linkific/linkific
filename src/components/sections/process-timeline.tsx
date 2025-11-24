@@ -60,8 +60,8 @@ export default function ProcessTimeline() {
   return (
     <section id="process" className="py-16">
       <div className="max-w-3xl mx-auto text-center mb-16 px-4">
-        <h2 className="text-3xl font-bold">Our Development Process</h2>
-        <p className="text-white/70 mt-2">A transparent and collaborative journey from idea to impact.</p>
+        <h2 className="text-3xl font-bold text-off-white">Our Development Process</h2>
+        <p className="text-sky-blue/70 mt-2">A transparent and collaborative journey from idea to impact.</p>
       </div>
 
       <motion.div
@@ -75,13 +75,13 @@ export default function ProcessTimeline() {
           <motion.div
             key={index}
             variants={itemVariants}
-            className="p-8 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col items-center text-center"
+            className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue flex flex-col items-center text-center"
           >
-            <div className="flex items-center justify-center size-16 rounded-full bg-gradient-to-br from-primary to-secondary mb-6 shadow-lg">
-              <step.icon className="size-8 text-white" />
+            <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg">
+              <step.icon className="size-8" />
             </div>
-            <h3 className="text-2xl font-bold mb-4">{step.title}</h3>
-            <p className="text-white/60">{step.description}</p>
+            <h3 className="text-2xl font-bold mb-4 text-off-white">{step.title}</h3>
+            <p className="text-sky-blue/70">{step.description}</p>
           </motion.div>
         ))}
       </motion.div>

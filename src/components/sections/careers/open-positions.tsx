@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const jobOpenings = [
     {
@@ -106,14 +107,14 @@ const scrollTo = (selector: string) => {
     }
 };
 
-const PositionCard = ({ job }: { job: { title: string, location: string, description: string } }) => (
-    <div className="p-6 rounded-lg bg-white/5 border border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+const PositionCard = ({ job, isDark }: { job: { title: string, location: string, description: string }, isDark?: boolean }) => (
+    <div className={cn("p-6 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4", isDark ? "bg-deep-blue/30 border border-deep-blue" : "bg-off-white border border-sky-blue/50 shadow-md")}>
         <div>
-            <h3 className="text-xl font-bold">{job.title}</h3>
-            <p className="text-white/60 text-sm mt-1">{job.location}</p>
-            <p className="text-white/70 mt-2 max-w-2xl">{job.description}</p>
+            <h3 className={cn("text-xl font-bold", isDark ? "text-off-white" : "text-midnight-blue")}>{job.title}</h3>
+            <p className={cn("text-sm mt-1", isDark ? "text-sky-blue/70" : "text-deep-blue/70")}>{job.location}</p>
+            <p className={cn("mt-2 max-w-2xl", isDark ? "text-sky-blue/80" : "text-deep-blue/80")}>{job.description}</p>
         </div>
-        <Button onClick={() => scrollTo('#apply')} className="mt-4 sm:mt-0 flex-shrink-0 flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-white/10 text-white text-sm font-bold hover:bg-white/20 transition-colors">
+        <Button onClick={() => scrollTo('#apply')} className={cn("mt-4 sm:mt-0 flex-shrink-0 flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 text-sm font-bold transition-colors", isDark ? "bg-sky-blue text-midnight-blue hover:bg-off-white" : "bg-steel-blue text-off-white hover:bg-deep-blue")}>
             Apply Now
         </Button>
     </div>
@@ -121,12 +122,12 @@ const PositionCard = ({ job }: { job: { title: string, location: string, descrip
 
 export default function OpenPositions() {
   return (
-    <section id="open-positions" className="p-8 sm:p-12 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
+    <section id="open-positions" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md">
         <div className="space-y-16">
             <div>
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold">Job Openings</h2>
-                    <p className="text-white/70 mt-2 max-w-2xl mx-auto">
+                    <h2 className="text-3xl font-bold text-midnight-blue">Job Openings</h2>
+                    <p className="text-deep-blue/80 mt-2 max-w-2xl mx-auto">
                         Ready to make an impact? Find your full-time role at Linkific.
                     </p>
                 </div>
@@ -139,8 +140,8 @@ export default function OpenPositions() {
             
             <div>
                 <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold">Internships</h2>
-                    <p className="text-white/70 mt-2 max-w-2xl mx-auto">
+                    <h2 className="text-3xl font-bold text-midnight-blue">Internships</h2>
+                    <p className="text-deep-blue/80 mt-2 max-w-2xl mx-auto">
                         Find your place at Linkific. We’re looking for passionate learners to join our intern team.
                     </p>
                 </div>

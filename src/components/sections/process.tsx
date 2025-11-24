@@ -52,8 +52,8 @@ const itemVariants = {
 export default function ProcessSection() {
   return (
     <section className="pt-24 sm:pt-32" id="process">
-        <h2 className="text-white text-3xl font-bold text-center">Our Process</h2>
-        <p className="text-gray-300 text-center mt-2 mb-12 max-w-2xl mx-auto">From idea to impact in four simple steps. Fast, tangible, and built on trust.</p>
+        <h2 className="text-off-white text-3xl font-bold text-center">Our Process</h2>
+        <p className="text-sky-blue/80 text-center mt-2 mb-12 max-w-2xl mx-auto">From idea to impact in four simple steps. Fast, tangible, and built on trust.</p>
         <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
             variants={containerVariants}
@@ -67,13 +67,13 @@ export default function ProcessSection() {
                     variants={itemVariants}
                     whileHover={{ scale: 1.04, y: -5 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className="flex flex-col items-start text-left p-6 rounded-xl border border-blue-800 hover:border-white/50 transition-colors cursor-pointer"
+                    className="flex flex-col items-start text-left p-6 rounded-xl bg-deep-blue/30 border border-deep-blue hover:border-sky-blue/50 transition-colors cursor-pointer"
                 >
-                    <div className="flex items-center justify-center size-12 rounded-lg bg-white text-dark-blue mb-5">
+                    <div className="flex items-center justify-center size-12 rounded-lg bg-sky-blue text-midnight-blue mb-5">
                         <step.icon className="size-6" />
                     </div>
-                    <h3 className="text-lg font-bold mb-2 text-white">{step.title}</h3>
-                    <p className="text-gray-400 text-sm">{step.description}</p>
+                    <h3 className="text-lg font-bold mb-2 text-off-white">{step.title}</h3>
+                    <p className="text-sky-blue/70 text-sm">{step.description}</p>
                 </motion.div>
             ))}
         </motion.div>

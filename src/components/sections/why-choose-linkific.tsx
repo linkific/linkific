@@ -30,9 +30,9 @@ const components = [
 export default function WhyChooseLinkific() {
   return (
     <section id="why-choose-us" className="py-16 text-center">
-      <div className="p-8 sm:p-12 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
-        <h2 className="text-3xl font-bold mb-4">Why Choose Linkific?</h2>
-        <p className="text-white/70 max-w-2xl mx-auto mb-12">It's about the right formula for success.</p>
+      <div className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md">
+        <h2 className="text-3xl font-bold mb-4 text-midnight-blue">Why Choose Linkific?</h2>
+        <p className="text-deep-blue/80 max-w-2xl mx-auto mb-12">It's about the right formula for success.</p>
         <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8">
           {components.map((Comp, index) => (
             <motion.div
@@ -44,10 +44,10 @@ export default function WhyChooseLinkific() {
               viewport={{ once: true }}
               className="flex flex-col items-center gap-2"
             >
-              <div className="flex items-center justify-center size-20 sm:size-24 rounded-full bg-background border-2 border-primary/50 shadow-lg">
-                <Comp.icon className="size-10 sm:size-12 text-primary" />
+              <div className="flex items-center justify-center size-20 sm:size-24 rounded-full bg-off-white border-2 border-steel-blue/30 shadow-lg">
+                <Comp.icon className="size-10 sm:size-12 text-steel-blue" />
               </div>
-              {Comp.label && <span className="font-bold text-lg">{Comp.label}</span>}
+              {Comp.label && <span className="font-bold text-lg text-midnight-blue">{Comp.label}</span>}
             </motion.div>
           ))}
           <motion.div
@@ -58,7 +58,7 @@ export default function WhyChooseLinkific() {
             viewport={{ once: true }}
             className="flex flex-col items-center gap-2"
           >
-             <div className="flex items-center justify-center size-20 sm:size-24 rounded-full bg-gradient-to-br from-primary to-secondary text-white shadow-lg">
+             <div className="flex items-center justify-center size-20 sm:size-24 rounded-full bg-steel-blue text-off-white shadow-lg">
                 <h3 className="text-3xl font-black">Impact</h3>
             </div>
           </motion.div>

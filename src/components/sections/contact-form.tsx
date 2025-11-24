@@ -12,6 +12,7 @@ import { useFirebase } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z.string().min(1, "Your Name is required"),
@@ -69,6 +70,14 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
 
   const isDarkBg = page === 'home';
 
+  const inputClasses = cn(
+    "w-full text-base rounded-md py-3 px-4 transition",
+    isDarkBg
+      ? "bg-deep-blue/50 border-deep-blue text-off-white placeholder:text-sky-blue/50 focus:ring-sky-blue focus:border-sky-blue"
+      : "bg-secondary border-sky-blue text-midnight-blue placeholder:text-deep-blue/60 focus:ring-steel-blue focus:border-steel-blue"
+  );
+
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -79,7 +88,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
             <FormItem>
               <FormLabel className="sr-only">Your Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your Name" {...field} className={isDarkBg ? "w-full bg-blue-950 border-blue-800 text-white placeholder-blue-300 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
+                <Input placeholder="Your Name" {...field} className={inputClasses} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -92,7 +101,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
             <FormItem>
               <FormLabel className="sr-only">Your Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="Your Email" {...field} className={isDarkBg ? "w-full bg-blue-950 border-blue-800 text-white placeholder-blue-300 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
+                <Input type="email" placeholder="Your Email" {...field} className={inputClasses} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -105,14 +114,17 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
             <FormItem className="sm:col-span-2">
               <FormLabel className="sr-only">Your Message</FormLabel>
               <FormControl>
-                <Textarea placeholder="Your Message" rows={4} {...field} className={isDarkBg ? "w-full bg-blue-950 border-blue-800 text-white placeholder-blue-300 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
+                <Textarea placeholder="Your Message" rows={4} {...field} className={inputClasses} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <div className="sm:col-span-2 flex justify-center">
-            <Button type="submit" disabled={isSubmitting} className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-white text-black text-base font-bold shadow-lg hover:bg-gray-200 transition-shadow">
+             <Button type="submit" disabled={isSubmitting} className={cn(
+               "flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-base font-bold shadow-lg transition-shadow",
+                isDarkBg ? "bg-sky-blue text-midnight-blue hover:bg-off-white" : "bg-steel-blue text-off-white hover:bg-deep-blue"
+             )}>
                  {isSubmitting ? <Loader2 className="animate-spin" /> : <span className="truncate">Send Message</span>}
             </Button>
         </div>

@@ -48,7 +48,7 @@ const IconSphere = () => {
       style={{ transformStyle: 'preserve-3d' }}
     >
       {icons.map((Icon, i) => (
-        <div key={i} className="absolute text-primary/50">
+        <div key={i} className="absolute text-steel-blue/50">
           <Icon className="size-8 sm:size-12" />
         </div>
       ))}
@@ -59,15 +59,15 @@ const IconSphere = () => {
 
 export default function ServiceIntroBanner() {
   return (
-    <section className="relative flex items-center justify-center text-center min-h-[60vh] rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden">
+    <section className="relative flex items-center justify-center text-center min-h-[60vh] rounded-xl bg-off-white border border-sky-blue/50 shadow-md overflow-hidden">
         <div className="absolute inset-0 opacity-20">
             <IconSphere />
         </div>
         <div className="relative z-10 p-8">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-midnight-blue">
                 Smart Systems.
                 <br />
-                <span className="text-primary">Scalable Innovation.</span>
+                <span className="text-steel-blue">Scalable Innovation.</span>
             </h1>
         </div>
     </section>

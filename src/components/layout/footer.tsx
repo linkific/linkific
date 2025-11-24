@@ -30,17 +30,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="flex flex-col gap-4">
              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-white text-2xl">auto_awesome</span>
-                <h2 className="text-white text-xl font-bold">Linkific</h2>
+                <span className="material-symbols-outlined text-steel-blue text-2xl">auto_awesome</span>
+                <h2 className="text-off-white text-xl font-bold">Linkific</h2>
             </div>
-            <p className="text-gray-400 text-sm">If you are reading this. why wait? lets have a chat.</p>
+            <p className="text-sky-blue/70 text-sm">If you are reading this. why wait? lets have a chat.</p>
           </div>
           <div>
-            <h4 className="text-white font-bold mb-4">Quick Links</h4>
+            <h4 className="text-off-white font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {footerNavs['Quick Links'].map((item) => (
                 <li key={item.name}>
-                  <Link href={item.href} className="text-gray-400 hover:text-white text-sm transition-colors">
+                  <Link href={item.href} className="text-sky-blue/70 hover:text-off-white text-sm transition-colors">
                     {item.name}
                   </Link>
                 </li>
@@ -48,11 +48,11 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-white font-bold mb-4">Contact</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
+            <h4 className="text-off-white font-bold mb-4">Contact</h4>
+            <ul className="space-y-2 text-sm text-sky-blue/70">
                {footerNavs['Contact'].map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className="text-gray-400 hover:text-white text-sm transition-colors">
+                  <a href={item.href} className="hover:text-off-white text-sm transition-colors">
                     {item.name}
                   </a>
                 </li>
@@ -60,21 +60,21 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-white font-bold mb-4">Follow Us</h4>
+            <h4 className="text-off-white font-bold mb-4">Follow Us</h4>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
-                <a key={social.name} href={social.href} className="text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+                <a key={social.name} href={social.href} className="text-sky-blue/70 hover:text-off-white transition-colors" target="_blank" rel="noopener noreferrer">
                   {social.icon}
                 </a>
               ))}
             </div>
           </div>
         </div>
-        <div className="mt-8 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
+        <div className="mt-8 border-t border-deep-blue pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-sky-blue/60">
           <p>© 2025 Linkific. All rights reserved.</p>
           <div className="flex gap-4 mt-4 sm:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-off-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-off-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

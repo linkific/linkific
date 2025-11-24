@@ -12,6 +12,7 @@ import poseDrone from '@/assets/armed drone.webp';
 import restaurantVision from '@/assets/hotel cams.webp';
 import docClassifier from '@/assets/doc classification.webp';
 import aiMeeting from '@/assets/breakout rooms.webp';
+import { Button } from '../ui/button';
 
 
 const allProjects = [
@@ -93,18 +94,18 @@ const ProjectCard = ({ project, index }: { project: { title: string, description
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
-        className="flex flex-col gap-4 rounded-xl bg-gray-100 border border-gray-200 p-4 h-full group hover:-translate-y-2 transition-transform duration-300 w-full max-w-sm">
+        className="flex flex-col gap-4 rounded-xl bg-off-white border border-sky-blue/50 p-4 h-full group hover:-translate-y-2 transition-transform duration-300 w-full max-w-sm shadow-md">
         <div className="relative w-full aspect-video rounded-lg overflow-hidden">
              <Image src={project.imageUrl} alt={project.alt} fill className="object-cover" data-ai-hint={project['data-ai-hint']} />
         </div>
         <div className="flex flex-col flex-1 justify-between gap-4">
             <div>
-                <p className="text-black text-lg font-medium">{project.title}</p>
-                <p className="text-gray-600 text-sm mt-1">{project.description}</p>
+                <p className="text-midnight-blue text-lg font-medium">{project.title}</p>
+                <p className="text-deep-blue/80 text-sm mt-1">{project.description}</p>
             </div>
-            <button className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 text-black text-sm font-bold hover:bg-gray-300 transition-colors">
-                <span className="truncate">View Case Study</span>
-            </button>
+            <Button variant="secondary" className="w-full h-10 px-4 font-bold hover:bg-sky-blue/50 transition-colors">
+                View Case Study
+            </Button>
         </div>
     </motion.div>
 );
@@ -114,8 +115,8 @@ export default function ProjectsSection({ featured = false }: { featured?: boole
     const projects = featured ? allProjects.slice(0, 3) : allProjects;
     return (
         <section className="pt-24 sm:pt-32" id="projects">
-            <h2 className="text-black text-3xl font-bold text-center">Our Projects</h2>
-            <p className="text-gray-600 text-center mt-2 mb-12 max-w-2xl mx-auto">A curated gallery of successful case studies, showcasing the real-world application of our technology.</p>
+            <h2 className="text-midnight-blue text-3xl font-bold text-center">Our Projects</h2>
+            <p className="text-deep-blue/80 text-center mt-2 mb-12 max-w-2xl mx-auto">A curated gallery of successful case studies, showcasing the real-world application of our technology.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                 {projects.map((project, index) => (
                     <ProjectCard key={index} project={project} index={index} />
@@ -123,9 +124,11 @@ export default function ProjectsSection({ featured = false }: { featured?: boole
             </div>
              {featured && (
                 <div className="mt-12 text-center">
-                    <Link href="/projects" className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-black text-white text-base font-bold shadow-lg hover:bg-gray-800 transition-shadow mx-auto w-fit">
+                     <Button asChild className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-steel-blue text-off-white text-base font-bold shadow-lg hover:bg-deep-blue transition-shadow mx-auto w-fit">
+                        <Link href="/projects">
                             <span className="truncate">View All Projects</span>
-                    </Link>
+                        </Link>
+                    </Button>
                 </div>
             )}
         </section>

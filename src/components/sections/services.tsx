@@ -35,8 +35,8 @@ const cardVariants = {
 export default function ServicesSection() {
     return (
         <section id="services" className="pt-24 sm:pt-32">
-            <h2 className="text-black text-3xl font-bold text-center">Our Services</h2>
-            <p className="text-gray-600 text-center mt-2 mb-12 max-w-2xl mx-auto">A clear breakdown of our core offerings designed to elevate your business operations.</p>
+            <h2 className="text-midnight-blue text-3xl font-bold text-center">Our Services</h2>
+            <p className="text-deep-blue/80 text-center mt-2 mb-12 max-w-2xl mx-auto">A clear breakdown of our core offerings designed to elevate your business operations.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {services.map((service, index) => (
                     <motion.div 
@@ -46,13 +46,13 @@ export default function ServicesSection() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
-                        className="flex flex-col items-center text-center p-8 rounded-xl bg-gray-100 border border-gray-200"
+                        className="flex flex-col items-center text-center p-8 rounded-xl bg-off-white border border-sky-blue/50 shadow-md"
                     >
-                        <div className="flex items-center justify-center size-16 rounded-full bg-black text-white mb-6">
+                        <div className="flex items-center justify-center size-16 rounded-full bg-steel-blue text-off-white mb-6">
                             <span className="material-symbols-outlined text-3xl">{service.icon}</span>
                         </div>
-                        <h3 className="text-xl font-bold mb-2 text-black">{service.title}</h3>
-                        <p className="text-gray-600 text-sm">{service.description}</p>
+                        <h3 className="text-xl font-bold mb-2 text-midnight-blue">{service.title}</h3>
+                        <p className="text-deep-blue/80 text-sm">{service.description}</p>
                     </motion.div>
                 ))}
             </div>

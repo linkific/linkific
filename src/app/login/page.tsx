@@ -75,21 +75,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative w-full min-h-screen overflow-x-hidden bg-white font-display text-black">
+    <div className="relative w-full min-h-screen overflow-x-hidden bg-off-white font-display text-midnight-blue">
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
-        <Card className="w-full max-w-md bg-white border">
+        <Card className="w-full max-w-md bg-off-white border-sky-blue">
           <CardHeader className="text-center">
              <Link href="/" className="flex items-center justify-center mb-4 gap-3">
-                 <span className="material-symbols-outlined text-black text-3xl">auto_awesome</span>
-                 <h2 className="text-black text-2xl font-bold">Linkific</h2>
+                 <span className="material-symbols-outlined text-steel-blue text-3xl">auto_awesome</span>
+                 <h2 className="text-midnight-blue text-2xl font-bold">Linkific</h2>
             </Link>
-            <CardTitle className="text-2xl font-bold">Employee Login</CardTitle>
-            <CardDescription>Enter your credentials to access your dashboard.</CardDescription>
+            <CardTitle className="text-2xl font-bold text-midnight-blue">Employee Login</CardTitle>
+            <CardDescription className="text-deep-blue/80">Enter your credentials to access your dashboard.</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="text-deep-blue">Email</Label>
                 <Input
                   id="email"
                   type="email"
@@ -97,6 +97,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  className="bg-secondary border-sky-blue"
                 />
               </div>
               <div className="space-y-2">
@@ -108,9 +109,10 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  className="bg-secondary border-sky-blue"
                 />
               </div>
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full bg-steel-blue text-off-white hover:bg-deep-blue" disabled={isLoading}>
                 {isLoading ? <Loader2 className="animate-spin" /> : 'Login'}
               </Button>
             </form>

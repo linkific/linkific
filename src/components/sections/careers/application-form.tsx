@@ -124,7 +124,7 @@ export default function ApplicationForm() {
   }
 
   return (
-    <section id="apply" className="p-8 sm:p-12 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10">
+    <section id="apply" className="p-8 sm:p-12 rounded-xl bg-deep-blue/30 border border-deep-blue">
         <AnimatePresence mode="wait">
             {isSuccess ? (
                  <motion.div
@@ -134,14 +134,14 @@ export default function ApplicationForm() {
                     exit={{ opacity: 0, y: -50 }}
                     className="text-center py-16"
                 >
-                    <h2 className="text-3xl font-bold mb-4">Welcome to Failing Out Success!</h2>
-                    <p className="text-white/70">Your application has been received. We're excited to learn more about you.</p>
+                    <h2 className="text-3xl font-bold mb-4 text-off-white">Welcome to Failing Out Success!</h2>
+                    <p className="text-sky-blue/70">Your application has been received. We're excited to learn more about you.</p>
                 </motion.div>
             ) : (
             <motion.div key="form">
                 <div className="max-w-xl mx-auto text-center">
-                    <h2 className="text-3xl font-bold mb-4">Apply Now</h2>
-                    <p className="text-white/70 mb-8">Join our mission to innovate and learn. Fill out the form below to get started.</p>
+                    <h2 className="text-3xl font-bold mb-4 text-off-white">Apply Now</h2>
+                    <p className="text-sky-blue/70 mb-8">Join our mission to innovate and learn. Fill out the form below to get started.</p>
                 </div>
                 <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -152,7 +152,7 @@ export default function ApplicationForm() {
                           <FormItem>
                           <FormLabel className="sr-only">Full Name</FormLabel>
                           <FormControl>
-                              <Input placeholder="Full Name" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                              <Input placeholder="Full Name" {...field} className="w-full bg-deep-blue/50 border-deep-blue text-off-white placeholder:text-sky-blue/50 focus:ring-sky-blue focus:border-sky-blue transition" />
                           </FormControl>
                           <FormMessage />
                           </FormItem>
@@ -165,7 +165,7 @@ export default function ApplicationForm() {
                           <FormItem>
                           <FormLabel className="sr-only">Your Email</FormLabel>
                           <FormControl>
-                              <Input type="email" placeholder="Your Email" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                              <Input type="email" placeholder="Your Email" {...field} className="w-full bg-deep-blue/50 border-deep-blue text-off-white placeholder:text-sky-blue/50 focus:ring-sky-blue focus:border-sky-blue transition" />
                           </FormControl>
                           <FormMessage />
                           </FormItem>
@@ -178,7 +178,7 @@ export default function ApplicationForm() {
                           <FormItem className="sm:col-span-2">
                           <FormLabel className="sr-only">Contact Number</FormLabel>
                           <FormControl>
-                              <Input type="tel" placeholder="Contact Number" {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                              <Input type="tel" placeholder="Contact Number" {...field} className="w-full bg-deep-blue/50 border-deep-blue text-off-white placeholder:text-sky-blue/50 focus:ring-sky-blue focus:border-sky-blue transition" />
                           </FormControl>
                           <FormMessage />
                           </FormItem>
@@ -192,7 +192,7 @@ export default function ApplicationForm() {
                                 <FormLabel className="sr-only">Role Applying For</FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
-                                        <SelectTrigger className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition h-auto">
+                                        <SelectTrigger className="w-full bg-deep-blue/50 border-deep-blue text-off-white placeholder:text-sky-blue/50 focus:ring-sky-blue focus:border-sky-blue transition h-auto">
                                             <SelectValue placeholder="Select a role to apply for" />
                                         </SelectTrigger>
                                     </FormControl>
@@ -223,7 +223,7 @@ export default function ApplicationForm() {
                             id="resume"
                             type="file" 
                             accept=".pdf,.doc,.docx"
-                            className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition h-auto file:hidden cursor-pointer"
+                            className="w-full bg-deep-blue/50 border-deep-blue text-off-white placeholder:text-sky-blue/50 focus:ring-sky-blue focus:border-sky-blue transition h-auto file:hidden cursor-pointer"
                             {...resumeRef}
                             onChange={(e) => {
                                 const target = e.target as HTMLInputElement;
@@ -234,7 +234,7 @@ export default function ApplicationForm() {
                                 resumeRef.onChange(e); // Propagate change to form hook
                             }}
                             />
-                            <Button asChild variant="ghost" className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer">
+                            <Button asChild variant="ghost" className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-sky-blue hover:text-off-white">
                             <label htmlFor="resume" className="flex items-center gap-2 cursor-pointer">
                                 <Upload className="size-4" />
                                 <span>{resumeFileName || "Upload Resume"}</span>
@@ -252,14 +252,14 @@ export default function ApplicationForm() {
                           <FormItem className="sm:col-span-2">
                           <FormLabel className="sr-only">Why do you want to join Linkific?</FormLabel>
                           <FormControl>
-                              <Textarea placeholder="Why do you want to join Linkific?" rows={4} {...field} className="w-full bg-white/5 border border-white/20 rounded-lg py-3 px-4 text-white placeholder-white/50 focus:ring-2 focus:ring-primary focus:border-primary transition" />
+                              <Textarea placeholder="Why do you want to join Linkific?" rows={4} {...field} className="w-full bg-deep-blue/50 border-deep-blue text-off-white placeholder:text-sky-blue/50 focus:ring-sky-blue focus:border-sky-blue transition" />
                           </FormControl>
                           <FormMessage />
                           </FormItem>
                       )}
                     />
                     <div className="sm:col-span-2 flex justify-center">
-                        <Button type="submit" disabled={isSubmitting} className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">
+                        <Button type="submit" disabled={isSubmitting} className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-sky-blue text-midnight-blue text-base font-bold shadow-lg hover:bg-off-white transition-shadow">
                             {isSubmitting ? (
                                 <Loader2 className="animate-spin" />
                             ) : (

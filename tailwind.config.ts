@@ -19,7 +19,11 @@ const config = {
     },
     extend: {
       colors: {
-        'dark-blue': '#041D56',
+        'midnight-blue': '#0A1931',
+        'sky-blue': '#B3CFE5',
+        'steel-blue': '#4A7FA7',
+        'deep-blue': '#1A3D63',
+        'off-white': '#F6FAFD',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

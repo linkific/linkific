@@ -12,17 +12,17 @@ const scrollTo = (selector: string) => {
 
 export default function CareersHero() {
   return (
-    <section id="careers-hero" className="p-8 sm:p-12 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 grid md:grid-cols-2 gap-12 items-center">
+    <section id="careers-hero" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md grid md:grid-cols-2 gap-12 items-center">
         <div className="text-center md:text-left">
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4">Join a team that builds through learning.</h1>
-            <p className="text-white/70 text-lg max-w-3xl mx-auto md:mx-0">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-midnight-blue">Join a team that builds through learning.</h1>
+            <p className="text-deep-blue/80 text-lg max-w-3xl mx-auto md:mx-0">
                 At Linkific, we believe in failing out success. We're a group of innovators who aren't afraid to experiment, learn, and grow together.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <Button onClick={() => scrollTo('#apply')} className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gradient-to-r from-primary to-secondary text-white text-base font-bold shadow-lg hover:shadow-primary/50 transition-shadow">
+                <Button onClick={() => scrollTo('#apply')} className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-steel-blue text-off-white text-base font-bold shadow-lg hover:bg-deep-blue transition-shadow">
                     Apply Now
                 </Button>
-                 <Button onClick={() => scrollTo('#open-positions')} variant="outline" className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-white text-base font-bold transition-shadow bg-white/10 hover:bg-white/20 border-0">
+                 <Button onClick={() => scrollTo('#open-positions')} variant="secondary" className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-midnight-blue text-base font-bold transition-shadow hover:bg-sky-blue/50 border-0">
                     Current Openings
                 </Button>
             </div>
