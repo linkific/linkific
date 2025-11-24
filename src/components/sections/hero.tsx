@@ -7,14 +7,16 @@ import Link from 'next/link';
 // A simplified grid background component
 const GridBackground = () => {
     return (
-        <div className="absolute inset-0 z-0">
-            <div className="relative h-full w-full bg-off-white">
-                {/* This div creates the faint grid lines */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] opacity-50"></div>
+        <div className="absolute inset-0 z-0 overflow-hidden">
+            <div className="absolute left-0 top-0 h-full w-full">
+                <div 
+                    className="absolute inset-0 h-full w-full bg-off-white [background-image:linear-gradient(to_right,theme(colors.midnight-blue)_50%,transparent_50%),linear-gradient(to_bottom,theme(colors.midnight-blue)_50%,transparent_50%)] [background-size:8rem_8rem] [mask-image:linear-gradient(to_right,white_50%,transparent_100%)]"
+                ></div>
             </div>
         </div>
     );
 };
+
 
 export default function HeroSection() {
     const containerVariants = {
