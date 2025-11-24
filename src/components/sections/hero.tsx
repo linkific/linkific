@@ -1,8 +1,20 @@
-"use client";
+'use client';
 
 import { motion } from 'framer-motion';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+
+// A simplified grid background component
+const GridBackground = () => {
+    return (
+        <div className="absolute inset-0 z-0">
+            <div className="relative h-full w-full bg-off-white">
+                {/* This div creates the faint grid lines */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,white)] opacity-50"></div>
+            </div>
+        </div>
+    );
+};
 
 export default function HeroSection() {
     const containerVariants = {
@@ -24,6 +36,7 @@ export default function HeroSection() {
 
     return (
         <section className="relative grid grid-cols-1 items-center gap-12 text-center min-h-[70vh]">
+            <GridBackground />
             <motion.div 
                 className="relative z-10 flex flex-col gap-6 items-center"
                 variants={containerVariants}
