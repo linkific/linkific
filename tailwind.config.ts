@@ -23,7 +23,7 @@ const config = {
         'sky-blue': '#B3CFE5',
         'steel-blue': '#4A7FA7',
         'deep-blue': '#1A3D63',
-        'off-white': '#dcf3ff',
+        'off-white': '#F0F2F5',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
