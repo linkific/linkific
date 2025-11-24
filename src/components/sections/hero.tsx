@@ -4,6 +4,31 @@ import { motion } from 'framer-motion';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
+const GridIcon = () => {
+    const gridData = [
+        // Row 1
+        { color: 'midnight-blue' }, { color: 'transparent' }, { color: 'midnight-blue' },
+        // Row 2
+        { color: 'transparent' }, {}, {},
+        // Row 3
+        { color: 'midnight-blue' }, {}, {},
+        // Row 4
+        { color: 'transparent' }, {}, {},
+    ];
+
+    return (
+        <div className="grid grid-cols-3 gap-1 w-12">
+            {gridData.map((cell, index) => (
+                <div
+                    key={index}
+                    className="w-3 h-3 rounded-sm"
+                    style={{ backgroundColor: cell.color ? (cell.color === 'transparent' ? 'transparent' : '#0A1931') : 'transparent' }}
+                ></div>
+            ))}
+        </div>
+    );
+};
+
 export default function HeroSection() {
     const containerVariants = {
         hidden: { opacity: 0, y: 50 },
@@ -30,7 +55,8 @@ export default function HeroSection() {
                 initial="hidden"
                 animate="visible"
             >
-                 <motion.div className="relative" variants={itemVariants}>
+                <motion.div className="relative flex justify-center items-center gap-4" variants={itemVariants}>
+                    <GridIcon />
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-tighter text-midnight-blue">
                         Automate What Slows You Down. <br /> <span className="text-royal-blue">Focus on What Matters.</span>
                     </h1>
