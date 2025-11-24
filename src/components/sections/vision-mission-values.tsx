@@ -37,8 +37,8 @@ export default function VisionMissionValues() {
             transition={{ type: 'spring', stiffness: 300 }}
             className="flex flex-col items-center text-center p-8 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 cursor-pointer"
           >
-            <div className="flex items-center justify-center size-16 rounded-full bg-gradient-to-br from-primary to-secondary mb-6 shadow-lg">
-              <item.icon className="text-white size-8" />
+            <div className="flex items-center justify-center size-16 rounded-full bg-gradient-to-br from-white to-gray-400 text-dark-blue mb-6 shadow-lg">
+              <item.icon className="size-8" />
             </div>
             <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
             <p className="text-white/60">{item.description}</p>

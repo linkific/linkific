@@ -67,7 +67,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
     }
   }
 
-  const isDarkBg = page === 'home' || page === 'contact'; // Assuming contact page form is also on dark bg
+  const isDarkBg = page === 'home';
 
   return (
     <Form {...form}>
@@ -79,7 +79,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
             <FormItem>
               <FormLabel className="sr-only">Your Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your Name" {...field} className={isDarkBg ? "w-full bg-gray-900 border-gray-700 text-white placeholder-gray-400 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
+                <Input placeholder="Your Name" {...field} className={isDarkBg ? "w-full bg-blue-950 border-blue-800 text-white placeholder-blue-300 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -92,7 +92,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
             <FormItem>
               <FormLabel className="sr-only">Your Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="Your Email" {...field} className={isDarkBg ? "w-full bg-gray-900 border-gray-700 text-white placeholder-gray-400 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
+                <Input type="email" placeholder="Your Email" {...field} className={isDarkBg ? "w-full bg-blue-950 border-blue-800 text-white placeholder-blue-300 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -105,7 +105,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
             <FormItem className="sm:col-span-2">
               <FormLabel className="sr-only">Your Message</FormLabel>
               <FormControl>
-                <Textarea placeholder="Your Message" rows={4} {...field} className={isDarkBg ? "w-full bg-gray-900 border-gray-700 text-white placeholder-gray-400 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
+                <Textarea placeholder="Your Message" rows={4} {...field} className={isDarkBg ? "w-full bg-blue-950 border-blue-800 text-white placeholder-blue-300 focus:ring-white" : "w-full bg-gray-50 border-gray-300 text-black placeholder-gray-500 focus:ring-black"} />
               </FormControl>
               <FormMessage />
             </FormItem>

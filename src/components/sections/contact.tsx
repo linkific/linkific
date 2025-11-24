@@ -3,7 +3,7 @@ import { ContactForm } from './contact-form';
 export default function ContactSection() {
     return (
         <section className="pt-24 sm:pt-32" id="contact">
-            <div className="p-8 sm:p-12 rounded-xl bg-black border border-gray-800">
+            <div className="p-8 sm:p-12 rounded-xl bg-dark-blue border border-blue-800">
                 <div className="max-w-3xl mx-auto text-center">
                     <h2 className="text-3xl font-bold mb-4 text-white">Your Vision, Automated.</h2>
                     <p className="text-gray-300 mb-8 text-lg">

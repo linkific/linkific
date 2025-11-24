@@ -67,11 +67,11 @@ export default function Timeline() {
             className={`relative flex items-center mb-16 ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}
           >
             <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-              <p className="text-primary font-bold text-xl">{event.year}</p>
+              <p className="text-white font-bold text-xl">{event.year}</p>
               <h3 className="text-2xl font-bold my-2">{event.title}</h3>
               <p className="text-white/70">{event.description}</p>
             </div>
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-6 rounded-full bg-primary border-4 border-background z-10"></div>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-6 rounded-full bg-white border-4 border-dark-blue z-10"></div>
           </motion.div>
         ))}
       </motion.div>

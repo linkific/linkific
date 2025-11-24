@@ -63,9 +63,9 @@ export default function KpiSection() {
           <motion.div
             key={index}
             variants={itemVariants}
-            className="p-8 rounded-xl bg-gray-900/50 border border-gray-700 text-center flex flex-col items-center"
+            className="p-8 rounded-xl bg-blue-950/50 border border-blue-800 text-center flex flex-col items-center"
           >
-            <div className="flex items-center justify-center size-16 rounded-full bg-white text-black mb-5">
+            <div className="flex items-center justify-center size-16 rounded-full bg-white text-dark-blue mb-5">
               <kpi.icon className="size-8" />
             </div>
             <p className="text-4xl font-bold text-white">{kpi.value}</p>

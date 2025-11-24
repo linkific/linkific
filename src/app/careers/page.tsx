@@ -17,8 +17,8 @@ export default function CareersPage() {
         </main>
       </div>
 
-      {/* Why Work With Us - Black BG */}
-      <div className="bg-black text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+      {/* Why Work With Us - Dark Blue BG */}
+      <div className="bg-dark-blue text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
           <WhyWorkWithUs />
         </main>
@@ -31,15 +31,15 @@ export default function CareersPage() {
         </main>
       </div>
 
-      {/* Application Form - Black BG */}
-      <div className="bg-black text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+      {/* Application Form - Dark Blue BG */}
+      <div className="bg-dark-blue text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
           <ApplicationForm />
         </main>
       </div>
 
-      {/* Footer - Black BG */}
-      <div className="bg-black text-white">
+      {/* Footer - Dark Blue BG */}
+      <div className="bg-dark-blue text-white">
            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <Footer />
           </main>

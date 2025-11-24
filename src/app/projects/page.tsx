@@ -13,7 +13,7 @@ export default function ProjectsPage() {
         </main>
       </div>
 
-      <div className="bg-black text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+      <div className="bg-dark-blue text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <Footer />
           </main>

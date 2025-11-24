@@ -20,8 +20,8 @@ export default function Home() {
           </main>
       </div>
 
-      {/* Process Section - Black BG with top diagonal clip */}
-      <div className="bg-black text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+      {/* Process Section - Dark Blue BG with top diagonal clip */}
+      <div className="bg-dark-blue text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
               <ProcessSection />
           </main>
@@ -34,8 +34,8 @@ export default function Home() {
           </main>
       </div>
 
-      {/* KPI Section - Black BG with top diagonal clip */}
-      <div className="bg-black text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+      {/* KPI Section - Dark Blue BG with top diagonal clip */}
+      <div className="bg-dark-blue text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
               <KpiSection />
           </main>
@@ -48,15 +48,15 @@ export default function Home() {
           </main>
       </div>
 
-      {/* Contact Section - Black BG with top diagonal clip */}
-      <div className="bg-black text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+      {/* Contact Section - Dark Blue BG with top diagonal clip */}
+      <div className="bg-dark-blue text-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
           <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
               <ContactSection />
           </main>
       </div>
 
-      {/* Footer Section - Black BG without diagonal clip */}
-      <div className="bg-black text-white">
+      {/* Footer Section - Dark Blue BG without diagonal clip */}
+      <div className="bg-dark-blue text-white">
            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <Footer />
           </main>

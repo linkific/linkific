@@ -36,7 +36,7 @@ export default function HeroSection() {
                     </h1>
                 </motion.div>
                 <motion.p 
-                    className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0"
+                    className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto"
                     variants={itemVariants}
                 >
                     Linkific's smart software and AI-powered automation streamlines your workflow, boosts efficiency, and drives unprecedented growth.
