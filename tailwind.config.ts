@@ -24,6 +24,7 @@ const config = {
         'steel-blue': '#4A7FA7',
         'deep-blue': '#1A3D63',
         'off-white': '#F0F2F5',
+        'dodger-blue': '#1E90FF',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
