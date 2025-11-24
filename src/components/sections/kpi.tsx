@@ -15,7 +15,7 @@ function AnimatedCounter({ from, to, suffix }: AnimatedCounterProps) {
 
     useEffect(() => {
         const controls = animate(from, to, {
-            duration: 1.5,
+            duration: 2.5,
             onUpdate(value) {
                 if (ref.current) {
                     ref.current.textContent = Math.round(value).toString() + (suffix || '');
