@@ -1,9 +1,10 @@
+
 'use client';
 
-import { motion, useMotionValue } from 'framer-motion';
+import { motion, useMotionValue, animate } from 'framer-motion';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 
 
 const initialItems = [
@@ -16,16 +17,52 @@ const initialItems = [
 function InteractiveWorkflow() {
     const [items, setItems] = useState(initialItems);
     const constraintsRef = useRef(null);
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    const resetPositions = () => {
+        setItems(initialItems);
+    };
 
     const handleDrag = (event:any, info:any, item:any) => {
-        setItems(currentItems =>
-            currentItems.map(currentItem =>
-                currentItem.id === item.id
-                    ? { ...currentItem, x: currentItem.x + info.delta.x, y: currentItem.y + info.delta.y }
-                    : currentItem
-            )
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+
+        const newItems = items.map(currentItem =>
+            currentItem.id === item.id
+                ? { ...currentItem, x: currentItem.x + info.delta.x, y: currentItem.y + info.delta.y }
+                : currentItem
         );
+        setItems(newItems);
+        
+        timeoutRef.current = setTimeout(resetPositions, 7000);
     };
+
+    useEffect(() => {
+        // Set the initial timeout
+        timeoutRef.current = setTimeout(resetPositions, 7000);
+
+        // Cleanup timeout on component unmount
+        return () => {
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
+
+    // Animate motion values when items state changes
+    const motionValues = useMemo(() => items.map(item => ({
+        x: useMotionValue(item.x),
+        y: useMotionValue(item.y)
+    })), [items]);
+
+    useEffect(() => {
+        items.forEach((item, index) => {
+            animate(motionValues[index].x, item.x, { type: 'spring', stiffness: 200, damping: 20 });
+            animate(motionValues[index].y, item.y, { type: 'spring', stiffness: 200, damping: 20 });
+        });
+    }, [items, motionValues]);
+
 
     return (
         <div className="relative w-full h-full flex flex-col items-center justify-center p-4 md:p-8">
@@ -37,17 +74,17 @@ function InteractiveWorkflow() {
                     {items.slice(0, -1).map((item, i) => (
                         <line
                             key={`line-${i}`}
-                            x1={item.x + 48}
-                            y1={item.y + 48}
-                            x2={items[i+1].x + 48}
-                            y2={items[i+1].y + 48}
+                            x1={motionValues[i].x.get() + 48}
+                            y1={motionValues[i].y.get() + 48}
+                            x2={motionValues[i+1].x.get() + 48}
+                            y2={motionValues[i+1].y.get() + 48}
                             stroke="hsl(var(--primary))"
                             strokeWidth="2"
                             strokeDasharray="4 4"
                         />
                     ))}
                 </svg>
-                {items.map((item) => (
+                {items.map((item, index) => (
                     <motion.div
                         key={item.id}
                         drag
@@ -56,13 +93,13 @@ function InteractiveWorkflow() {
                         onDrag={(e, info) => handleDrag(e, info, item)}
                         style={{
                             position: 'absolute',
-                            x: useMotionValue(item.x),
-                            y: useMotionValue(item.y),
+                            x: motionValues[index].x,
+                            y: motionValues[index].y,
                         }}
                         className={`p-3 rounded-full text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-center text-center size-24 ${item.color}`}
                         whileTap={{ scale: 1.1 }}
                     >
-                       <span className="inline-block transform -skew-x-[10deg] text-xs">{item.label}</span>
+                       <span className="inline-block transform skew-x-[10deg] text-xs">{item.label}</span>
                     </motion.div>
                 ))}
             </div>
@@ -139,3 +176,4 @@ export default function HeroSection() {
         </section>
     );
 }
+
