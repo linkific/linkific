@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 
 const footerNavs = {
@@ -12,7 +13,7 @@ const footerNavs = {
     { href: 'tel:+919022143695', name: '+91 9022143695' },
     { href: 'tel:+919209147566', name: '+91 9209147566' },
     { href: 'mailto:contact@linkific.com', name: 'contact@linkific.com' },
-    { href: '#', name: 'Nagpur, Maharashtra 440023' },
+    { href: 'https://www.google.com/maps/search/?api=1&query=Nagpur+Maharashtra+440023', name: 'Nagpur, Maharashtra 440023' },
   ]
 };
 
@@ -51,7 +52,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-sky-blue/70">
                {footerNavs['Contact'].map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className="hover:text-off-white text-sm transition-colors">
+                  <a href={item.href} className="hover:text-off-white text-sm transition-colors" target="_blank" rel="noopener noreferrer">
                     {item.name}
                   </a>
                 </li>
@@ -70,7 +71,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-deep-blue pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-sky-blue/60">
-          <p>© 2025 Linkific. All rights reserved.</p>
+          <p>© 2024 Linkific. All rights reserved.</p>
           <div className="flex gap-4 mt-4 sm:mt-0">
             <a href="#" className="hover:text-off-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-off-white transition-colors">Terms of Service</a>
