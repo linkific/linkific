@@ -16,6 +16,7 @@ import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
   email: z.string().email("A valid work email is required"),
   challenge: z.string().min(1, "Please describe your workflow challenge"),
 });
@@ -27,7 +28,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { email: "", challenge: "" },
+    defaultValues: { name: "", email: "", challenge: "" },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -44,7 +45,7 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
     try {
       const messagesCollection = collection(firestore, "contactMessages");
       const dataToSave = {
-        name: 'N/A', // Simplified form
+        name: values.name,
         email: values.email,
         message: `Workflow Challenge: ${values.challenge}`,
         sentAt: serverTimestamp(),
@@ -83,6 +84,19 @@ export function ContactForm({ page }: { page: 'home' | 'contact' }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-xl mx-auto grid grid-cols-1 gap-6">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="sr-only">Your Name</FormLabel>
+              <FormControl>
+                <Input type="text" placeholder="Your Name" {...field} className={inputClasses} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="email"
