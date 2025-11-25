@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useCollection, useFirebase, useMemoFirebase, useUser } from '@/firebase';
 import { collection, orderBy, query, doc, deleteDoc } from 'firebase/firestore';
 import { Eye, Loader2, Trash2, Download, LogOut } from 'lucide-react';
@@ -418,24 +419,34 @@ export default function DashboardPage() {
         </div>
       </header>
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-16">
-         <Card>
-            <CardHeader>
-              <CardTitle className="text-3xl font-bold">Contact Messages</CardTitle>
-              <CardDescription>Here are the messages submitted through your website.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <MessagesTable />
-            </CardContent>
-         </Card>
-         <Card>
-            <CardHeader>
-              <CardTitle className="text-3xl font-bold">Job Applications</CardTitle>
-              <CardDescription>Here are the applications submitted through your careers page.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <ApplicationsTable />
-            </CardContent>
-         </Card>
+         <Tabs defaultValue="messages">
+            <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
+                <TabsTrigger value="messages">Contact Messages</TabsTrigger>
+                <TabsTrigger value="applications">Job Applications</TabsTrigger>
+            </TabsList>
+            <TabsContent value="messages">
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="text-3xl font-bold">Contact Messages</CardTitle>
+                        <CardDescription>Here are the messages submitted through your website.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <MessagesTable />
+                    </CardContent>
+                </Card>
+            </TabsContent>
+            <TabsContent value="applications">
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="text-3xl font-bold">Job Applications</CardTitle>
+                        <CardDescription>Here are the applications submitted through your careers page.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <ApplicationsTable />
+                    </CardContent>
+                </Card>
+            </TabsContent>
+         </Tabs>
       </main>
     </div>
   );
