@@ -32,7 +32,7 @@ function InteractiveWorkflow() {
             <p className="text-sm font-semibold text-center text-deep-blue/80 mb-4">
                 Your manual workflow (try dragging the items)
             </p>
-            <div ref={constraintsRef} className="relative w-full max-w-sm h-96 rounded-lg border border-solid border-sky-blue/50">
+            <div ref={constraintsRef} className="relative w-full max-w-sm h-96 rounded-lg">
                  <svg className="absolute top-0 left-0 w-full h-full" style={{ pointerEvents: 'none' }}>
                     {items.slice(0, -1).map((item, i) => (
                         <line
@@ -62,7 +62,7 @@ function InteractiveWorkflow() {
                         className={`p-3 rounded-full text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-center text-center size-24 ${item.color}`}
                         whileTap={{ scale: 1.1 }}
                     >
-                       <span className="inline-block transform skew-x-[10deg] text-xs">{item.label}</span>
+                       <span className="inline-block transform -skew-x-[10deg] text-xs">{item.label}</span>
                     </motion.div>
                 ))}
             </div>
