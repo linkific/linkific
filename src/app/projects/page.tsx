@@ -1,15 +1,15 @@
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import ProjectsSection from '@/components/sections/projects';
+import CaseStudiesSection from '@/components/sections/projects';
 
-export default function ProjectsPage() {
+export default function CaseStudiesPage() {
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden bg-off-white font-display text-midnight-blue">
       <Header />
 
       <div className="bg-off-white">
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <ProjectsSection />
+          <CaseStudiesSection />
         </main>
       </div>
 

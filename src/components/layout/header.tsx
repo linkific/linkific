@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Projects', href: '/projects' },
+    { name: 'Case Studies', href: '/projects' },
     { name: 'Services', href: '/services' },
     { name: 'About Us', href: '/about' },
     { name: 'Careers', href: '/careers' },
@@ -36,7 +36,9 @@ export default function Header() {
                           href={link.href} 
                           className={cn(
                             "transition-colors text-sm font-medium",
-                            pathname === link.href ? "text-steel-blue" : "text-midnight-blue/70 hover:text-steel-blue"
+                            (pathname === link.href || (link.href === '/projects' && pathname.startsWith('/case-studies')))
+                              ? "text-steel-blue" 
+                              : "text-midnight-blue/70 hover:text-steel-blue"
                           )}
                         >
                             {link.name}
@@ -66,7 +68,9 @@ export default function Header() {
                                       onClick={() => setSheetOpen(false)}
                                       className={cn(
                                         "text-lg font-medium transition-colors",
-                                        pathname === link.href ? "text-steel-blue" : "text-midnight-blue/70 hover:text-steel-blue"
+                                        (pathname === link.href || (link.href === '/projects' && pathname.startsWith('/case-studies')))
+                                          ? "text-steel-blue" 
+                                          : "text-midnight-blue/70 hover:text-steel-blue"
                                       )}
                                     >
                                         {link.name}

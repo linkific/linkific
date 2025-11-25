@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const footerNavs = {
   'Quick Links': [
-    { href: '/projects', name: 'Projects' },
+    { href: '/projects', name: 'Case Studies' },
     { href: '/services', name: 'Services' },
     { href: '/contact', name: 'Contact Us' },
     { href: '/about', name: 'About Us' },

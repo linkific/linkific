@@ -3,74 +3,56 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-
-import hospitalChatbot from '@/assets/hospital.webp';
-import chromeExtension from '@/assets/EHR.webp';
-import poultryFarm from '@/assets/poultry.webp';
-import hotelKiosk from '@/assets/kiosk.webp';
-import poseDrone from '@/assets/armed drone.webp';
-import restaurantVision from '@/assets/hotel cams.webp';
-import docClassifier from '@/assets/doc classification.webp';
-import aiMeeting from '@/assets/breakout rooms.webp';
 import { Button } from '../ui/button';
 
-
-const allProjects = [
+export const allCaseStudies = [
     {
-        title: "Hospital support chatbot",
-        description: "A healthcare support chatbot for bookings and query resolutions for doctors.",
-        imageUrl: hospitalChatbot,
-        alt: "Hospital support chatbot",
-        "data-ai-hint": "tech health"
+        slug: "automated-invoice-processing",
+        title: "Automated Invoice Processing",
+        description: "Reduced manual data entry by 95% and cut down invoice processing time from days to minutes for a mid-sized enterprise.",
+        imageUrl: "https://picsum.photos/seed/finance-1/800/600",
+        alt: "Abstract visualization of invoice data being processed",
+        "data-ai-hint": "finance invoice",
+        problem: "A growing mid-sized enterprise was struggling with a high volume of supplier invoices. The manual process involved data entry, validation against purchase orders, and routing for approvals, leading to frequent delays, errors, and late payment penalties.",
+        solution: "We designed and implemented a custom automation solution that used AI to extract data from incoming invoices (PDFs and emails). The system automatically matched invoices to POs, flagged exceptions for human review, and routed approved invoices directly into their accounting system.",
+        results: [
+            "95% reduction in manual data entry.",
+            "Invoice processing cycle reduced from 3-5 days to under 15 minutes.",
+            "Eliminated late payment fees, saving over $15,000 annually.",
+            "Freed up the AP team to focus on vendor relations and financial analysis."
+        ]
     },
     {
-        title: "AI assisted chrome extension",
-        description: "An API integrated chrome extension that allows user to manage different EHR systems at once.",
-        imageUrl: chromeExtension,
-        alt: "AI assisted chrome extension",
-        "data-ai-hint": "browser ai"
+        slug: "real-time-expense-reconciliation",
+        title: "Real-time Expense Reconciliation",
+        description: "Enabled a financial services firm to achieve 99% accuracy in expense reporting and gain real-time visibility into spending.",
+        imageUrl: "https://picsum.photos/seed/finance-2/800/600",
+        alt: "Dashboard showing real-time expense data",
+        "data-ai-hint": "finance dashboard",
+        problem: "A financial services firm with a large sales team faced significant challenges with month-end expense reconciliation. The process was slow, error-prone, and provided no real-time visibility into corporate spending, making budget management difficult.",
+        solution: "We built a solution that integrated with their corporate credit card provider and existing accounting software. The system automatically categorized transactions, applied company policies, and flagged out-of-policy spending in real-time. Employees could simply photograph receipts, and the AI would handle the rest.",
+        results: [
+            "Month-end closing time for expenses reduced by 80%.",
+            "Achieved 99% accuracy in expense reporting.",
+            "Provided management with a real-time dashboard of team spending.",
+            "Improved employee satisfaction by simplifying the reporting process."
+        ]
     },
     {
-        title: "Poultry Farm management application",
-        description: "A android app that allows user to keep track of poultry with a integrated system.",
-        imageUrl: poultryFarm,
-        alt: "Poultry Farm management application",
-        "data-ai-hint": "tech farm"
-    },
-    {
-        title: "Hotel kiosk + AI detection",
-        description: "A kiosk system with hand movement detection to handle ordering with wireless communications.",
-        imageUrl: hotelKiosk,
-        alt: "Hotel kiosk with AI detection",
-        "data-ai-hint": "ai kiosk"
-    },
-    {
-        title: "Pose detection with armed drone",
-        description: "A pose detection software that enables a drone to understand position of a person in front for friend or foe detection.",
-        imageUrl: poseDrone,
-        alt: "Pose detection with armed drone",
-        "data-ai-hint": "ai drone"
-    },
-    {
-        title: "Object detection through restaurants cams",
-        description: "Computer vision for hotel table management (detects empty tables, hand signals for service, etc.)",
-        imageUrl: restaurantVision,
-        alt: "Object detection in a restaurant",
-        "data-ai-hint": "restaurant vision"
-    },
-    {
-        title: "Document Classification ML Model",
-        description: "Automatically identifies document types (Aadhaar card, PAN card, income certificates, etc.)",
-        imageUrl: docClassifier,
-        alt: "Document Classification ML Model",
-        "data-ai-hint": "document scan"
-    },
-    {
-        title: "Breakout rooms - AI command",
-        description: "A AI integrated sales and management system with integrated call agents.",
-        imageUrl: aiMeeting,
-        alt: "Breakout rooms AI command system",
-        "data-ai-hint": "ai meeting"
+        slug: "automated-approval-workflows",
+        title: "Automated Approval Workflows",
+        description: "Streamlined multi-level approval chains for a manufacturing company, reducing approval times by over 70%.",
+        imageUrl: "https://picsum.photos/seed/finance-3/800/600",
+        alt: "Diagram of an automated workflow",
+        "data-ai-hint": "workflow diagram",
+        problem: "A large manufacturing company's procurement process was hampered by a complex, manual approval workflow. Purchase requests required multiple sign-offs, often getting lost in email chains, which delayed critical procurement and production.",
+        solution: "We developed a centralized system with dynamic, AI-based decision routing. The system automatically determined the required approvers based on the request's department, amount, and category. It sent automated reminders and escalated stalled requests, providing full visibility into the approval chain.",
+        results: [
+            "Reduced average approval time from 7 days to less than 2 days.",
+            "Eliminated the issue of 'lost' requests and process bottlenecks.",
+            "Created a complete, auditable trail for every purchase request.",
+            "Increased operational efficiency and reduced procurement-related production delays."
+        ]
     }
 ];
 
@@ -87,7 +69,7 @@ const cardVariants = {
   }),
 };
 
-const ProjectCard = ({ project, index }: { project: { title: string, description: string, imageUrl: any, alt: string, "data-ai-hint"?: string }, index: number }) => (
+const CaseStudyCard = ({ caseStudy, index }: { caseStudy: typeof allCaseStudies[0], index: number }) => (
     <motion.div 
         custom={index}
         variants={cardVariants}
@@ -96,37 +78,37 @@ const ProjectCard = ({ project, index }: { project: { title: string, description
         viewport={{ once: true, amount: 0.5 }}
         className="flex flex-col gap-4 rounded-xl bg-off-white border border-sky-blue/50 p-4 h-full group hover:-translate-y-2 transition-transform duration-300 w-full max-w-sm shadow-md">
         <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-             <Image src={project.imageUrl} alt={project.alt} fill className="object-cover" data-ai-hint={project['data-ai-hint']} />
+             <Image src={caseStudy.imageUrl} alt={caseStudy.alt} fill className="object-cover" data-ai-hint={caseStudy['data-ai-hint']} />
         </div>
         <div className="flex flex-col flex-1 justify-between gap-4">
             <div>
-                <p className="text-midnight-blue text-lg font-medium">{project.title}</p>
-                <p className="text-deep-blue/80 text-sm mt-1">{project.description}</p>
+                <p className="text-midnight-blue text-lg font-medium">{caseStudy.title}</p>
+                <p className="text-deep-blue/80 text-sm mt-1">{caseStudy.description}</p>
             </div>
-            <Button variant="secondary" className="w-full h-10 px-4 font-bold bg-steel-blue text-off-white hover:bg-deep-blue transition-colors">
-                View Case Study
+            <Button asChild variant="secondary" className="w-full h-10 px-4 font-bold bg-steel-blue text-off-white hover:bg-deep-blue transition-colors">
+                <Link href={`/case-studies/${caseStudy.slug}`}>View Case Study</Link>
             </Button>
         </div>
     </motion.div>
 );
 
 
-export default function ProjectsSection({ featured = false }: { featured?: boolean }) {
-    const projects = featured ? allProjects.slice(0, 3) : allProjects;
+export default function CaseStudiesSection({ featured = false }: { featured?: boolean }) {
+    const caseStudies = featured ? allCaseStudies.slice(0, 3) : allCaseStudies;
     return (
         <section className="pt-24 sm:pt-32" id="projects">
-            <h2 className="text-midnight-blue text-3xl font-bold text-center">Our Projects</h2>
-            <p className="text-deep-blue/80 text-center mt-2 mb-12 max-w-2xl mx-auto">A curated gallery of successful case studies, showcasing the real-world application of our technology.</p>
+            <h2 className="text-midnight-blue text-3xl font-bold text-center">Case Studies</h2>
+            <p className="text-deep-blue/80 text-center mt-2 mb-12 max-w-2xl mx-auto">See how we've transformed finance operations for businesses like yours.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-                {projects.map((project, index) => (
-                    <ProjectCard key={index} project={project} index={index} />
+                {caseStudies.map((caseStudy, index) => (
+                    <CaseStudyCard key={index} caseStudy={caseStudy} index={index} />
                 ))}
             </div>
              {featured && (
                 <div className="mt-12 text-center">
                      <Button asChild className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-deep-blue text-off-white text-base font-bold shadow-lg hover:bg-midnight-blue transition-shadow mx-auto w-fit">
                         <Link href="/projects">
-                            <span className="truncate">View All Projects</span>
+                            <span className="truncate">View All Case Studies</span>
                         </Link>
                     </Button>
                 </div>
