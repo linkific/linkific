@@ -6,6 +6,7 @@ const footerNavs = {
     { href: '/services', name: 'Services' },
     { href: '/contact', name: 'Contact' },
     { href: '/about', name: 'About' },
+    { href: '/careers', name: 'Careers' },
   ],
   'Contact': [
     { href: 'tel:+919022143695', name: '+91 9022143695' },

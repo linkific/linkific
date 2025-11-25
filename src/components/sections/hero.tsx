@@ -85,16 +85,16 @@ export default function HeroSection() {
                     variants={itemVariants}
                 >
                     <div className="flex flex-col items-center md:items-start">
-                        <Button asChild className="flex min-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-deep-blue text-off-white text-base font-bold shadow-lg hover:bg-midnight-blue transition-shadow">
+                        <Button asChild size="lg">
                             <Link href="/contact">
-                                <span className="truncate">Request a custom automation plan</span>
+                                Request a custom automation plan
                             </Link>
                         </Button>
                          <p className="text-xs text-deep-blue/60 mt-1.5">Takes under one minute</p>
                     </div>
-                     <Button asChild variant="secondary" className="flex min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-midnight-blue text-base font-bold transition-shadow hover:bg-sky-blue/50 border-0">
+                     <Button asChild variant="secondary" size="lg">
                         <Link href="/projects">
-                            <span className="truncate">Explore past work</span>
+                            Explore past work
                         </Link>
                     </Button>
                 </motion.div>

@@ -44,9 +44,9 @@ export default function Header() {
                     ))}
                 </nav>
                 <div className="flex items-center gap-2">
-                    <Button asChild className="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-deep-blue text-off-white text-sm font-bold shadow-md hover:bg-midnight-blue transition-shadow">
+                    <Button asChild className="hidden md:flex">
                         <Link href="/contact">
-                            <span className="truncate">Get Started</span>
+                            Get Started
                         </Link>
                     </Button>
                     <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>

@@ -78,7 +78,7 @@ export default function CaseStudyDetailPage() {
             </div>
             
              <div className="text-center pt-12">
-                <Button asChild size="lg" className="bg-deep-blue text-off-white hover:bg-midnight-blue">
+                <Button asChild size="lg">
                     <Link href="/contact">Automate Your Workflow</Link>
                 </Button>
             </div>
