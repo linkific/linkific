@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const jobOpenings = [
     {
@@ -123,37 +124,32 @@ const PositionCard = ({ job, isDark }: { job: { title: string, location: string,
 export default function OpenPositions() {
   return (
     <section id="open-positions" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md">
-      <div>
-        <div className="space-y-16">
-            <div>
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-midnight-blue">Job Openings</h2>
-                    <p className="text-deep-blue/80 mt-2 max-w-2xl mx-auto">
-                        Ready to make an impact? Find your full-time role at Linkific.
-                    </p>
-                </div>
-                <div className="space-y-8">
-                    {jobOpenings.map((job, index) => (
-                        <PositionCard key={`job-${index}`} job={job} />
-                    ))}
-                </div>
-            </div>
-            
-            <div>
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold text-midnight-blue">Internships</h2>
-                    <p className="text-deep-blue/80 mt-2 max-w-2xl mx-auto">
-                        Find your place at Linkific. We’re looking for passionate learners to join our intern team.
-                    </p>
-                </div>
-                <div className="space-y-8">
-                    {internships.map((job, index) => (
-                       <PositionCard key={`internship-${index}`} job={job} />
-                    ))}
-                </div>
-            </div>
-        </div>
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold text-midnight-blue">Open Positions</h2>
+        <p className="text-deep-blue/80 mt-2 max-w-2xl mx-auto">
+            Ready to make an impact? Find your next role at Linkific.
+        </p>
       </div>
+      <Tabs defaultValue="jobs" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
+          <TabsTrigger value="jobs">Job Openings</TabsTrigger>
+          <TabsTrigger value="internships">Internships</TabsTrigger>
+        </TabsList>
+        <TabsContent value="jobs" className="mt-12">
+            <div className="space-y-8">
+                {jobOpenings.map((job, index) => (
+                    <PositionCard key={`job-${index}`} job={job} />
+                ))}
+            </div>
+        </TabsContent>
+        <TabsContent value="internships" className="mt-12">
+             <div className="space-y-8">
+                {internships.map((job, index) => (
+                   <PositionCard key={`internship-${index}`} job={job} />
+                ))}
+            </div>
+        </TabsContent>
+      </Tabs>
     </section>
   );
 }
