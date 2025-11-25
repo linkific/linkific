@@ -108,8 +108,8 @@ const scrollTo = (selector: string) => {
 };
 
 const PositionCard = ({ job, isDark }: { job: { title: string, location: string, description: string }, isDark?: boolean }) => (
-    <div className={cn("p-6 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4", isDark ? "bg-deep-blue/30 border border-deep-blue" : "bg-off-white border border-sky-blue/50 shadow-md")}>
-        <div>
+    <div className={cn("p-6 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transform -skew-x-[10deg]", isDark ? "bg-deep-blue/30 border border-deep-blue" : "bg-off-white border border-sky-blue/50 shadow-md")}>
+        <div className="transform skew-x-[10deg]">
             <h3 className={cn("text-xl font-bold", isDark ? "text-off-white" : "text-midnight-blue")}>{job.title}</h3>
             <p className={cn("text-sm mt-1", isDark ? "text-sky-blue/70" : "text-deep-blue/70")}>{job.location}</p>
             <p className={cn("mt-2 max-w-2xl", isDark ? "text-sky-blue/80" : "text-deep-blue/80")}>{job.description}</p>
@@ -122,7 +122,8 @@ const PositionCard = ({ job, isDark }: { job: { title: string, location: string,
 
 export default function OpenPositions() {
   return (
-    <section id="open-positions" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md">
+    <section id="open-positions" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md transform -skew-x-[10deg]">
+      <div className="transform skew-x-[10deg]">
         <div className="space-y-16">
             <div>
                 <div className="text-center mb-12">
@@ -152,6 +153,7 @@ export default function OpenPositions() {
                 </div>
             </div>
         </div>
+      </div>
     </section>
   );
 }

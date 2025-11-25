@@ -96,17 +96,19 @@ export default function KpiSection() {
           <motion.div
             key={index}
             variants={itemVariants}
-            className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue text-center flex flex-col items-center"
+            className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue text-center flex flex-col items-center transform -skew-x-[10deg]"
           >
-            <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-5">
-              <kpi.icon className="size-8" />
+            <div className="transform skew-x-[10deg]">
+              <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-5">
+                <kpi.icon className="size-8" />
+              </div>
+              {isInView ? 
+                  <AnimatedCounter from={0} to={kpi.value} suffix={kpi.suffix} /> 
+                  : 
+                  <p className="text-4xl font-bold text-off-white">0{kpi.suffix}</p>
+              }
+              <p className="text-sm text-sky-blue/70 mt-1">{kpi.label}</p>
             </div>
-            {isInView ? 
-                <AnimatedCounter from={0} to={kpi.value} suffix={kpi.suffix} /> 
-                : 
-                <p className="text-4xl font-bold text-off-white">0{kpi.suffix}</p>
-            }
-            <p className="text-sm text-sky-blue/70 mt-1">{kpi.label}</p>
           </motion.div>
         ))}
       </motion.div>

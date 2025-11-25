@@ -12,7 +12,8 @@ const scrollTo = (selector: string) => {
 
 export default function CareersHero() {
   return (
-    <section id="careers-hero" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md grid md:grid-cols-2 gap-12 items-center">
+    <section id="careers-hero" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md grid md:grid-cols-2 gap-12 items-center transform -skew-x-[10deg]">
+      <div className="transform skew-x-[10deg]">
         <div className="text-center md:text-left">
             <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-midnight-blue">Join a team that builds through learning.</h1>
             <p className="text-deep-blue/80 text-lg max-w-3xl mx-auto md:mx-0">
@@ -30,6 +31,7 @@ export default function CareersHero() {
         <div className="relative w-full h-80 rounded-xl overflow-hidden">
             <Image src="https://picsum.photos/seed/office-team/800/600" alt="Linkific Team" layout="fill" objectFit="cover" data-ai-hint="office team collaboration" />
         </div>
+      </div>
     </section>
   );
 }

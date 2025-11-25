@@ -35,13 +35,15 @@ export default function VisionMissionValues() {
             key={index}
             whileHover={{ scale: 1.05, y: -10 }}
             transition={{ type: 'spring', stiffness: 300 }}
-            className="flex flex-col items-center text-center p-8 rounded-xl bg-deep-blue/30 border border-deep-blue cursor-pointer"
+            className="flex flex-col items-center text-center p-8 rounded-xl bg-deep-blue/30 border border-deep-blue cursor-pointer transform -skew-x-[10deg]"
           >
-            <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg">
-              <item.icon className="size-8" />
+            <div className="transform skew-x-[10deg]">
+              <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg">
+                <item.icon className="size-8" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-off-white">{item.title}</h3>
+              <p className="text-sky-blue/70">{item.description}</p>
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-off-white">{item.title}</h3>
-            <p className="text-sky-blue/70">{item.description}</p>
           </motion.div>
         ))}
       </div>

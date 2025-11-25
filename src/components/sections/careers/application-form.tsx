@@ -124,7 +124,8 @@ export default function ApplicationForm() {
   }
 
   return (
-    <section id="apply" className="p-8 sm:p-12 rounded-xl bg-deep-blue/30 border border-deep-blue">
+    <section id="apply" className="p-8 sm:p-12 rounded-xl bg-deep-blue/30 border border-deep-blue transform -skew-x-[10deg]">
+      <div className="transform skew-x-[10deg]">
         <AnimatePresence mode="wait">
             {isSuccess ? (
                  <motion.div
@@ -204,7 +205,7 @@ export default function ApplicationForm() {
                                             ))}
                                         </SelectGroup>
                                         <SelectGroup>
-                                            <SelectLabel>Internships</SelectLabel>
+                                            <SelectLabel>Internships</Label>
                                             {internships.map(role => (
                                                 <SelectItem key={role} value={role}>{role}</SelectItem>
                                             ))}
@@ -272,6 +273,7 @@ export default function ApplicationForm() {
             </motion.div>
          )}
         </AnimatePresence>
+      </div>
     </section>
   );
 }

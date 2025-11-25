@@ -5,15 +5,19 @@ import { cn } from "@/lib/utils"
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
+      "rounded-lg border bg-card text-card-foreground shadow-sm transform -skew-x-[10deg]",
       className
     )}
     {...props}
-  />
+  >
+    <div className="transform skew-x-[10deg]">
+      {children}
+    </div>
+  </div>
 ))
 Card.displayName = "Card"
 

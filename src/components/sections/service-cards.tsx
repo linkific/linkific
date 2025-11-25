@@ -56,13 +56,15 @@ export default function ServiceCards() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
-            className="flex flex-col text-left p-8 rounded-xl bg-deep-blue/30 border border-deep-blue h-full"
+            className="flex flex-col text-left p-8 rounded-xl bg-deep-blue/30 border border-deep-blue h-full transform -skew-x-[10deg]"
           >
-            <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg self-start">
-              <service.icon className="size-8" />
+            <div className="transform skew-x-[10deg]">
+              <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg self-start">
+                <service.icon className="size-8" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-off-white">{service.title}</h3>
+              <p className="text-sky-blue/70 text-sm flex-grow">{service.description}</p>
             </div>
-            <h3 className="text-xl font-bold mb-2 text-off-white">{service.title}</h3>
-            <p className="text-sky-blue/70 text-sm flex-grow">{service.description}</p>
           </motion.div>
         ))}
       </div>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { motion } from 'framer-motion';
@@ -75,8 +74,9 @@ export default function Features() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.5 }}
-                className="flex flex-col text-left p-6 rounded-xl bg-off-white border border-sky-blue/50 shadow-md h-full"
+                className="flex flex-col text-left p-6 rounded-xl bg-off-white border border-sky-blue/50 shadow-md h-full transform -skew-x-[10deg]"
             >
+              <div className="transform skew-x-[10deg]">
                 <div className="flex items-center gap-4 mb-4">
                     <div className="flex items-center justify-center size-12 rounded-lg bg-steel-blue/10 text-steel-blue">
                         <feature.icon className="size-6" />
@@ -85,6 +85,7 @@ export default function Features() {
                 </div>
                 <p className="text-deep-blue font-medium text-sm flex-grow">Benefit: {feature.benefit}</p>
                 <p className="text-deep-blue/70 text-sm mt-2">Why it matters: {feature.why}</p>
+              </div>
             </motion.div>
         ))}
       </div>

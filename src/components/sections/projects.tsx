@@ -76,18 +76,20 @@ const CaseStudyCard = ({ caseStudy, index }: { caseStudy: typeof allCaseStudies[
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
-        className="flex flex-col gap-4 rounded-xl bg-off-white border border-sky-blue/50 p-4 h-full group hover:-translate-y-2 transition-transform duration-300 w-full max-w-sm shadow-md">
-        <div className="relative w-full aspect-video rounded-lg overflow-hidden">
-             <Image src={caseStudy.imageUrl} alt={caseStudy.alt} fill className="object-cover" data-ai-hint={caseStudy['data-ai-hint']} />
-        </div>
-        <div className="flex flex-col flex-1 justify-between gap-4">
-            <div>
-                <p className="text-midnight-blue text-lg font-medium">{caseStudy.title}</p>
-                <p className="text-deep-blue/80 text-sm mt-1">{caseStudy.description}</p>
-            </div>
-            <Button asChild variant="secondary" className="w-full h-10 px-4 font-bold bg-steel-blue text-off-white hover:bg-deep-blue transition-colors">
-                <Link href={`/case-studies/${caseStudy.slug}`}>View Case Study</Link>
-            </Button>
+        className="flex flex-col gap-4 rounded-xl bg-off-white border border-sky-blue/50 p-4 h-full group hover:-translate-y-2 transition-transform duration-300 w-full max-w-sm shadow-md transform -skew-x-[10deg]">
+        <div className="transform skew-x-[10deg]">
+          <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+               <Image src={caseStudy.imageUrl} alt={caseStudy.alt} fill className="object-cover" data-ai-hint={caseStudy['data-ai-hint']} />
+          </div>
+          <div className="flex flex-col flex-1 justify-between gap-4 pt-4">
+              <div>
+                  <p className="text-midnight-blue text-lg font-medium">{caseStudy.title}</p>
+                  <p className="text-deep-blue/80 text-sm mt-1">{caseStudy.description}</p>
+              </div>
+              <Button asChild variant="secondary" className="w-full h-10 px-4 font-bold bg-steel-blue text-off-white hover:bg-deep-blue transition-colors">
+                  <Link href={`/case-studies/${caseStudy.slug}`}>View Case Study</Link>
+              </Button>
+          </div>
         </div>
     </motion.div>
 );

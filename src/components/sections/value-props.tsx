@@ -1,4 +1,3 @@
-
 'use client';
 import { motion } from 'framer-motion';
 import { Hourglass, Scale, Cog } from 'lucide-react';
@@ -50,23 +49,27 @@ export default function ValueProps() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
-                        className="flex flex-col items-start text-left p-8 rounded-xl bg-deep-blue/30 border border-deep-blue"
+                        className="flex flex-col items-start text-left p-8 rounded-xl bg-deep-blue/30 border border-deep-blue transform -skew-x-[10deg]"
                     >
-                        <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6">
-                            <prop.icon className="size-8" />
+                        <div className="transform skew-x-[10deg]">
+                          <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6">
+                              <prop.icon className="size-8" />
+                          </div>
+                          <h3 className="text-xl font-bold mb-2 text-off-white">{prop.title}</h3>
+                          <p className="text-sky-blue/70 text-sm flex-grow mb-4">{prop.description}</p>
+                          <p className="font-bold text-sky-blue text-sm">{prop.microcopy}</p>
                         </div>
-                        <h3 className="text-xl font-bold mb-2 text-off-white">{prop.title}</h3>
-                        <p className="text-sky-blue/70 text-sm flex-grow mb-4">{prop.description}</p>
-                        <p className="font-bold text-sky-blue text-sm">{prop.microcopy}</p>
                     </motion.div>
                 ))}
             </div>
-             <div className="mt-16 text-center bg-deep-blue/30 border border-deep-blue rounded-xl p-8">
-                <h3 className="text-xl font-bold text-off-white">How we automated a full approval chain</h3>
-                <p className="text-sky-blue/70 my-2">Case Study Preview</p>
-                <Button variant="secondary" className="mt-2 bg-sky-blue text-midnight-blue hover:bg-off-white">
-                    Read the Case Study
-                </Button>
+             <div className="mt-16 text-center bg-deep-blue/30 border border-deep-blue rounded-xl p-8 transform -skew-x-[10deg]">
+                <div className="transform skew-x-[10deg]">
+                  <h3 className="text-xl font-bold text-off-white">How we automated a full approval chain</h3>
+                  <p className="text-sky-blue/70 my-2">Case Study Preview</p>
+                  <Button variant="secondary" className="mt-2 bg-sky-blue text-midnight-blue hover:bg-off-white">
+                      Read the Case Study
+                  </Button>
+                </div>
             </div>
         </section>
     );
