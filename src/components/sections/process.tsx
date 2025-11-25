@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion } from 'framer-motion';
@@ -7,22 +8,22 @@ const processSteps = [
   {
     icon: Mail,
     title: '1. Contact Us',
-    description: 'Drop a quick note — tell us your problem, data, or workflow you want fixed.',
+    description: 'Tell us about the workflow, data, or repetitive task you want to automate.',
   },
   {
     icon: Zap,
-    title: '2. POC in 3 Days',
-    description: 'We’ll deliver a focused proof-of-concept that shows the idea working with your data.',
+    title: '2. Get a Plan',
+    description: 'We deliver a custom automation plan that shows how we will solve your problem.',
   },
   {
     icon: CheckCircle,
-    title: '3. Confirm & Build',
-    description: 'Once you approve the POC, we build a production-ready prototype in 1–4 weeks.',
+    title: '3. Build & Test',
+    description: 'Once you approve, we build and rigorously test your production-ready system in 1-4 weeks.',
   },
   {
     icon: PartyPopper,
-    title: '4. Enjoy Your Work',
-    description: 'You get a working system that automates the grunt work so your team can focus on growth.',
+    title: '4. Deploy & Support',
+    description: 'You get a working system and ongoing support so your team can focus on growth.',
   },
 ];
 
@@ -52,7 +53,7 @@ const itemVariants = {
 export default function ProcessSection() {
   return (
     <section className="pt-24 sm:pt-32" id="process">
-        <h2 className="text-off-white text-3xl font-bold text-center">Our Process</h2>
+        <h2 className="text-off-white text-3xl font-bold text-center">How We Build Your Automation</h2>
         <p className="text-sky-blue/80 text-center mt-2 mb-12 max-w-2xl mx-auto">From idea to impact in four simple steps. Fast, tangible, and built on trust.</p>
         <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"

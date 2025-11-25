@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
@@ -5,8 +6,8 @@ import { FirebaseClientProvider } from '@/firebase';
 import Favicon from '@/assets/Linkific.webp';
 
 export const metadata: Metadata = {
-  title: 'Linkific - Revolutionize Your Business with AI',
-  description: "Linkific's smart software and AI-powered automation streamlines your workflow, boosts efficiency, and drives unprecedented growth.",
+  title: 'Custom Automation for Finance Teams',
+  description: "Save time with workflow automation built for your finance process. Fast setup and measurable ROI.",
   icons: [{ rel: 'icon', url: Favicon.src }],
 };
 

@@ -1,12 +1,13 @@
 
 import Header from '@/components/layout/header';
 import HeroSection from '@/components/sections/hero';
-import KpiSection from '@/components/sections/kpi';
-import ServicesSection from '@/components/sections/services';
-import ContactSection from '@/components/sections/contact';
 import Footer from '@/components/layout/footer';
 import ProcessSection from '@/components/sections/process';
-import ProjectsSection from '@/components/sections/projects';
+import SocialProof from '@/components/sections/social-proof';
+import ValueProps from '@/components/sections/value-props';
+import Features from '@/components/sections/features';
+import Faq from '@/components/sections/faq';
+import ContactSection from '@/components/sections/contact';
 
 export default function Home() {
   return (
@@ -20,42 +21,49 @@ export default function Home() {
           </main>
       </div>
 
-      {/* Process Section - Dark Blue BG with top diagonal clip */}
+      {/* Social Proof - White BG */}
+      <div className="bg-off-white">
+           <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16">
+              <SocialProof />
+          </main>
+      </div>
+
+       {/* Value Propositions - Dark Blue BG */}
+      <div className="bg-midnight-blue text-off-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+           <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+              <ValueProps />
+          </main>
+      </div>
+      
+      {/* Features Section - White BG */}
+      <div className="bg-off-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+            <Features />
+          </main>
+      </div>
+
+      {/* Process Section - Dark Blue BG */}
       <div className="bg-midnight-blue text-off-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
               <ProcessSection />
           </main>
       </div>
       
-      {/* Projects Section - White BG with top diagonal clip */}
-      <div className="bg-off-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
-          <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-            <ProjectsSection featured={true}/>
-          </main>
-      </div>
-
-      {/* KPI Section - Dark Blue BG with top diagonal clip */}
-      <div className="bg-midnight-blue text-off-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
+      {/* FAQ Section - White BG */}
+       <div className="bg-off-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-              <KpiSection />
+              <Faq />
           </main>
       </div>
 
-      {/* Services Section - White BG with top diagonal clip */}
-      <div className="bg-off-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
-           <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-              <ServicesSection />
-          </main>
-      </div>
-
-      {/* Contact Section - Dark Blue BG with top diagonal clip */}
+      {/* Contact Section - Dark Blue BG */}
       <div className="bg-midnight-blue text-off-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
           <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
               <ContactSection />
           </main>
       </div>
 
-      {/* Footer Section - Dark Blue BG without diagonal clip */}
+      {/* Footer Section - Dark Blue BG */}
       <div className="bg-midnight-blue text-off-white">
            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <Footer />
