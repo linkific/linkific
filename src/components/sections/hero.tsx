@@ -6,6 +6,7 @@ import { motion, Reorder } from 'framer-motion';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { useState } from 'react';
+import { GripVertical } from 'lucide-react';
 
 
 const initialItems = [
@@ -25,13 +26,15 @@ function InteractiveWorkflow() {
             </p>
             <Reorder.Group axis="y" values={items} onReorder={setItems} className="space-y-3 w-full max-w-xs">
                 {items.map((item) => (
-                    <Reorder.Item 
-                        key={item.id} 
+                    <Reorder.Item
+                        key={item.id}
                         value={item}
-                        className={`p-4 rounded-lg text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-center text-center ${item.color}`}
+                        className={`p-4 rounded-lg text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-between text-center ${item.color}`}
                         whileDrag={{ scale: 1.05 }}
                     >
-                       <span className="inline-block transform skew-x-[10deg]">{item.label}</span>
+                       <GripVertical className="h-5 w-5 text-off-white/50" />
+                       <span className="inline-block transform -skew-x-[10deg] flex-grow">{item.label}</span>
+                       <div className="w-5"></div>
                     </Reorder.Item>
                 ))}
             </Reorder.Group>
