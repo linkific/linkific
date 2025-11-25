@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { motion, useMotionValue, animate } from 'framer-motion';
@@ -20,12 +21,12 @@ function InteractiveWorkflow() {
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     // Initialize motion values in state, not in useMemo
-    const [motionValues, setMotionValues] = useState(() =>
+    const motionValues = useMemo(() =>
         initialItems.map(item => ({
             x: useMotionValue(item.x),
             y: useMotionValue(item.y)
-        }))
-    );
+        })), []);
+
 
     const resetPositions = () => {
         // Animate back to initial positions
@@ -93,7 +94,7 @@ function InteractiveWorkflow() {
                         className={`p-3 rounded-full text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-center text-center size-24 ${item.color}`}
                         whileTap={{ scale: 1.1 }}
                     >
-                       <span className="inline-block transform skew-x-[-10deg] text-xs">{item.label}</span>
+                       <span className="inline-block transform skew-x-[10deg] text-xs">{item.label}</span>
                     </motion.div>
                 ))}
             </div>
