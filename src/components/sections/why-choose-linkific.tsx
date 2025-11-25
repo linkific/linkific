@@ -19,6 +19,21 @@ const iconVariants = {
   }),
 };
 
+const impactIconVariant = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: (i: number) => ({
+        scale: [1, 1.2, 1.1],
+        opacity: 1,
+        transition: {
+            delay: i * 0.2,
+            type: 'spring',
+            stiffness: 260,
+            damping: 20,
+        },
+    }),
+};
+
+
 const components = [
   { icon: Cpu, label: 'Tech' },
   { icon: Plus, label: null },
@@ -34,7 +49,7 @@ export default function WhyChooseLinkific() {
   return (
     <section id="why-choose-us" className="py-16 text-center">
       <div className={cn(
-          "p-8 sm:p-12 rounded-xl border transition-colors duration-700 ease-in-out",
+          "p-8 sm:p-12 rounded-xl transition-colors duration-700 ease-in-out",
           impactAnimated 
             ? "bg-midnight-blue border-deep-blue" 
             : "bg-off-white border-sky-blue/50 shadow-md"
@@ -67,7 +82,7 @@ export default function WhyChooseLinkific() {
             ))}
             <motion.div
               custom={components.length}
-              variants={iconVariants}
+              variants={impactIconVariant}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
