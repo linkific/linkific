@@ -71,7 +71,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-deep-blue pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-sky-blue/60">
-          <p>© 2024 Linkific. All rights reserved.</p>
+          <p>© 2025 Linkific. All rights reserved.</p>
           <div className="flex gap-4 mt-4 sm:mt-0">
             <a href="#" className="hover:text-off-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-off-white transition-colors">Terms of Service</a>
