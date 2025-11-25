@@ -5,11 +5,6 @@ import { MapPin, Mail, Phone } from 'lucide-react';
 
 const contactDetails = [
   {
-    icon: Mail,
-    text: 'contact@linkific.com',
-    href: 'mailto:contact@linkific.com',
-  },
-  {
     icon: Phone,
     text: '+91 9022143695',
     href: 'tel:+919022143695',
@@ -18,6 +13,11 @@ const contactDetails = [
     icon: Phone,
     text: '+91 9209147566',
     href: 'tel:+919209147566',
+  },
+  {
+    icon: Mail,
+    text: 'contact@linkific.com',
+    href: 'mailto:contact@linkific.com',
   },
   {
     icon: MapPin,

@@ -6,12 +6,11 @@ const footerNavs = {
     { href: '/services', name: 'Services' },
     { href: '/contact', name: 'Contact' },
     { href: '/about', name: 'About' },
-    { href: '/careers', name: 'Careers' },
   ],
   'Contact': [
-    { href: 'mailto:contact@linkific.com', name: 'contact@linkific.com' },
     { href: 'tel:+919022143695', name: '+91 9022143695' },
     { href: 'tel:+919209147566', name: '+91 9209147566' },
+    { href: 'mailto:contact@linkific.com', name: 'contact@linkific.com' },
     { href: '#', name: 'Nagpur, Maharashtra 440023' },
   ]
 };
