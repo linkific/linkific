@@ -69,23 +69,61 @@ export default function ProcessTimeline() {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
-        className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8"
+        className="max-w-5xl mx-auto flex flex-col items-center gap-8"
       >
-        {processSteps.map((step, index) => (
-          <motion.div
-            key={index}
-            variants={itemVariants}
-            className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue flex flex-col items-center text-center"
-          >
-            <div>
-              <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg">
-                <step.icon className="size-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-off-white">{step.title}</h3>
-              <p className="text-sky-blue/70">{step.description}</p>
-            </div>
-          </motion.div>
-        ))}
+        {/* Top Row: 3 items for medium screens, 5 for large */}
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {processSteps.slice(0, 3).map((step, index) => (
+            <motion.div
+                key={index}
+                variants={itemVariants}
+                className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue flex flex-col items-center text-center"
+            >
+                <div>
+                <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg">
+                    <step.icon className="size-8" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-off-white">{step.title}</h3>
+                <p className="text-sky-blue/70">{step.description}</p>
+                </div>
+            </motion.div>
+            ))}
+            {/* These two are only visible on large screens as part of the 5-col grid */}
+            {processSteps.slice(3).map((step, index) => (
+                <motion.div
+                    key={index + 3}
+                    variants={itemVariants}
+                    className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue flex-col items-center text-center hidden lg:flex"
+                >
+                    <div>
+                    <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg">
+                        <step.icon className="size-8" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4 text-off-white">{step.title}</h3>
+                    <p className="text-sky-blue/70">{step.description}</p>
+                    </div>
+                </motion.div>
+            ))}
+        </div>
+        
+        {/* Bottom Row: 2 centered items, only visible on medium screens */}
+        <div className="w-full justify-center hidden md:grid md:grid-cols-2 lg:hidden gap-8 md:w-2/3">
+            {processSteps.slice(3).map((step, index) => (
+            <motion.div
+                key={index + 3}
+                variants={itemVariants}
+                className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue flex flex-col items-center text-center"
+            >
+                <div>
+                <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg">
+                    <step.icon className="size-8" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-off-white">{step.title}</h3>
+                <p className="text-sky-blue/70">{step.description}</p>
+                </div>
+            </motion.div>
+            ))}
+        </div>
       </motion.div>
     </section>
   );
