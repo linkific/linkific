@@ -33,6 +33,13 @@ export default function ContactPage() {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <div className="grid lg:grid-cols-2 gap-16">
             <div>
+              <h2 className="text-3xl font-bold mb-4 text-midnight-blue">Send us a message</h2>
+              <p className="text-deep-blue/80 mb-8">
+                We'll get back to you as soon as possible.
+              </p>
+              <ContactForm page="contact" />
+            </div>
+            <div>
               <h1 className="text-4xl font-bold mb-4 text-midnight-blue">Get in Touch</h1>
               <p className="text-deep-blue/80 mb-8">
                 Have a project in mind, a question, or just want to say hello? We'd love to hear from you.
@@ -56,13 +63,6 @@ export default function ContactPage() {
                     referrerPolicy="no-referrer-when-downgrade"
                   ></iframe>
               </div>
-            </div>
-              <div>
-              <h2 className="text-3xl font-bold mb-4 text-midnight-blue">Send us a message</h2>
-              <p className="text-deep-blue/80 mb-8">
-                We'll get back to you as soon as possible.
-              </p>
-              <ContactForm page="contact" />
             </div>
           </div>
       </main>
