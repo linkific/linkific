@@ -60,23 +60,23 @@ export default function CaseStudyDetailPage() {
                     <p className="text-deep-blue/90">{caseStudy.problem}</p>
                   </div>
                 </div>
-                <div className="p-6 bg-off-white border border-sky-blue/50 rounded-xl shadow-md">
+                <div className="p-8 sm:p-10 rounded-xl bg-deep-blue/80 text-off-white">
                   <div>
-                    <h2 className="text-2xl font-bold text-midnight-blue mb-4">Our Solution</h2>
-                    <p className="text-deep-blue/90">{caseStudy.solution}</p>
+                    <h2 className="text-2xl font-bold text-off-white mb-4">Our Solution</h2>
+                    <p className="text-sky-blue/90">{caseStudy.solution}</p>
                   </div>
                 </div>
             </div>
 
-            <div className="p-8 sm:p-10 rounded-xl bg-deep-blue/80 text-off-white">
+            <div className="p-8 sm:p-10 rounded-xl bg-off-white border border-sky-blue/50 shadow-md">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
                     <h2 className="text-3xl font-bold mb-4">Finance Capability</h2>
-                    <p className="text-sky-blue/90">{caseStudy.financeCapability}</p>
+                    <p className="text-deep-blue/90">{caseStudy.financeCapability}</p>
                 </div>
-                <div className="p-6 rounded-lg bg-sky-blue/10 border border-sky-blue/50">
-                    <h3 className="text-xl font-bold text-off-white mb-2">Outcome</h3>
-                    <p className="text-sky-blue/90">{caseStudy.outcome}</p>
+                <div className="p-6 rounded-lg bg-steel-blue/10 border border-steel-blue/50">
+                    <h3 className="text-xl font-bold text-midnight-blue mb-2">Outcome</h3>
+                    <p className="text-deep-blue/90">{caseStudy.outcome}</p>
                 </div>
               </div>
             </div>
