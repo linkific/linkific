@@ -45,7 +45,7 @@ export default function CaseStudyDetailPage() {
             </header>
 
             <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-sky-blue/50 transform -skew-x-[10deg]">
-                <Image src={caseStudy.imageUrl} alt={caseStudy.alt} layout="fill" objectFit="cover" data-ai-hint={caseStudy['data-ai-hint']} className="transform skew-x-[10deg]" />
+                <Image src={caseStudy.imageUrl} alt={caseStudy.alt} layout="fill" objectFit="cover" data-ai-hint={caseStudy['data-ai-hint']} className="transform skew-x-[10deg] scale-125" />
             </div>
 
             <div className="grid md:grid-cols-2 gap-12">

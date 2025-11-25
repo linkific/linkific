@@ -28,9 +28,9 @@ export default function CareersHero() {
                 </Button>
             </div>
         </div>
-        <div className="relative w-full h-80 rounded-xl overflow-hidden">
-            <Image src="https://picsum.photos/seed/office-team/800/600" alt="Linkific Team" layout="fill" objectFit="cover" data-ai-hint="office team collaboration" />
-        </div>
+      </div>
+      <div className="relative w-full h-80 rounded-xl overflow-hidden transform skew-x-[10deg]">
+          <Image src="https://picsum.photos/seed/office-team/800/600" alt="Linkific Team" layout="fill" objectFit="cover" data-ai-hint="office team collaboration" />
       </div>
     </section>
   );
