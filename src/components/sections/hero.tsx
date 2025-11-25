@@ -1,4 +1,3 @@
-
 'use client';
 
 import { motion } from 'framer-motion';
@@ -70,22 +69,6 @@ export default function HeroSection() {
                             <span className="truncate">Explore past work</span>
                         </Link>
                     </Button>
-                </motion.div>
-                 <motion.div 
-                    className="pt-8 text-center md:text-left w-full"
-                    variants={itemVariants}
-                >
-                    <h2 className="text-sm font-bold uppercase tracking-wider text-deep-blue/60 mb-4">
-                        Trusted by modern finance teams
-                    </h2>
-                    <div className="flex justify-center md:justify-start items-center gap-6 flex-wrap">
-                        {logos.map((logo, index) => (
-                             <div key={index} className="grayscale opacity-50">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={logo.src} alt={logo.name} className="h-6 object-contain" />
-                            </div>
-                        ))}
-                    </div>
                 </motion.div>
             </motion.div>
             <motion.div 
