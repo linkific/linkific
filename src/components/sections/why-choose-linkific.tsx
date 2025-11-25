@@ -89,7 +89,7 @@ export default function WhyChooseLinkific() {
               onAnimationComplete={() => setImpactAnimated(true)}
               className="flex flex-col items-center gap-2"
             >
-               <div className="flex items-center justify-center size-20 sm:size-24 rounded-full bg-steel-blue text-off-white shadow-lg">
+               <div className="flex items-center justify-center size-24 sm:size-28 rounded-full bg-steel-blue text-off-white shadow-lg">
                   <h3 className="text-3xl font-black">Impact</h3>
               </div>
             </motion.div>
