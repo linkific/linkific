@@ -6,55 +6,149 @@ import { motion } from 'framer-motion';
 import { Button } from '../ui/button';
 
 export const allCaseStudies = [
-    {
-        slug: "automated-invoice-processing",
-        title: "Automated Invoice Processing",
-        description: "Reduced manual data entry by 95% and cut down invoice processing time from days to minutes for a mid-sized enterprise.",
-        imageUrl: "https://picsum.photos/seed/finance-1/800/600",
-        alt: "Abstract visualization of invoice data being processed",
-        "data-ai-hint": "finance invoice",
-        problem: "A growing mid-sized enterprise was struggling with a high volume of supplier invoices. The manual process involved data entry, validation against purchase orders, and routing for approvals, leading to frequent delays, errors, and late payment penalties.",
-        solution: "We designed and implemented a custom automation solution that used AI to extract data from incoming invoices (PDFs and emails). The system automatically matched invoices to POs, flagged exceptions for human review, and routed approved invoices directly into their accounting system.",
-        results: [
-            "95% reduction in manual data entry.",
-            "Invoice processing cycle reduced from 3-5 days to under 15 minutes.",
-            "Eliminated late payment fees, saving over $15,000 annually.",
-            "Freed up the AP team to focus on vendor relations and financial analysis."
-        ]
-    },
-    {
-        slug: "real-time-expense-reconciliation",
-        title: "Real-time Expense Reconciliation",
-        description: "Enabled a financial services firm to achieve 99% accuracy in expense reporting and gain real-time visibility into spending.",
-        imageUrl: "https://picsum.photos/seed/finance-2/800/600",
-        alt: "Dashboard showing real-time expense data",
-        "data-ai-hint": "finance dashboard",
-        problem: "A financial services firm with a large sales team faced significant challenges with month-end expense reconciliation. The process was slow, error-prone, and provided no real-time visibility into corporate spending, making budget management difficult.",
-        solution: "We built a solution that integrated with their corporate credit card provider and existing accounting software. The system automatically categorized transactions, applied company policies, and flagged out-of-policy spending in real-time. Employees could simply photograph receipts, and the AI would handle the rest.",
-        results: [
-            "Month-end closing time for expenses reduced by 80%.",
-            "Achieved 99% accuracy in expense reporting.",
-            "Provided management with a real-time dashboard of team spending.",
-            "Improved employee satisfaction by simplifying the reporting process."
-        ]
-    },
-    {
-        slug: "automated-approval-workflows",
-        title: "Automated Approval Workflows",
-        description: "Streamlined multi-level approval chains for a manufacturing company, reducing approval times by over 70%.",
-        imageUrl: "https://picsum.photos/seed/finance-3/800/600",
-        alt: "Diagram of an automated workflow",
-        "data-ai-hint": "workflow diagram",
-        problem: "A large manufacturing company's procurement process was hampered by a complex, manual approval workflow. Purchase requests required multiple sign-offs, often getting lost in email chains, which delayed critical procurement and production.",
-        solution: "We developed a centralized system with dynamic, AI-based decision routing. The system automatically determined the required approvers based on the request's department, amount, and category. It sent automated reminders and escalated stalled requests, providing full visibility into the approval chain.",
-        results: [
-            "Reduced average approval time from 7 days to less than 2 days.",
-            "Eliminated the issue of 'lost' requests and process bottlenecks.",
-            "Created a complete, auditable trail for every purchase request.",
-            "Increased operational efficiency and reduced procurement-related production delays."
-        ]
-    }
+  {
+    slug: 'automated-support-chatbot-for-healthcare',
+    title: 'Automated Support Chatbot for Healthcare',
+    industry: 'Healthcare',
+    problem:
+      'The client handled high-volume repetitive support questions and manual booking steps that slowed response time and required staff involvement.',
+    solution:
+      'Built a chatbot that automated query handling, appointment routing and information retrieval.',
+    financeCapability:
+      'Shows ability to automate structured decision trees, handle sensitive data and reduce repetitive inquiries traditionally done by staff.',
+    outcome:
+      'Reduced incoming manual workload and improved response consistency.',
+    tech: 'Python, AI models',
+    client: 'Yourva Healthcare',
+    positioningTag: 'Automating repetitive process based communication.',
+    imageUrl: 'https://picsum.photos/seed/chatbot-1/800/600',
+    alt: 'AI chatbot interface for healthcare',
+    'data-ai-hint': 'support chatbot',
+  },
+  {
+    slug: 'ai-assisted-data-transfer-for-ehr-systems',
+    title: 'AI Assisted Data Transfer for EHR Systems',
+    industry: 'Health technology',
+    problem:
+      'Users manually moved structured data between multiple systems, creating errors and delays.',
+    solution:
+      'Built an automation layer that extracted, validated and transferred data between systems with minimal manual effort.',
+    financeCapability:
+      'Mirrors finance data movement workflows such as reconciliation, reporting consolidation and system integration. Shows skill in handling structured compliance sensitive data.',
+    outcome: 'Faster processing and reduced manual workload.',
+    tech: 'React, REST APIs',
+    client: 'Chime EHR',
+    positioningTag: 'Workflow automation with multi system integration.',
+    imageUrl: 'https://picsum.photos/seed/ehr-2/800/600',
+    alt: 'Data transfer visualization between systems',
+    'data-ai-hint': 'data transfer',
+  },
+  {
+    slug: 'poultry-farm-process-tracking-application',
+    title: 'Poultry Farm Process Tracking Application',
+    industry: 'Agriculture operations',
+    problem:
+      'Records and recurring operational inputs were tracked manually leading to inefficiencies.',
+    solution:
+      'Built a mobile system to record, monitor and automate routine operational data capture.',
+    financeCapability:
+      'Demonstrates automation for recurring records, auditability, event triggers and structured input tracking.',
+    outcome: 'Greater operational clarity and reduced manual entry.',
+    tech: 'Kotlin',
+    client: 'Janki Farms',
+    positioningTag: 'Operational workflow digitization.',
+    imageUrl: 'https://picsum.photos/seed/farm-3/800/600',
+    alt: 'Mobile app for farm data tracking',
+    'data-ai-hint': 'farm mobile',
+  },
+  {
+    slug: 'ai-kiosk-ordering-system-with-gesture-detection',
+    title: 'AI Kiosk Ordering System with Gesture Detection',
+    industry: 'Hospitality',
+    problem: 'Ordering workflows required manual handling and caused delays.',
+    solution:
+      'Built a workflow system triggered by user actions with automated routing and backend integration.',
+    financeCapability:
+      'Shows automated process logic, human input interpretation and backend system orchestration.',
+    outcome: 'Reduced wait time and improved repeatability.',
+    tech: 'Python, YOLO',
+    client: 'H Solos',
+    positioningTag: 'Human action to automated workflow logic.',
+    imageUrl: 'https://picsum.photos/seed/kiosk-4/800/600',
+    alt: 'AI kiosk with gesture detection',
+    'data-ai-hint': 'ordering kiosk',
+  },
+  {
+    slug: 'pose-detection-for-decision-classification',
+    title: 'Pose Detection for Decision Classification',
+    industry: 'Security',
+    problem:
+      'The system needed automated classification to take the right action without manual review.',
+    solution:
+      'Built a model that detected and classified pose signals in real time.',
+    financeCapability:
+      'Demonstrates ability to automate decision-making logic similar to approval or exception workflows.',
+    outcome: 'Improved decision speed without manual checking.',
+    tech: 'Tensorflow, ML',
+    client: 'H Solos',
+    positioningTag: 'Automated decision classification.',
+    imageUrl: 'https://picsum.photos/seed/pose-5/800/600',
+    alt: 'Pose detection algorithm visualization',
+    'data-ai-hint': 'pose detection',
+  },
+  {
+    slug: 'computer-vision-monitoring-for-restaurant-operations',
+    title: 'Computer Vision Monitoring for Restaurant Operations',
+    industry: 'Hospitality',
+    problem:
+      'Staff spent time tracking operational triggers manually like table status and service needs.',
+    solution: 'Built automated detection and alert system.',
+    financeCapability:
+      'Proven automation of exception tracking, alerting logic and operational compliance.',
+    outcome: 'Faster response and reduced manual oversight.',
+    tech: 'ML, Python',
+    client: 'H Solos',
+    positioningTag: 'Exception automation with smart triggers.',
+    imageUrl: 'https://picsum.photos/seed/vision-6/800/600',
+    alt: 'Computer vision monitoring a restaurant',
+    'data-ai-hint': 'restaurant monitoring',
+  },
+  {
+    slug: 'intelligent-document-classification',
+    title: 'Intelligent Document Classification',
+    industry: 'Paper to digital transformation',
+    problem:
+      'Large volumes of documents needed to be identified and routed.',
+    solution: 'Built ML model to classify documents automatically.',
+    financeCapability:
+      'Direct alignment with invoice classification, KYC, statement processing and compliance mapping.',
+    outcome: 'Faster processing and reduced manual sorting.',
+    tech: 'Transfer learning',
+    client: 'Samta AI',
+    positioningTag: 'Document understanding automation.',
+    imageUrl: 'https://picsum.photos/seed/docs-7/800/600',
+    alt: 'AI classifying different document types',
+    'data-ai-hint': 'document classification',
+  },
+  {
+    slug: 'ai-integrated-sales-and-workflow-tool',
+    title: 'AI Integrated Sales and Workflow Tool',
+    industry: 'Operations',
+    problem: 'A fragmented workflow required manual steps across systems.',
+    solution:
+      'Built a coordinated automation platform with AI handling routing, notes and next actions.',
+    financeCapability:
+      'Similar to integrating accounting tools, approval layers and reporting logic into one automated system.',
+    outcome: 'Reduced manual coordination and better workflow consistency.',
+    tech: 'Python, React',
+    client: 'Breakout Rooms',
+    positioningTag: 'End to end workflow automation.',
+    imageUrl: 'https://picsum.photos/seed/sales-8/800/600',
+    alt: 'Integrated sales workflow dashboard',
+    'data-ai-hint': 'sales workflow',
+  },
 ];
+
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -84,7 +178,7 @@ const CaseStudyCard = ({ caseStudy, index }: { caseStudy: typeof allCaseStudies[
           <div className="flex flex-col flex-1 justify-between gap-4 pt-4">
               <div>
                   <p className="text-midnight-blue text-lg font-medium">{caseStudy.title}</p>
-                  <p className="text-deep-blue/80 text-sm mt-1">{caseStudy.description}</p>
+                  <p className="text-deep-blue/80 text-sm mt-1">{caseStudy.outcome}</p>
               </div>
               <Button asChild variant="secondary" className="w-full h-10 px-4 font-bold bg-steel-blue text-off-white hover:bg-deep-blue transition-colors">
                   <Link href={`/case-studies/${caseStudy.slug}`}>View Case Study</Link>
@@ -97,10 +191,12 @@ const CaseStudyCard = ({ caseStudy, index }: { caseStudy: typeof allCaseStudies[
 
 export default function CaseStudiesSection({ featured = false }: { featured?: boolean }) {
     const caseStudies = featured ? allCaseStudies.slice(0, 3) : allCaseStudies;
+    const headline = featured ? "See how we've transformed finance operations for businesses like yours." : "Automation experience across regulated and high complexity workflows.";
+    
     return (
         <section className="pt-24 sm:pt-32" id="projects">
             <h2 className="text-midnight-blue text-3xl font-bold text-center">Case Studies</h2>
-            <p className="text-deep-blue/80 text-center mt-2 mb-12 max-w-2xl mx-auto">See how we've transformed finance operations for businesses like yours.</p>
+            <p className="text-deep-blue/80 text-center mt-2 mb-12 max-w-2xl mx-auto">{headline}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                 {caseStudies.map((caseStudy, index) => (
                     <CaseStudyCard key={index} caseStudy={caseStudy} index={index} />
@@ -110,7 +206,7 @@ export default function CaseStudiesSection({ featured = false }: { featured?: bo
                 <div className="mt-12 text-center">
                      <Button asChild className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-deep-blue text-off-white text-base font-bold shadow-lg hover:bg-midnight-blue transition-shadow mx-auto w-fit">
                         <Link href="/projects">
-                            <span className="truncate">View All Case Studies</span>
+                            <span className="inline-block transform skew-x-[10deg]">View All Case Studies</span>
                         </Link>
                     </Button>
                 </div>

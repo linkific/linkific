@@ -65,10 +65,10 @@ export default function ValueProps() {
             </div>
              <div className="mt-16 text-center bg-deep-blue/30 border border-deep-blue rounded-xl p-8">
                 <div>
-                  <h3 className="text-xl font-bold text-off-white">How we automated a full approval chain</h3>
+                  <h3 className="text-xl font-bold text-off-white">How we automated a data transfer workflow</h3>
                   <p className="text-sky-blue/70 my-2">Case Study Preview</p>
                     <Button asChild variant="secondary" className="mt-2 bg-sky-blue text-midnight-blue hover:bg-off-white">
-                      <Link href="/case-studies/automated-approval-workflows">
+                      <Link href="/case-studies/ai-assisted-data-transfer-for-ehr-systems">
                         Read the Case Study
                       </Link>
                   </Button>

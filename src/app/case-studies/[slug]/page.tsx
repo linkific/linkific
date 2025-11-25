@@ -5,7 +5,7 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { allCaseStudies } from '@/components/sections/projects';
 import Image from 'next/image';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Briefcase, Bot, Code } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -40,22 +40,27 @@ export default function CaseStudyDetailPage() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <article className="space-y-12">
             <header className="text-center">
-                <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-midnight-blue">{caseStudy.title}</h1>
-                <p className="text-lg text-deep-blue/80 max-w-3xl mx-auto">{caseStudy.description}</p>
+                <p className="font-bold text-steel-blue">{caseStudy.positioningTag}</p>
+                <h1 className="text-4xl sm:text-5xl font-bold my-2 text-midnight-blue">{caseStudy.title}</h1>
+                 <div className="flex justify-center gap-6 text-sm text-deep-blue/80 mt-4">
+                    <span>Industry: <span className="font-semibold">{caseStudy.industry}</span></span>
+                    <span>Client: <span className="font-semibold">{caseStudy.client}</span></span>
+                    <span>Tech: <span className="font-semibold">{caseStudy.tech}</span></span>
+                </div>
             </header>
 
             <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-sky-blue/50">
                 <Image src={caseStudy.imageUrl} alt={caseStudy.alt} layout="fill" objectFit="cover" data-ai-hint={caseStudy['data-ai-hint']} />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12">
-                <div className="p-8 bg-off-white border border-sky-blue/50 rounded-xl shadow-md">
+            <div className="grid md:grid-cols-2 gap-8">
+                <div className="p-6 bg-off-white border border-sky-blue/50 rounded-xl shadow-md">
                   <div>
                     <h2 className="text-2xl font-bold text-midnight-blue mb-4">The Problem</h2>
                     <p className="text-deep-blue/90">{caseStudy.problem}</p>
                   </div>
                 </div>
-                <div className="p-8 bg-off-white border border-sky-blue/50 rounded-xl shadow-md">
+                <div className="p-6 bg-off-white border border-sky-blue/50 rounded-xl shadow-md">
                   <div>
                     <h2 className="text-2xl font-bold text-midnight-blue mb-4">Our Solution</h2>
                     <p className="text-deep-blue/90">{caseStudy.solution}</p>
@@ -63,21 +68,20 @@ export default function CaseStudyDetailPage() {
                 </div>
             </div>
 
-            <div className="p-8 sm:p-12 rounded-xl bg-deep-blue/80 text-off-white">
-              <div>
-                <h2 className="text-3xl font-bold text-center mb-8">Key Results</h2>
-                <ul className="space-y-4 max-w-2xl mx-auto">
-                    {caseStudy.results.map((result, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                            <CheckCircle className="size-6 text-sky-blue flex-shrink-0 mt-1" />
-                            <span className="text-sky-blue/90">{result}</span>
-                        </li>
-                    ))}
-                </ul>
+            <div className="p-8 sm:p-10 rounded-xl bg-deep-blue/80 text-off-white">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 className="text-3xl font-bold mb-4">Finance Capability</h2>
+                    <p className="text-sky-blue/90">{caseStudy.financeCapability}</p>
+                </div>
+                <div className="p-6 rounded-lg bg-sky-blue/10 border border-sky-blue/50">
+                    <h3 className="text-xl font-bold text-off-white mb-2">Outcome</h3>
+                    <p className="text-sky-blue/90">{caseStudy.outcome}</p>
+                </div>
               </div>
             </div>
             
-             <div className="text-center pt-12">
+             <div className="text-center pt-8">
                 <Button asChild size="lg">
                     <Link href="/contact">Automate Your Workflow</Link>
                 </Button>
