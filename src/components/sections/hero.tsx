@@ -1,10 +1,9 @@
 'use client';
 
-import { motion, Reorder, useMotionValue } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
-import { GripVertical } from 'lucide-react';
 
 
 const initialItems = [
@@ -33,15 +32,15 @@ function InteractiveWorkflow() {
             <p className="text-sm font-semibold text-center text-deep-blue/80 mb-4">
                 Your manual workflow (try dragging the items)
             </p>
-            <div ref={constraintsRef} className="relative w-full max-w-sm h-96 rounded-lg border border-dashed border-sky-blue/50 bg-secondary/50">
+            <div ref={constraintsRef} className="relative w-full max-w-sm h-96 rounded-lg border border-solid border-sky-blue/50">
                  <svg className="absolute top-0 left-0 w-full h-full" style={{ pointerEvents: 'none' }}>
                     {items.slice(0, -1).map((item, i) => (
                         <line
                             key={`line-${i}`}
                             x1={item.x + 50}
-                            y1={item.y + 20}
+                            y1={item.y + 50}
                             x2={items[i+1].x + 50}
-                            y2={items[i+1].y + 20}
+                            y2={items[i+1].y + 50}
                             stroke="hsl(var(--steel-blue))"
                             strokeWidth="2"
                             strokeDasharray="4 4"
@@ -60,10 +59,10 @@ function InteractiveWorkflow() {
                             x: useMotionValue(item.x),
                             y: useMotionValue(item.y),
                         }}
-                        className={`p-3 rounded-lg text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center gap-2 ${item.color}`}
+                        className={`p-3 rounded-full text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-center text-center size-24 ${item.color}`}
                         whileTap={{ scale: 1.1 }}
                     >
-                       <span className="inline-block transform -skew-x-[10deg]">{item.label}</span>
+                       <span className="inline-block transform skew-x-[10deg] text-xs">{item.label}</span>
                     </motion.div>
                 ))}
             </div>
