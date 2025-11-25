@@ -1,8 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { cn } from "@/lib/utils";
 
 const jobOpenings = [
     {
@@ -108,18 +109,29 @@ const scrollTo = (selector: string) => {
     }
 };
 
-const PositionCard = ({ job, isDark }: { job: { title: string, location: string, description: string }, isDark?: boolean }) => (
-    <div className={cn("p-6 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4", isDark ? "bg-deep-blue/30 border border-deep-blue" : "bg-off-white border border-sky-blue/50 shadow-md")}>
-        <div>
-            <h3 className={cn("text-xl font-bold", isDark ? "text-off-white" : "text-midnight-blue")}>{job.title}</h3>
-            <p className={cn("text-sm mt-1", isDark ? "text-sky-blue/70" : "text-deep-blue/70")}>{job.location}</p>
-            <p className={cn("mt-2 max-w-2xl", isDark ? "text-sky-blue/80" : "text-deep-blue/80")}>{job.description}</p>
-        </div>
-        <Button onClick={() => scrollTo('#apply')} className={cn("mt-4 sm:mt-0 flex-shrink-0 flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 text-sm font-bold transition-colors", isDark ? "bg-sky-blue text-midnight-blue hover:bg-off-white" : "bg-steel-blue text-off-white hover:bg-deep-blue")}>
-            Apply Now
-        </Button>
-    </div>
+const PositionsAccordion = ({ positions }: { positions: { title: string, location: string, description: string }[] }) => (
+    <Accordion type="single" collapsible className="w-full space-y-4">
+        {positions.map((job, index) => (
+            <AccordionItem key={index} value={`item-${index}`} className="bg-off-white border border-sky-blue/50 shadow-md rounded-lg px-6">
+                <AccordionTrigger className="text-left hover:no-underline">
+                    <div>
+                        <h3 className="text-xl font-bold text-midnight-blue">{job.title}</h3>
+                        <p className="text-sm mt-1 text-deep-blue/70">{job.location}</p>
+                    </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                    <div className="pt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-sky-blue/50">
+                        <p className="max-w-2xl text-deep-blue/80">{job.description}</p>
+                        <Button onClick={() => scrollTo('#apply')} className={cn("mt-4 sm:mt-0 flex-shrink-0 flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 text-sm font-bold transition-colors bg-steel-blue text-off-white hover:bg-deep-blue")}>
+                           <span className="inline-block transform skew-x-[10deg]">Apply Now</span>
+                        </Button>
+                    </div>
+                </AccordionContent>
+            </AccordionItem>
+        ))}
+    </Accordion>
 );
+
 
 export default function OpenPositions() {
   return (
@@ -136,18 +148,10 @@ export default function OpenPositions() {
           <TabsTrigger value="internships">Internships</TabsTrigger>
         </TabsList>
         <TabsContent value="jobs" className="mt-12">
-            <div className="space-y-8">
-                {jobOpenings.map((job, index) => (
-                    <PositionCard key={`job-${index}`} job={job} />
-                ))}
-            </div>
+            <PositionsAccordion positions={jobOpenings} />
         </TabsContent>
         <TabsContent value="internships" className="mt-12">
-             <div className="space-y-8">
-                {internships.map((job, index) => (
-                   <PositionCard key={`internship-${index}`} job={job} />
-                ))}
-            </div>
+             <PositionsAccordion positions={internships} />
         </TabsContent>
       </Tabs>
     </section>
