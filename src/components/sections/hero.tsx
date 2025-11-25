@@ -46,8 +46,8 @@ function InteractiveWorkflow() {
                             value={item}
                             className={`relative p-4 rounded-lg text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-between ${item.color}`}
                         >
-                            <span>{item.label}</span>
-                            <GripVertical className="size-5 text-off-white/50" />
+                           <span className="inline-block transform skew-x-[10deg]">{item.label}</span>
+                           <GripVertical className="size-5 text-off-white/50" />
                         </Reorder.Item>
                     ))}
                 </Reorder.Group>
@@ -96,7 +96,7 @@ export default function HeroSection() {
                     We build custom automation solutions that remove repetitive finance work so your team focuses on decisions, not manual tasks.
                 </motion.p>
                 <motion.div 
-                    className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 mt-4"
+                    className="flex flex-col sm:flex-row items-start justify-center md:justify-start gap-4 mt-4"
                     variants={itemVariants}
                 >
                     <div className="flex flex-col items-center md:items-start">
@@ -107,13 +107,11 @@ export default function HeroSection() {
                         </Button>
                          <p className="text-xs text-deep-blue/60 mt-1.5">Takes under one minute</p>
                     </div>
-                     <div className="flex flex-col">
-                        <Button asChild variant="secondary" className="flex min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-midnight-blue text-base font-bold transition-shadow hover:bg-sky-blue/50 border-0">
-                            <Link href="/projects">
-                                <span className="truncate">Explore past work</span>
-                            </Link>
-                        </Button>
-                    </div>
+                    <Button asChild variant="secondary" className="flex min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-midnight-blue text-base font-bold transition-shadow hover:bg-sky-blue/50 border-0">
+                        <Link href="/projects">
+                            <span className="truncate">Explore past work</span>
+                        </Link>
+                    </Button>
                 </motion.div>
             </motion.div>
             <motion.div 
