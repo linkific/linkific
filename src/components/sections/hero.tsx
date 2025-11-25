@@ -37,11 +37,11 @@ function InteractiveWorkflow() {
                     {items.slice(0, -1).map((item, i) => (
                         <line
                             key={`line-${i}`}
-                            x1={item.x + 50}
-                            y1={item.y + 50}
-                            x2={items[i+1].x + 50}
-                            y2={items[i+1].y + 50}
-                            stroke="hsl(var(--steel-blue))"
+                            x1={item.x + 48}
+                            y1={item.y + 48}
+                            x2={items[i+1].x + 48}
+                            y2={items[i+1].y + 48}
+                            stroke="hsl(var(--primary))"
                             strokeWidth="2"
                             strokeDasharray="4 4"
                         />
