@@ -85,7 +85,7 @@ export default function HeroSection() {
                     variants={itemVariants}
                 >
                     <div className="flex flex-col items-center md:items-start">
-                        <Button asChild size="lg">
+                        <Button asChild size="lg" className="bg-deep-blue text-off-white hover:bg-midnight-blue">
                             <Link href="/contact">
                                 Request a custom automation plan
                             </Link>
