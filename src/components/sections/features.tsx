@@ -74,9 +74,9 @@ export default function Features() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.5 }}
-                className="flex flex-col text-left p-6 rounded-xl bg-off-white border border-sky-blue/50 shadow-md h-full transform -skew-x-[10deg]"
+                className="flex flex-col text-left p-6 rounded-xl bg-off-white border border-sky-blue/50 shadow-md h-full"
             >
-              <div className="transform skew-x-[10deg]">
+              <div>
                 <div className="flex items-center gap-4 mb-4">
                     <div className="flex items-center justify-center size-12 rounded-lg bg-steel-blue/10 text-steel-blue">
                         <feature.icon className="size-6" />

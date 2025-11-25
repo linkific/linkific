@@ -75,9 +75,9 @@ export default function ProcessTimeline() {
           <motion.div
             key={index}
             variants={itemVariants}
-            className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue flex flex-col items-center text-center transform -skew-x-[10deg]"
+            className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue flex flex-col items-center text-center"
           >
-            <div className="transform skew-x-[10deg]">
+            <div>
               <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg">
                 <step.icon className="size-8" />
               </div>

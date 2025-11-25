@@ -30,8 +30,8 @@ const components = [
 export default function WhyChooseLinkific() {
   return (
     <section id="why-choose-us" className="py-16 text-center">
-      <div className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md transform -skew-x-[10deg]">
-        <div className="transform skew-x-[10deg]">
+      <div className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md">
+        <div>
           <h2 className="text-3xl font-bold mb-4 text-midnight-blue">Why Choose Linkific?</h2>
           <p className="text-deep-blue/80 max-w-2xl mx-auto mb-12">It's about the right formula for success.</p>
           <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8">

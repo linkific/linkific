@@ -44,27 +44,27 @@ export default function CaseStudyDetailPage() {
                 <p className="text-lg text-deep-blue/80 max-w-3xl mx-auto">{caseStudy.description}</p>
             </header>
 
-            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-sky-blue/50 transform -skew-x-[10deg]">
-                <Image src={caseStudy.imageUrl} alt={caseStudy.alt} layout="fill" objectFit="cover" data-ai-hint={caseStudy['data-ai-hint']} className="transform skew-x-[10deg] scale-125" />
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg border border-sky-blue/50">
+                <Image src={caseStudy.imageUrl} alt={caseStudy.alt} layout="fill" objectFit="cover" data-ai-hint={caseStudy['data-ai-hint']} />
             </div>
 
             <div className="grid md:grid-cols-2 gap-12">
-                <div className="p-8 bg-off-white border border-sky-blue/50 rounded-xl shadow-md transform -skew-x-[10deg]">
-                  <div className="transform skew-x-[10deg]">
+                <div className="p-8 bg-off-white border border-sky-blue/50 rounded-xl shadow-md">
+                  <div>
                     <h2 className="text-2xl font-bold text-midnight-blue mb-4">The Problem</h2>
                     <p className="text-deep-blue/90">{caseStudy.problem}</p>
                   </div>
                 </div>
-                <div className="p-8 bg-off-white border border-sky-blue/50 rounded-xl shadow-md transform -skew-x-[10deg]">
-                  <div className="transform skew-x-[10deg]">
+                <div className="p-8 bg-off-white border border-sky-blue/50 rounded-xl shadow-md">
+                  <div>
                     <h2 className="text-2xl font-bold text-midnight-blue mb-4">Our Solution</h2>
                     <p className="text-deep-blue/90">{caseStudy.solution}</p>
                   </div>
                 </div>
             </div>
 
-            <div className="p-8 sm:p-12 rounded-xl bg-deep-blue/80 text-off-white transform -skew-x-[10deg]">
-              <div className="transform skew-x-[10deg]">
+            <div className="p-8 sm:p-12 rounded-xl bg-deep-blue/80 text-off-white">
+              <div>
                 <h2 className="text-3xl font-bold text-center mb-8">Key Results</h2>
                 <ul className="space-y-4 max-w-2xl mx-auto">
                     {caseStudy.results.map((result, index) => (

@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 export default function Philosophy() {
   return (
-    <section id="philosophy" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md text-center transform -skew-x-[10deg]">
-      <div className="transform skew-x-[10deg]">
+    <section id="philosophy" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md text-center">
+      <div>
         <h2 className="text-3xl font-bold mb-8 text-midnight-blue">Our Philosophy</h2>
         <div className="relative overflow-hidden">
           <motion.div

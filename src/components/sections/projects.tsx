@@ -76,8 +76,8 @@ const CaseStudyCard = ({ caseStudy, index }: { caseStudy: typeof allCaseStudies[
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
-        className="flex flex-col gap-4 rounded-xl bg-off-white border border-sky-blue/50 p-4 h-full group hover:-translate-y-2 transition-transform duration-300 w-full max-w-sm shadow-md transform -skew-x-[10deg]">
-        <div className="transform skew-x-[10deg]">
+        className="flex flex-col gap-4 rounded-xl bg-off-white border border-sky-blue/50 p-4 h-full group hover:-translate-y-2 transition-transform duration-300 w-full max-w-sm shadow-md">
+        <div>
           <div className="relative w-full aspect-video rounded-lg overflow-hidden">
                <Image src={caseStudy.imageUrl} alt={caseStudy.alt} fill className="object-cover" data-ai-hint={caseStudy['data-ai-hint']} />
           </div>

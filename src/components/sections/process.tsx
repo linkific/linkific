@@ -67,9 +67,9 @@ export default function ProcessSection() {
                     variants={itemVariants}
                     whileHover={{ scale: 1.04, y: -5 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className="flex flex-col items-start text-left p-6 rounded-xl bg-deep-blue/30 border border-deep-blue hover:border-sky-blue/50 transition-colors cursor-pointer transform -skew-x-[10deg]"
+                    className="flex flex-col items-start text-left p-6 rounded-xl bg-deep-blue/30 border border-deep-blue hover:border-sky-blue/50 transition-colors cursor-pointer"
                 >
-                    <div className="transform skew-x-[10deg]">
+                    <div>
                       <div className="flex items-center justify-center size-12 rounded-lg bg-sky-blue text-midnight-blue mb-5">
                           <step.icon className="size-6" />
                       </div>

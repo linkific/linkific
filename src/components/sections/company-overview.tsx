@@ -4,8 +4,8 @@ import Image from "next/image";
 
 export default function CompanyOverview() {
     return (
-        <section id="company-overview" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md transform -skew-x-[10deg]">
-            <div className="transform skew-x-[10deg]">
+        <section id="company-overview" className="p-8 sm:p-12 rounded-xl bg-off-white border border-sky-blue/50 shadow-md">
+            <div>
                 <div className="text-center">
                     <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-midnight-blue">About Linkific</h1>
                     <p className="text-deep-blue/80 text-lg max-w-3xl mx-auto">

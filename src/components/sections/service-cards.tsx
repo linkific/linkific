@@ -56,9 +56,9 @@ export default function ServiceCards() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
-            className="flex flex-col text-left p-8 rounded-xl bg-deep-blue/30 border border-deep-blue h-full transform -skew-x-[10deg]"
+            className="flex flex-col text-left p-8 rounded-xl bg-deep-blue/30 border border-deep-blue h-full"
           >
-            <div className="transform skew-x-[10deg]">
+            <div>
               <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6 shadow-lg self-start">
                 <service.icon className="size-8" />
               </div>

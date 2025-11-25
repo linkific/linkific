@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { Hourglass, Scale, Cog } from 'lucide-react';
 import { Button } from '../ui/button';
+import Link from 'next/link';
 
 const valueProps = [
     {
@@ -49,9 +50,9 @@ export default function ValueProps() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
-                        className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue transform -skew-x-[10deg]"
+                        className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue"
                     >
-                        <div className="transform skew-x-[10deg] h-full flex flex-col">
+                        <div className="h-full flex flex-col">
                           <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6">
                               <prop.icon className="size-8" />
                           </div>
@@ -62,12 +63,14 @@ export default function ValueProps() {
                     </motion.div>
                 ))}
             </div>
-             <div className="mt-16 text-center bg-deep-blue/30 border border-deep-blue rounded-xl p-8 transform -skew-x-[10deg]">
-                <div className="transform skew-x-[10deg]">
+             <div className="mt-16 text-center bg-deep-blue/30 border border-deep-blue rounded-xl p-8">
+                <div>
                   <h3 className="text-xl font-bold text-off-white">How we automated a full approval chain</h3>
                   <p className="text-sky-blue/70 my-2">Case Study Preview</p>
-                  <Button variant="secondary" className="mt-2 bg-sky-blue text-midnight-blue hover:bg-off-white">
-                      Read the Case Study
+                    <Button asChild variant="secondary" className="mt-2 bg-sky-blue text-midnight-blue hover:bg-off-white">
+                      <Link href="/case-studies/automated-approval-workflows">
+                        Read the Case Study
+                      </Link>
                   </Button>
                 </div>
             </div>

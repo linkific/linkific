@@ -59,8 +59,7 @@ const IconSphere = () => {
 
 export default function ServiceIntroBanner() {
   return (
-    <section className="relative flex items-center justify-center text-center min-h-[60vh] rounded-xl bg-secondary border border-sky-blue/50 shadow-inner overflow-hidden transform -skew-x-[10deg]">
-      <div className="transform skew-x-[10deg]">
+    <section className="relative flex items-center justify-center text-center min-h-[60vh] rounded-xl bg-secondary border border-sky-blue/50 shadow-inner overflow-hidden">
         <div className="absolute inset-0 opacity-20">
             <IconSphere />
         </div>
@@ -71,7 +70,6 @@ export default function ServiceIntroBanner() {
                 <span className="text-steel-blue">Scalable Innovation.</span>
             </h1>
         </div>
-      </div>
     </section>
   );
 }
