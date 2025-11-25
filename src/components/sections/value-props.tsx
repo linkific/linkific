@@ -49,9 +49,9 @@ export default function ValueProps() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.5 }}
-                        className="flex flex-col items-start text-left p-8 rounded-xl bg-deep-blue/30 border border-deep-blue transform -skew-x-[10deg]"
+                        className="p-8 rounded-xl bg-deep-blue/30 border border-deep-blue transform -skew-x-[10deg]"
                     >
-                        <div className="transform skew-x-[10deg]">
+                        <div className="transform skew-x-[10deg] h-full flex flex-col">
                           <div className="flex items-center justify-center size-16 rounded-full bg-sky-blue text-midnight-blue mb-6">
                               <prop.icon className="size-8" />
                           </div>
