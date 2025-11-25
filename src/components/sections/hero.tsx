@@ -29,12 +29,14 @@ function InteractiveWorkflow() {
                     <Reorder.Item
                         key={item.id}
                         value={item}
-                        className={`p-4 rounded-lg text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-between text-center ${item.color}`}
+                        className={`p-4 rounded-lg text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-between text-center ${item.color} transform -skew-x-[10deg]`}
                         whileDrag={{ scale: 1.05 }}
                     >
-                       <GripVertical className="h-5 w-5 text-off-white/50" />
-                       <span className="inline-block transform -skew-x-[10deg] flex-grow">{item.label}</span>
-                       <div className="w-5"></div>
+                        <div className="inline-block transform skew-x-[10deg] flex-grow flex items-center justify-between">
+                            <GripVertical className="h-5 w-5 text-off-white/50" />
+                            <span>{item.label}</span>
+                            <div className="w-5"></div>
+                        </div>
                     </Reorder.Item>
                 ))}
             </Reorder.Group>
