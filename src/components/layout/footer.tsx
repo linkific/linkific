@@ -30,7 +30,6 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="flex flex-col gap-4">
              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-steel-blue text-2xl">auto_awesome</span>
                 <h2 className="text-off-white text-xl font-bold">Linkific</h2>
             </div>
             <p className="text-sky-blue/70 text-sm">If you are reading this. why wait? lets have a chat.</p>

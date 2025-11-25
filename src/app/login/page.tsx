@@ -80,7 +80,6 @@ export default function LoginPage() {
         <Card className="w-full max-w-md bg-off-white border-sky-blue">
           <CardHeader className="text-center">
              <Link href="/" className="flex items-center justify-center mb-4 gap-3">
-                 <span className="material-symbols-outlined text-steel-blue text-3xl">auto_awesome</span>
                  <h2 className="text-midnight-blue text-2xl font-bold">Linkific</h2>
             </Link>
             <CardTitle className="text-2xl font-bold text-midnight-blue">Employee Login</CardTitle>

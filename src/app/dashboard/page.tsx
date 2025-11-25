@@ -408,7 +408,6 @@ export default function DashboardPage() {
       <header className="sticky top-0 z-50 bg-off-white/80 backdrop-blur-xl border-b border-sky-blue/50">
         <div className="flex items-center justify-between h-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link href="/" className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-steel-blue text-2xl">auto_awesome</span>
                 <h2 className="text-midnight-blue text-xl font-bold">Linkific</h2>
             </Link>
             <h1 className="text-xl font-semibold text-midnight-blue">Dashboard</h1>
