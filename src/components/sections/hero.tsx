@@ -2,102 +2,39 @@
 
 'use client';
 
-import { motion, useMotionValue, animate } from 'framer-motion';
+import { motion, Reorder } from 'framer-motion';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 
 
 const initialItems = [
-    { id: 1, label: 'Review Invoices', color: 'bg-steel-blue', x: 20, y: 20 },
-    { id: 2, label: 'Match POs', color: 'bg-deep-blue', x: 180, y: 80 },
-    { id: 3, label: 'Route for Approval', color: 'bg-steel-blue', x: 40, y: 180 },
-    { id: 4, label: 'Process Payments', color: 'bg-deep-blue', x: 200, y: 240 },
+    { id: 1, label: 'Review Invoices', color: 'bg-steel-blue' },
+    { id: 2, label: 'Match POs', color: 'bg-deep-blue' },
+    { id: 3, label: 'Route for Approval', color: 'bg-steel-blue' },
+    { id: 4, label: 'Process Payments', color: 'bg-deep-blue' },
 ];
 
 function InteractiveWorkflow() {
     const [items, setItems] = useState(initialItems);
-    const constraintsRef = useRef(null);
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-    // Initialize motion values in state, not in useMemo
-    const motionValues = useMemo(() =>
-        initialItems.map(item => ({
-            x: useMotionValue(item.x),
-            y: useMotionValue(item.y)
-        })), []);
-
-
-    const resetPositions = () => {
-        // Animate back to initial positions
-        initialItems.forEach((item, index) => {
-            animate(motionValues[index].x, item.x, { type: 'spring', stiffness: 200, damping: 20 });
-            animate(motionValues[index].y, item.y, { type: 'spring', stiffness: 200, damping: 20 });
-        });
-    };
-
-    const handleDrag = (event:any, info:any, item:any, index: number) => {
-        if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current);
-        }
-
-        // The motion values are already updated by the drag, so we just need to restart the timeout
-        timeoutRef.current = setTimeout(resetPositions, 7000);
-    };
-
-    useEffect(() => {
-        // Set the initial timeout
-        timeoutRef.current = setTimeout(resetPositions, 7000);
-
-        // Cleanup timeout on component unmount
-        return () => {
-            if (timeoutRef.current) {
-                clearTimeout(timeoutRef.current);
-            }
-        };
-    }, []); // Empty dependency array to run only once
-
 
     return (
         <div className="relative w-full h-full flex flex-col items-center justify-center p-4 md:p-8">
             <p className="text-sm font-semibold text-center text-deep-blue/80 mb-4">
-                Your manual workflow (try dragging the items)
+                Your manual workflow (try reordering the items)
             </p>
-            <div ref={constraintsRef} className="relative w-full max-w-sm h-96 rounded-lg">
-                 <svg className="absolute top-0 left-0 w-full h-full" style={{ pointerEvents: 'none' }}>
-                    {items.slice(0, -1).map((item, i) => (
-                        <motion.line
-                            key={`line-${i}`}
-                            x1={motionValues[i].x}
-                            y1={motionValues[i].y}
-                            x2={motionValues[i+1].x}
-                            y2={motionValues[i+1].y}
-                            stroke="hsl(var(--primary))"
-                            strokeWidth="2"
-                            strokeDasharray="4 4"
-                            style={{transform: 'translate(48px, 48px)'}}
-                        />
-                    ))}
-                </svg>
-                {items.map((item, index) => (
-                    <motion.div
-                        key={item.id}
-                        drag
-                        dragConstraints={constraintsRef}
-                        dragElastic={0.1}
-                        onDrag={(e, info) => handleDrag(e, info, item, index)}
-                        style={{
-                            position: 'absolute',
-                            x: motionValues[index].x,
-                            y: motionValues[index].y,
-                        }}
-                        className={`p-3 rounded-full text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-center text-center size-24 ${item.color}`}
-                        whileTap={{ scale: 1.1 }}
+            <Reorder.Group axis="y" values={items} onReorder={setItems} className="space-y-3 w-full max-w-xs">
+                {items.map((item) => (
+                    <Reorder.Item 
+                        key={item.id} 
+                        value={item}
+                        className={`p-4 rounded-lg text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-center text-center ${item.color}`}
+                        whileDrag={{ scale: 1.05 }}
                     >
-                       <span className="inline-block transform skew-x-[10deg] text-xs">{item.label}</span>
-                    </motion.div>
+                       <span className="inline-block transform skew-x-[10deg]">{item.label}</span>
+                    </Reorder.Item>
                 ))}
-            </div>
+            </Reorder.Group>
         </div>
     );
 }
