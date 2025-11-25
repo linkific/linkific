@@ -22,11 +22,11 @@ export default function Home() {
       </div>
 
       {/* Social Proof - White BG */}
-      <div className="bg-off-white">
+      {/* <div className="bg-off-white">
            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16">
               <SocialProof />
           </main>
-      </div>
+      </div> */}
 
        {/* Value Propositions - Dark Blue BG */}
       <div className="bg-midnight-blue text-off-white" style={{clipPath: 'polygon(0 10%, 100% 0, 100% 100%, 0 100%)'}}>
