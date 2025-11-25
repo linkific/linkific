@@ -59,7 +59,7 @@ const IconSphere = () => {
 
 export default function ServiceIntroBanner() {
   return (
-    <section className="relative flex items-center justify-center text-center min-h-[60vh] rounded-xl bg-off-white border border-sky-blue/50 shadow-md overflow-hidden">
+    <section className="relative flex items-center justify-center text-center min-h-[60vh] rounded-xl bg-secondary border border-sky-blue/50 shadow-md shadow-inner overflow-hidden">
         <div className="absolute inset-0 opacity-20">
             <IconSphere />
         </div>
