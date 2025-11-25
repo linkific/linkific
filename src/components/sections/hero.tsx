@@ -1,56 +1,71 @@
 'use client';
 
-import { motion, Reorder } from 'framer-motion';
+import { motion, Reorder, useMotionValue } from 'framer-motion';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { GripVertical } from 'lucide-react';
 
 
 const initialItems = [
-    { id: 1, label: 'Review Invoices', color: 'bg-steel-blue' },
-    { id: 2, label: 'Match POs', color: 'bg-deep-blue' },
-    { id: 3, label: 'Route for Approval', color: 'bg-steel-blue' },
-    { id: 4, label: 'Process Payments', color: 'bg-deep-blue' },
+    { id: 1, label: 'Review Invoices', color: 'bg-steel-blue', x: 20, y: 20 },
+    { id: 2, label: 'Match POs', color: 'bg-deep-blue', x: 180, y: 80 },
+    { id: 3, label: 'Route for Approval', color: 'bg-steel-blue', x: 40, y: 180 },
+    { id: 4, label: 'Process Payments', color: 'bg-deep-blue', x: 200, y: 240 },
 ];
 
 function InteractiveWorkflow() {
     const [items, setItems] = useState(initialItems);
+    const constraintsRef = useRef(null);
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.5,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
+    const handleDrag = (event:any, info:any, item:any) => {
+        setItems(currentItems =>
+            currentItems.map(currentItem =>
+                currentItem.id === item.id
+                    ? { ...currentItem, x: currentItem.x + info.delta.x, y: currentItem.y + info.delta.y }
+                    : currentItem
+            )
+        );
     };
 
     return (
-        <div className="relative w-full h-full flex items-center justify-center p-4 md:p-8">
-            <div className="w-full max-w-sm space-y-3">
-                 <p className="text-sm font-semibold text-center text-deep-blue/80">
-                    Your manual workflow (try dragging the items)
-                </p>
-                <Reorder.Group axis="y" values={items} onReorder={setItems} className="space-y-3">
-                    {items.map((item) => (
-                        <Reorder.Item 
-                            key={item.id} 
-                            value={item}
-                            className={`relative p-4 rounded-lg text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center justify-between ${item.color}`}
-                        >
-                           <span className="inline-block transform skew-x-[10deg]">{item.label}</span>
-                           <GripVertical className="size-5 text-off-white/50" />
-                        </Reorder.Item>
+        <div className="relative w-full h-full flex flex-col items-center justify-center p-4 md:p-8">
+            <p className="text-sm font-semibold text-center text-deep-blue/80 mb-4">
+                Your manual workflow (try dragging the items)
+            </p>
+            <div ref={constraintsRef} className="relative w-full max-w-sm h-96 rounded-lg border border-dashed border-sky-blue/50 bg-secondary/50">
+                 <svg className="absolute top-0 left-0 w-full h-full" style={{ pointerEvents: 'none' }}>
+                    {items.slice(0, -1).map((item, i) => (
+                        <line
+                            key={`line-${i}`}
+                            x1={item.x + 50}
+                            y1={item.y + 20}
+                            x2={items[i+1].x + 50}
+                            y2={items[i+1].y + 20}
+                            stroke="hsl(var(--steel-blue))"
+                            strokeWidth="2"
+                            strokeDasharray="4 4"
+                        />
                     ))}
-                </Reorder.Group>
+                </svg>
+                {items.map((item) => (
+                    <motion.div
+                        key={item.id}
+                        drag
+                        dragConstraints={constraintsRef}
+                        dragElastic={0.1}
+                        onDrag={(e, info) => handleDrag(e, info, item)}
+                        style={{
+                            position: 'absolute',
+                            x: useMotionValue(item.x),
+                            y: useMotionValue(item.y),
+                        }}
+                        className={`p-3 rounded-lg text-off-white font-medium shadow-md cursor-grab active:cursor-grabbing flex items-center gap-2 ${item.color}`}
+                        whileTap={{ scale: 1.1 }}
+                    >
+                       <span className="inline-block transform -skew-x-[10deg]">{item.label}</span>
+                    </motion.div>
+                ))}
             </div>
         </div>
     );
@@ -107,7 +122,7 @@ export default function HeroSection() {
                         </Button>
                          <p className="text-xs text-deep-blue/60 mt-1.5">Takes under one minute</p>
                     </div>
-                    <Button asChild variant="secondary" className="flex min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-midnight-blue text-base font-bold transition-shadow hover:bg-sky-blue/50 border-0">
+                     <Button asChild variant="secondary" className="flex min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 text-midnight-blue text-base font-bold transition-shadow hover:bg-sky-blue/50 border-0">
                         <Link href="/projects">
                             <span className="truncate">Explore past work</span>
                         </Link>
