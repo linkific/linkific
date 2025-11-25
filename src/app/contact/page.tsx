@@ -40,10 +40,12 @@ export default function ContactPage() {
           </div>
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             <div className="p-8 sm:p-10 rounded-xl bg-off-white border border-sky-blue/50 shadow-md">
-              <h2 className="text-3xl font-bold mb-4 text-midnight-blue">Send us a message</h2>
-              <p className="text-deep-blue/80 mb-8">
-                We'll get back to you as soon as possible.
-              </p>
+              <div className="text-center">
+                <h2 className="text-3xl font-bold mb-4 text-midnight-blue">Send us a message</h2>
+                <p className="text-deep-blue/80 mb-8">
+                  We'll get back to you as soon as possible.
+                </p>
+              </div>
               <ContactForm page="contact" />
             </div>
             <div>
